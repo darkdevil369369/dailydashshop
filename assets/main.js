@@ -95,7 +95,7 @@
       <div class="p-body">
         <span class="p-cat">${(DDS.categories.find(c=>c.id===p.category)||{}).label||''}</span>
         <a class="p-name" href="/product.html?id=${p.id}">${p.name}</a>
-        <span class="p-rate">★ ${p.rating.toFixed(1)} <span class="muted">· ${p.formats[0]}${p.formats.length>1?' +'+(p.formats.length-1):''}</span></span>
+        <span class="p-rate">${p.reviews>0?`★ ${p.rating.toFixed(1)} <span class="muted">· `:`<span class="muted">`}${p.formats[0]}${p.formats.length>1?' +'+(p.formats.length-1):''}</span></span>
         <div class="p-foot">
           <span class="p-price">${cmp}${money(p.price)}</span>
           <a class="p-buy" href="/product.html?id=${p.id}">View →</a>
@@ -148,7 +148,7 @@
           <a href="/shop.html" class="muted" style="font-family:Sora;font-weight:600;font-size:.9rem">← All templates</a>
           <span class="p-cat" style="margin-top:14px;display:block">${(DDS.categories.find(c=>c.id===p.category)||{}).label}</span>
           <h1 style="font-size:clamp(1.9rem,4vw,2.7rem);margin:6px 0 10px">${p.name}</h1>
-          <div class="p-rate" style="font-size:1rem">★ ${p.rating.toFixed(1)} <span class="muted">· ${p.delivery}</span></div>
+          <div class="p-rate" style="font-size:1rem">${p.reviews>0?`★ ${p.rating.toFixed(1)} <span class="muted">· `:`<span class="muted">`}${p.delivery}</span></div>
           <p style="color:var(--ink-2);font-size:1.08rem;margin:16px 0">${p.short}</p>
           <div style="display:flex;align-items:baseline;gap:12px;margin:6px 0 20px">
             <span class="p-price" style="font-size:2rem">${cmp}${money(p.price)}</span>
