@@ -265,6 +265,35 @@ h1,h2,h3,h4,.display{font-family:"Fraunces","Sora",Georgia,serif;font-weight:600
   .ft-top{grid-template-columns:1fr}
   .cap-form input{min-width:100%}
 }
+/* ---------- sticky conversion bar ---------- */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:70;transform:translateY(130%);transition:transform .45s var(--ease);
+  background:var(--ink);color:#fff;box-shadow:0 -14px 44px -14px rgba(10,8,30,.55);border-top:1px solid rgba(255,255,255,.08)}
+.sticky-cta.show{transform:none}
+.sticky-cta .in{display:flex;align-items:center;gap:18px;justify-content:space-between;padding:13px 0;flex-wrap:wrap}
+.sticky-cta .txt{display:flex;align-items:center;gap:12px;min-width:0}
+.sticky-cta .gift{font-size:1.3rem}
+.sticky-cta p{font-family:"Sora";font-weight:700;margin:0;font-size:.98rem;line-height:1.25}
+.sticky-cta p small{display:block;color:#a7a5c0;font-weight:600;font-size:.8rem}
+.sticky-cta .act{display:flex;align-items:center;gap:6px}
+.sticky-cta .x{background:none;border:0;color:#8b89a6;cursor:pointer;font-size:1.3rem;line-height:1;padding:6px 8px}
+.sticky-cta .x:hover{color:#fff}
+@media(max-width:560px){.sticky-cta p small{display:none}.sticky-cta .in{padding:10px 0}}
+
+/* ---------- promise / guarantee band ---------- */
+.promise-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin-top:44px}
+.promise{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:30px;position:relative;overflow:hidden}
+.promise::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad-warm)}
+.promise .ic{font-size:1.6rem;margin-bottom:14px}
+.promise h3{font-family:"Sora";font-weight:700;font-size:1.16rem;margin-bottom:8px}
+.promise p{color:var(--ink-2);font-size:.97rem}
+.guarantee-note{display:inline-flex;align-items:center;gap:10px;margin-top:36px;background:var(--bg-2);border:1px solid var(--line);
+  border-radius:999px;padding:12px 22px;font-family:"Sora";font-weight:600;color:var(--ink-2);font-size:.95rem}
+.guarantee-note b{color:var(--ink)}
+
+/* refined brand mark svg */
+.brand .mark svg{width:22px;height:22px}
+.ft .brand .mark svg{width:18px;height:18px}
+
 /* mobile drawer */
 .drawer{position:fixed;inset:0;background:var(--bg);z-index:80;transform:translateX(100%);transition:transform .35s var(--ease);
   padding:26px;display:flex;flex-direction:column;gap:8px}

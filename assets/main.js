@@ -19,7 +19,7 @@
     return `
     <header class="hdr" id="hdr">
       <div class="wrap nav">
-        <a class="brand" href="/"><span class="mark">D</span>Daily&nbsp;Dash&nbsp;Shop</a>
+        <a class="brand" href="/"><span class="mark"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M24 17h13.5C47.2 17 54 24 54 33.5S47.2 50 37.5 50H24V17zm9.2 24.6c5.4 0 8.9-3.3 8.9-8.1s-3.5-8.1-8.9-8.1H32v16.2h1.2z" fill="#fff"/><rect x="6" y="24" width="12" height="4" rx="2" fill="#fff" opacity=".85"/><rect x="2" y="34" width="14" height="4" rx="2" fill="#fff" opacity=".5"/></svg></span>Daily&nbsp;Dash&nbsp;Shop</a>
         <nav class="nav-links">
           ${link('/shop.html','Shop')}
           ${link('/#categories','Categories')}
@@ -51,8 +51,8 @@
       <div class="wrap">
         <div class="ft-top">
           <div>
-            <a class="brand" href="/"><span class="mark">D</span>Daily&nbsp;Dash&nbsp;Shop</a>
-            <p class="blurb">Premium, ready-to-edit digital templates that make you look professional in minutes. Instant download. Loved worldwide.</p>
+            <a class="brand" href="/"><span class="mark"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M24 17h13.5C47.2 17 54 24 54 33.5S47.2 50 37.5 50H24V17zm9.2 24.6c5.4 0 8.9-3.3 8.9-8.1s-3.5-8.1-8.9-8.1H32v16.2h1.2z" fill="#fff"/><rect x="6" y="24" width="12" height="4" rx="2" fill="#fff" opacity=".85"/><rect x="2" y="34" width="14" height="4" rx="2" fill="#fff" opacity=".5"/></svg></span>Daily&nbsp;Dash&nbsp;Shop</a>
+            <p class="blurb">Premium, ready-to-edit digital templates that make you look professional in minutes. Instant download, made for creators worldwide.</p>
           </div>
           <div>
             <h4>Shop</h4>
@@ -213,10 +213,31 @@
     $$("#drawer a").forEach(a=>a.addEventListener("click",()=>d.classList.remove("open")));
   }
 
+  /* ---------- sticky conversion bar ---------- */
+  function stickyCTA(){
+    if(sessionStorage.getItem("dds_cta_x")) return;
+    const bar=document.createElement("div");
+    bar.className="sticky-cta";
+    bar.innerHTML=`<div class="wrap in">
+      <div class="txt"><span class="gift">🎁</span><p>Get 20% off your first order<small>Free starter template pack — instantly, when you join.</small></p></div>
+      <div class="act"><a href="/#join" class="btn btn-accent" style="--py:11px;--px:20px">Claim 20% off</a>
+      <button class="x" aria-label="Dismiss">×</button></div></div>`;
+    document.body.appendChild(bar);
+    bar.querySelector(".x").addEventListener("click",()=>{bar.classList.remove("show");sessionStorage.setItem("dds_cta_x","1");});
+    const join=$("#join");
+    const onScroll=()=>{
+      const past=scrollY>760;
+      let inJoin=false;
+      if(join){const r=join.getBoundingClientRect();inJoin=r.top<innerHeight&&r.bottom>0;}
+      bar.classList.toggle("show", past && !inJoin);
+    };
+    addEventListener("scroll",onScroll,{passive:true}); onScroll();
+  }
+
   /* ---------- boot ---------- */
   document.addEventListener("DOMContentLoaded",()=>{
     const h=$("#site-header"); if(h) h.innerHTML=header(h.dataset.active||"");
     const f=$("#site-footer"); if(f) f.innerHTML=footer();
-    chrome(); renderFeatured(); renderShop(); renderProduct(); capture(); observe();
+    chrome(); renderFeatured(); renderShop(); renderProduct(); capture(); observe(); stickyCTA();
   });
 })();
