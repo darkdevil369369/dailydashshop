@@ -55,7 +55,7 @@ DDS.products = [
       "Editable in Canva, Word & Google Docs",
       "Icon pack, colour presets & 1-page + 2-page versions",
     ],
-    formats:["Canva","Word (.docx)","Google Docs","PDF guide"],
+    formats:["Word (.docx)","Google Docs","PDF"],
     delivery:"Instant download",
   },
   {
@@ -125,5 +125,15 @@ DDS.products = [
 
 DDS.storeLinks = {          // set real links when Etsy/Gumroad live; falls back to signup
   etsy:  "",
-  gumroad:"",
+  gumroad:"https://dailydash.gumroad.com",
+};
+
+// Per-product buy links — set to our Razorpay checkout at go-live (after KYC).
+// Empty for now → buttons safely fall back to the "Get 20% off" signup until payment is live.
+DDS.buyLinks = {
+  "everything-bundle": "",
+  "resume-executive":  "",
+  "life-planner":      "",
+  "freelancer-kit":    "",
+  "social-kit":        "",
 };

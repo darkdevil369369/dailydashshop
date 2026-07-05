@@ -139,8 +139,10 @@
     document.title=`${p.name} — Daily Dash Shop`;
     const cmp=p.compareAt?`<s>${money(p.compareAt)}</s> `:"";
     const off=p.compareAt?Math.round((1-p.price/p.compareAt)*100):0;
-    const buy = DDS.storeLinks.etsy || DDS.storeLinks.gumroad || "/#join";
-    const buyLabel = (DDS.storeLinks.etsy||DDS.storeLinks.gumroad)?"Buy & download now":"Get 20% off — join the list";
+    const link = (DDS.buyLinks && DDS.buyLinks[p.id]) || "";
+    const buy = link || "/#join";
+    const buyLabel = link ? "Buy &amp; download now →" : "Get 20% off — join the list";
+    const buyAttr = link ? ' target="_blank" rel="noopener"' : '';
     host.innerHTML=`
       <div class="pd-grid">
         <div class="pd-media"><img src="${p.image}" alt="${p.name}"></div>
@@ -156,7 +158,7 @@
           </div>
           <ul class="pd-list">${p.highlights.map(h=>`<li>✓ ${h}</li>`).join("")}</ul>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
-            <a href="${buy}" class="btn btn-accent btn-lg">${buyLabel}</a>
+            <a href="${buy}"${buyAttr} class="btn btn-accent btn-lg">${buyLabel}</a>
             <a href="/shop.html" class="btn btn-ghost btn-lg">Keep browsing</a>
           </div>
           <div class="pd-meta">
