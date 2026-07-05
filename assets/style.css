@@ -258,6 +258,7 @@ h1,h2,h3,h4,.display{font-family:"Fraunces","Sora",Georgia,serif;font-weight:600
   .hero-cta,.hero-proof{justify-content:center}
   .hero-visual{max-width:400px;margin-top:10px}
   .nav-links{display:none}
+  .nav-actions .btn{display:none}
   .burger{display:block}
   .ft-top{grid-template-columns:1fr 1fr}
 }
