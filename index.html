@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Dash Shop — Premium Digital Templates, Instantly Delivered</title>
+<meta name="description" content="Beautifully designed, ready-to-use digital templates — resumes, planners, and productivity kits. Instant download. Join for 20% off your first order plus a free starter pack.">
+<meta property="og:title" content="Daily Dash Shop — Premium Digital Templates">
+<meta property="og:description" content="Instant-download digital templates that make you look professional in minutes. Get 20% off + a free starter pack.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dailydashshop.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f1222; --ink2:#3a3f5c; --muted:#6b7192;
+  --bg:#ffffff; --bg2:#f6f7fb; --line:#e7e9f2;
+  --brand:#4f46e5; --brand2:#7c3aed; --accent:#ff5c8a;
+  --grad:linear-gradient(120deg,#4f46e5 0%,#7c3aed 55%,#ec4899 100%);
+  --shadow:0 20px 50px -20px rgba(31,29,90,.28);
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.brand{font-family:'Sora','Inter',sans-serif;letter-spacing:-.02em;line-height:1.1}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border:0;cursor:pointer;border-radius:999px;padding:15px 26px;font-size:1rem;transition:transform .15s ease, box-shadow .15s ease}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 12px 30px -10px rgba(124,58,237,.6)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px -12px rgba(124,58,237,.7)}
+.btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.brand{font-weight:800;font-size:1.25rem;display:flex;align-items:center;gap:9px}
+.logo{width:30px;height:30px;border-radius:9px;background:var(--grad);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-family:'Sora'}
+.nav-cta{font-size:.95rem;padding:10px 20px}
+
+/* hero */
+.hero{position:relative;padding:72px 0 40px;background:
+  radial-gradient(1000px 500px at 80% -10%,rgba(124,58,237,.10),transparent 60%),
+  radial-gradient(700px 400px at 0% 10%,rgba(236,72,153,.08),transparent 55%)}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--line);color:var(--ink2);font-weight:600;font-size:.85rem;padding:7px 14px;border-radius:999px;margin-bottom:22px}
+.dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.18)}
+.hero h1{font-size:clamp(2.1rem,5vw,3.6rem);font-weight:800;max-width:14ch}
+.hero h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(1.05rem,2.2vw,1.28rem);color:var(--ink2);max-width:52ch;margin:20px 0 30px}
+
+/* email capture card */
+.capture{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;max-width:560px}
+.capture h3{font-size:1.15rem;margin-bottom:4px}
+.capture p{color:var(--muted);font-size:.95rem;margin-bottom:16px}
+.form-row{display:flex;gap:10px;flex-wrap:wrap}
+.form-row input{flex:1;min-width:220px;padding:15px 16px;border:1.5px solid var(--line);border-radius:12px;font-size:1rem;font-family:inherit;outline:none;transition:border .15s}
+.form-row input:focus{border-color:var(--brand)}
+.consent{font-size:.8rem;color:var(--muted);margin-top:12px}
+.msg{margin-top:12px;font-weight:600;display:none}
+.perk-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px}
+.perk{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink2);font-weight:600}
+.perk svg{color:var(--brand)}
+
+/* trust strip */
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);margin-top:52px}
+.trust .wrap{display:flex;gap:38px;flex-wrap:wrap;justify-content:center;padding:22px}
+.trust b{font-size:1.4rem;font-family:'Sora'}
+.trust .t{color:var(--muted);font-size:.85rem}
+
+/* sections */
+section.block{padding:64px 0}
+.eyebrow{color:var(--brand);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
+.h2{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;margin:8px 0 14px}
+.sub{color:var(--ink2);max-width:56ch;font-size:1.05rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:34px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;transition:transform .18s, box-shadow .18s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.ic{width:46px;height:46px;border-radius:12px;background:var(--bg2);display:flex;align-items:center;justify-content:center;color:var(--brand);margin-bottom:14px}
+.card h3{font-size:1.15rem;margin-bottom:6px}
+.card p{color:var(--muted);font-size:.95rem}
+
+/* products preview */
+.prod{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;transition:transform .18s, box-shadow .18s}
+.prod:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.prod .thumb{aspect-ratio:4/3;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Sora';font-weight:700;font-size:1.05rem;text-align:center;padding:18px;opacity:.95}
+.prod .meta{padding:16px 18px}
+.prod .meta .n{font-weight:700}
+.prod .meta .soon{color:var(--accent);font-weight:700;font-size:.82rem}
+
+/* how */
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:30px}
+.step{position:relative;padding:26px 22px 22px;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+.step::before{counter-increment:s;content:counter(s);position:absolute;top:-16px;left:22px;width:34px;height:34px;border-radius:10px;background:var(--grad);color:#fff;font-family:'Sora';font-weight:800;display:flex;align-items:center;justify-content:center}
+.step h3{margin:8px 0 6px;font-size:1.08rem}
+.step p{color:var(--muted);font-size:.93rem}
+
+/* cta band */
+.cta{background:var(--ink);color:#fff;border-radius:26px;padding:52px 30px;text-align:center;background-image:radial-gradient(600px 300px at 20% 0%,rgba(124,58,237,.5),transparent 60%),radial-gradient(500px 260px at 100% 100%,rgba(236,72,153,.4),transparent 60%)}
+.cta h2{font-size:clamp(1.6rem,3.5vw,2.3rem);font-weight:800}
+.cta p{color:#c9cbe3;max-width:48ch;margin:12px auto 26px}
+
+/* footer */
+footer{padding:40px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;margin-top:64px}
+.fnav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#"><span class="logo">D</span>Daily Dash Shop</a>
+    <a href="#join" class="btn btn-primary nav-cta">Get 20% off</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="badge"><span class="dot"></span>New drops every week · Instant download</span>
+    <h1>Look <span class="g">professional</span> in minutes, not hours.</h1>
+    <p class="lead">Premium, ready-to-edit digital templates — resumes, planners, and productivity kits — designed to make you stand out. Buy once, download instantly, use forever.</p>
+
+    <!-- EMAIL CAPTURE (the Phase-1 engine) -->
+    <div class="capture" id="join">
+      <h3>Join & save 20% on your first order</h3>
+      <p>Plus a <b>free starter template pack</b> the moment you subscribe.</p>
+      <form id="signup" class="form-row" novalidate>
+        <input type="email" id="email" name="email" placeholder="you@email.com" required autocomplete="email">
+        <button type="submit" class="btn btn-primary">Send my 20% code</button>
+      </form>
+      <div class="msg" id="msg"></div>
+      <div class="consent">No spam. Unsubscribe anytime. We only send new drops & deals.</div>
+      <div class="perk-row">
+        <span class="perk">✓ Free starter pack</span>
+        <span class="perk">✓ 20% welcome code</span>
+        <span class="perk">✓ Early access to new drops</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust">
+  <div class="wrap">
+    <div><b>Instant</b><div class="t">Download delivery</div></div>
+    <div><b>Editable</b><div class="t">Yours to customize</div></div>
+    <div><b>Weekly</b><div class="t">Fresh new designs</div></div>
+    <div><b>Secure</b><div class="t">Trusted checkout</div></div>
+  </div>
+</div>
+
+<!-- WHY -->
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">Why Daily Dash Shop</div>
+    <div class="h2">Design-agency quality, without the agency price.</div>
+    <p class="sub">Every template is crafted to be clean, modern, and effortless to personalize — so you get a polished result in minutes.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">⚡</div><h3>Instant delivery</h3><p>Pay and download in seconds. No waiting, no shipping — it's all digital.</p></div>
+      <div class="card"><div class="ic">🎨</div><h3>Fully editable</h3><p>Swap text, colors, and layout in tools you already use. No design skills needed.</p></div>
+      <div class="card"><div class="ic">♾️</div><h3>Buy once, keep forever</h3><p>One purchase, unlimited use. Come back for the next drop, not the same file.</p></div>
+      <div class="card"><div class="ic">💜</div><h3>Made by real designers</h3><p>Curated, original designs — not recycled clip-art. Quality you can show off.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS PREVIEW -->
+<section class="block" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="eyebrow">Coming this week</div>
+    <div class="h2">First drops landing soon</div>
+    <p class="sub">Subscribe above and you'll be first in line — with your 20% code ready to use.</p>
+    <div class="grid">
+      <div class="prod"><div class="thumb">Modern Resume &amp; CV Pack</div><div class="meta"><div class="n">Resume Templates</div><div class="soon">Dropping soon →</div></div></div>
+      <div class="prod"><div class="thumb">Ultimate Life Planner</div><div class="meta"><div class="n">Digital Planners</div><div class="soon">Dropping soon →</div></div></div>
+      <div class="prod"><div class="thumb">Freelancer Starter Kit</div><div class="meta"><div class="n">Business Templates</div><div class="soon">Dropping soon →</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <div class="h2">From click to done — in under 5 minutes</div>
+    <div class="steps">
+      <div class="step"><h3>Pick your template</h3><p>Browse clean, modern designs made for real results.</p></div>
+      <div class="step"><h3>Download instantly</h3><p>It's yours the second you check out. No wait.</p></div>
+      <div class="step"><h3>Make it yours</h3><p>Edit text, colors, and details in minutes.</p></div>
+      <div class="step"><h3>Ship it</h3><p>Print, send, or post — and look like a pro.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="wrap">
+  <div class="cta">
+    <h2>Get your 20% welcome code + free starter pack</h2>
+    <p>Join the list before the first drop and lock in the best price we'll ever offer.</p>
+    <a href="#join" class="btn btn-primary">Claim my 20% off</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap fnav">
+    <div><span class="brand" style="font-size:1.05rem"><span class="logo" style="width:24px;height:24px;font-size:.9rem">D</span>Daily Dash Shop</span></div>
+    <div>© <span id="yr"></span> Daily Dash Shop · Premium digital templates · hello@dailydashshop.com</div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Email capture — posts to a configurable endpoint (Brevo form / Formspree / Apps Script).
+// Set window.DDS_ENDPOINT at deploy time. Until then it stores locally so no lead is lost.
+const ENDPOINT = window.DDS_ENDPOINT || ""; // e.g. Brevo double-opt-in form action URL
+const form = document.getElementById('signup');
+const msg = document.getElementById('msg');
+function show(t,ok){msg.style.display='block';msg.style.color=ok?'#16a34a':'#dc2626';msg.textContent=t;}
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){show('Please enter a valid email.',false);return;}
+  try{
+    if(ENDPOINT){
+      const fd = new FormData(); fd.append('email', email); fd.append('EMAIL', email);
+      await fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:fd});
+    }
+    // always keep a local backup capture so we never lose a lead pre-integration
+    const leads = JSON.parse(localStorage.getItem('dds_leads')||'[]'); leads.push({email,t:Date.now()});
+    localStorage.setItem('dds_leads', JSON.stringify(leads));
+    show('You’re in! Check your inbox for the 20% code + free pack. 🎉', true);
+    form.reset();
+  }catch(err){show('Something went wrong — please try again.',false);}
+});
+</script>
+</body>
+</html>
