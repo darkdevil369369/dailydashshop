@@ -92,12 +92,12 @@ DDS.products = [
     gallery:["assets/img/freelancer-kit.jpg"],
     short:"Everything to run a freelance business — invoice, proposal, contract, pricing sheet and client onboarding.",
     highlights:[
-      "Invoice, proposal & contract templates",
-      "Pricing calculator + client onboarding pack",
-      "Editable branding in Canva & Google Sheets",
-      "Lawyer-style plain-English contract wording",
+      "6 pro documents: proposal, agreement, NDA, invoice, pricing sheet & onboarding checklist",
+      "Plain-English contract & NDA wording",
+      "Fully editable in Word & Google Docs",
+      "Print-ready invoice PDF included",
     ],
-    formats:["Canva","Google Sheets","Word","PDF"],
+    formats:["Word (.docx)","Google Docs","PDF"],
     delivery:"Instant download",
   },
   {
