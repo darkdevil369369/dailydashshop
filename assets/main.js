@@ -71,7 +71,7 @@
             <h4>Legal</h4>
             <a href="/privacy.html">Privacy</a>
             <a href="/terms.html">Terms</a>
-            <a href="/refund.html">Refunds</a>
+            <a href="/refund.html">Refund Policy</a>
           </div>
         </div>
         <div class="ft-bottom">
