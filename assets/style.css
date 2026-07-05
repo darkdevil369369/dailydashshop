@@ -280,6 +280,24 @@ h1,h2,h3,h4,.display{font-family:"Fraunces","Sora",Georgia,serif;font-weight:600
 .sticky-cta .x:hover{color:#fff}
 @media(max-width:560px){.sticky-cta p small{display:none}.sticky-cta .in{padding:10px 0}}
 
+/* ---------- bundle spotlight ---------- */
+.bundle-band{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(20px,4vw,48px);align-items:center;
+  background:var(--ink);color:#fff;border-radius:var(--r-xl);padding:clamp(20px,3vw,30px);overflow:hidden;position:relative;box-shadow:var(--shadow-lg)}
+.bundle-band::before{content:"";position:absolute;inset:0;background:
+   radial-gradient(34rem 22rem at 0% 0%,rgba(123,63,242,.42),transparent 55%),
+   radial-gradient(30rem 20rem at 100% 100%,rgba(255,106,61,.4),transparent 55%);pointer-events:none}
+.bundle-media{position:relative;z-index:2;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/5;box-shadow:var(--shadow)}
+.bundle-media img{width:100%;height:100%;object-fit:cover}
+.bundle-copy{position:relative;z-index:2;padding:8px 10px 8px 0}
+.bundle-copy h2{color:#fff;font-size:clamp(1.8rem,3.6vw,2.7rem);margin:14px 0 10px}
+.bundle-copy p{color:#cbc9de;font-size:1.06rem;max-width:46ch}
+.bundle-price{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:22px 0}
+.bundle-price .now{font-family:"Sora";font-weight:800;font-size:2.6rem;color:#fff}
+.bundle-price .was{font-family:"Sora";font-weight:600;font-size:1.3rem;color:#8b89a6;text-decoration:line-through}
+.bundle-price .save{font-family:"Sora";font-weight:700;font-size:.85rem;background:var(--grad-warm);color:#231000;padding:7px 14px;border-radius:999px}
+.bundle-fine{color:#9997b4 !important;font-size:.88rem;margin-top:14px}
+@media(max-width:800px){.bundle-band{grid-template-columns:1fr}.bundle-media{max-height:340px;aspect-ratio:16/10}}
+
 /* ---------- promise / guarantee band ---------- */
 .promise-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin-top:44px}
 .promise{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:30px;position:relative;overflow:hidden}

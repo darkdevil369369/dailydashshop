@@ -7,6 +7,7 @@ window.DDS = window.DDS || {};
 
 DDS.categories = [
   { id:"all",       label:"All" },
+  { id:"bundles",   label:"Bundles" },
   { id:"resumes",   label:"Resumes & CV" },
   { id:"planners",  label:"Planners" },
   { id:"business",  label:"Business Kits" },
@@ -14,6 +15,28 @@ DDS.categories = [
 ];
 
 DDS.products = [
+  {
+    id:"everything-bundle",
+    slug:"everything-bundle",
+    name:"The Everything Bundle — All 4 Packs",
+    category:"bundles",
+    seller:"dailydash",
+    price:49, compareAt:76, currency:"USD",    // compareAt = honest sum of the 4 individual prices
+    rating:5.0, reviews:0,
+    badge:"Best value", hot:true,
+    image:"assets/img/bundle.jpg",
+    gallery:["assets/img/bundle.jpg"],
+    short:"Every Daily Dash template in one pack — resume, planner, freelancer kit and 120 social templates. Worth $76, yours for $49.",
+    highlights:[
+      "All 4 premium packs in one download — worth $76 individually",
+      "Executive Resume & CV Pack ($12)",
+      "Ultimate Life & Goals Planner ($16)",
+      "Freelancer Starter Kit ($19) + Instagram 120-Kit ($29)",
+      "Save $27 — our biggest deal, yours forever",
+    ],
+    formats:["Canva","Word","Google Docs","PDF","Notion"],
+    delivery:"Instant download",
+  },
   {
     id:"resume-executive",
     slug:"executive-resume-cv-pack",
