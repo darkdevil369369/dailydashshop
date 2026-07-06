@@ -229,7 +229,11 @@ h1,h2,h3,h4,.display{font-family:"Fraunces","Sora",Georgia,serif;font-weight:600
 /* ---------- product detail ---------- */
 .pd-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,60px);align-items:start}
 .pd-media{position:sticky;top:96px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);background:var(--bg-2)}
-.pd-media img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.pd-media>img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.pd-thumbs{display:flex;gap:8px;padding:10px;background:var(--bg-2);border-top:1px solid var(--line)}
+.pd-thumb{flex:1;border:2px solid transparent;border-radius:10px;overflow:hidden;padding:0;cursor:pointer;background:none;line-height:0;transition:border-color .2s}
+.pd-thumb.on{border-color:var(--brand)}
+.pd-thumb img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
 .pd-list{list-style:none;display:grid;gap:10px;margin:8px 0}
 .pd-list li{color:var(--ink-2);font-size:1rem}
 .pd-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}

@@ -143,9 +143,13 @@
     const buy = link || "/#join";
     const buyLabel = link ? "Buy &amp; download now →" : "Get 20% off — join the list";
     const buyAttr = link ? ' target="_blank" rel="noopener"' : '';
+    const gal = (p.gallery && p.gallery.length ? p.gallery : [p.image]);
+    const thumbs = gal.length>1
+      ? `<div class="pd-thumbs">${gal.map((g,i)=>`<button class="pd-thumb${i===0?" on":""}" data-src="${g}" aria-label="Preview ${i+1}"><img loading="lazy" src="${g}" alt="${p.name} preview ${i+1}"></button>`).join("")}</div>`
+      : "";
     host.innerHTML=`
       <div class="pd-grid">
-        <div class="pd-media"><img src="${p.image}" alt="${p.name}"></div>
+        <div class="pd-media"><img id="pdMainImg" src="${gal[0]}" alt="${p.name}">${thumbs}</div>
         <div class="pd-info">
           <a href="/shop.html" class="muted" style="font-family:Sora;font-weight:600;font-size:.9rem">← All templates</a>
           <span class="p-cat" style="margin-top:14px;display:block">${(DDS.categories.find(c=>c.id===p.category)||{}).label}</span>
@@ -168,6 +172,13 @@
           </div>
         </div>
       </div>`;
+    // gallery: click a thumbnail to swap the main image
+    const main=$("#pdMainImg");
+    host.querySelectorAll(".pd-thumb").forEach(btn=>btn.addEventListener("click",()=>{
+      main.src=btn.dataset.src;
+      host.querySelectorAll(".pd-thumb").forEach(b=>b.classList.remove("on"));
+      btn.classList.add("on");
+    }));
   }
 
   /* ---------- email capture ---------- */
