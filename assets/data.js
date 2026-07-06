@@ -50,10 +50,10 @@ DDS.products = [
     gallery:["assets/img/resume-executive.jpg"],
     short:"Recruiter-approved, ATS-friendly resume + matching cover letter and references — fully editable in minutes.",
     highlights:[
-      "3 modern layouts + matching cover letter",
+      "3 editable layouts: Classic ATS, Modern Two-Column & Executive",
       "ATS-friendly — passes applicant tracking systems",
-      "Editable in Canva, Word & Google Docs",
-      "Icon pack, colour presets & 1-page + 2-page versions",
+      "Matching cover letter + references sheet included",
+      "Editable in Word & Google Docs · 1-page & 2-page versions",
     ],
     formats:["Word (.docx)","Google Docs","PDF"],
     delivery:"Instant download",
@@ -69,7 +69,7 @@ DDS.products = [
     badge:"New",
     image:"assets/img/life-planner.jpg",
     gallery:["assets/img/life-planner.jpg"],
-    short:"A calm, all-in-one digital planner for goals, habits, budget and weekly focus — hyperlinked and print-ready.",
+    short:"A calm, all-in-one digital planner for goals, habits, budget and weekly focus — print-ready and reusable every year.",
     highlights:[
       "6 designed pages: goals, monthly, weekly, habit tracker & budget",
       "Undated — reuse it every single year",
