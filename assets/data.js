@@ -25,7 +25,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"Best value", hot:true,
     image:"assets/img/bundle.jpg",
-    gallery:["assets/img/bundle.jpg"],
+    gallery:["assets/img/bundle.jpg","assets/img/resume-executive.jpg","assets/img/life-planner.jpg","assets/img/freelancer-kit.jpg"],
     short:"Every Daily Dash pack in one download — the 3-layout resume pack, life planner, freelancer kit and Instagram Growth Kit. Worth $61, yours for $39.",
     highlights:[
       "All 4 premium packs in one download — worth $61 individually",
@@ -47,7 +47,7 @@ DDS.products = [
     rating:4.9, reviews:0,
     badge:"Bestseller", hot:true,
     image:"assets/img/resume-executive.jpg",
-    gallery:["assets/img/resume-executive.jpg"],
+    gallery:["assets/img/resume-executive.jpg","assets/img/resume-executive-2.jpg","assets/img/resume-executive-3.jpg"],
     short:"Recruiter-approved, ATS-friendly resume + matching cover letter and references — fully editable in minutes.",
     highlights:[
       "3 editable layouts: Classic ATS, Modern Two-Column & Executive",
@@ -68,7 +68,7 @@ DDS.products = [
     rating:4.8, reviews:0,
     badge:"New",
     image:"assets/img/life-planner.jpg",
-    gallery:["assets/img/life-planner.jpg"],
+    gallery:["assets/img/life-planner.jpg","assets/img/life-planner-2.jpg","assets/img/life-planner-3.jpg"],
     short:"A calm, all-in-one digital planner for goals, habits, budget and weekly focus — print-ready and reusable every year.",
     highlights:[
       "6 designed pages: goals, monthly, weekly, habit tracker & budget",
@@ -89,7 +89,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"Pro pick",
     image:"assets/img/freelancer-kit.jpg",
-    gallery:["assets/img/freelancer-kit.jpg"],
+    gallery:["assets/img/freelancer-kit.jpg","assets/img/freelancer-kit-2.jpg","assets/img/freelancer-kit-3.jpg"],
     short:"Everything to run a freelance business — invoice, proposal, contract, pricing sheet and client onboarding.",
     highlights:[
       "6 pro documents: proposal, agreement, NDA, invoice, pricing sheet & onboarding checklist",
@@ -110,7 +110,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"New", hot:true,
     image:"assets/img/social-kit.jpg",
-    gallery:["assets/img/social-kit.jpg"],
+    gallery:["assets/img/social-kit.jpg","assets/img/social-kit-2.jpg","assets/img/social-kit-3.jpg"],
     short:"A complete Instagram growth system — an 11-page playbook (30-day plan, 120 hooks, autopilot workflow) plus 14 editable templates.",
     highlights:[
       "11-page Growth Playbook: 30-day calendar, 5 content pillars & best posting times",
