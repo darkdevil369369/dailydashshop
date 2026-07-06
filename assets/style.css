@@ -250,6 +250,7 @@ h1,h2,h3,h4,.display{font-family:"Fraunces","Sora",Georgia,serif;font-weight:600
 /* reveal on scroll */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
 
 /* ---------- responsive ---------- */
 @media(max-width:900px){

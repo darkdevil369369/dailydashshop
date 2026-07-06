@@ -199,10 +199,15 @@
 
   /* ---------- reveal-on-scroll ---------- */
   let io;
+  const revealAll=()=>$$(".reveal:not(.in)").forEach(el=>el.classList.add("in"));
   function observe(){
-    if(!("IntersectionObserver" in window)){ $$(".reveal").forEach(el=>el.classList.add("in")); return; }
-    io=io||new IntersectionObserver((es)=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);}}),{threshold:.12});
+    // accessibility + no-JS-observer + safety: never let content stay invisible
+    const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduce || !("IntersectionObserver" in window)){ revealAll(); return; }
+    io=io||new IntersectionObserver((es)=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);}}),{threshold:.12,rootMargin:"0px 0px -8% 0px"});
     $$(".reveal:not(.in)").forEach(el=>io.observe(el));
+    // failsafe: if anything is still hidden after 2.5s (edge cases / short pages), show it
+    clearTimeout(observe._t); observe._t=setTimeout(revealAll, 2500);
   }
 
   /* ---------- header behaviour + drawer ---------- */
