@@ -341,12 +341,13 @@ DDS.storeLinks = {          // set real links when Etsy/Gumroad live; falls back
   gumroad:"https://dailydash.gumroad.com",
 };
 
-// Per-product buy links — set to our Razorpay checkout at go-live (after KYC).
-// Empty for now → buttons safely fall back to the "Get 20% off" signup until payment is live.
+// Per-product buy links → Gumroad checkout (?wanted=true opens the buy form directly).
+// Gumroad = merchant of record: handles global tax + delivery. Money accrues in the Gumroad
+// wallet, paid out to bank once the $100 threshold is reached. Empty → falls back to signup.
 DDS.buyLinks = {
-  "everything-bundle": "",
-  "resume-executive":  "",
-  "life-planner":      "",
-  "freelancer-kit":    "",
-  "social-kit":        "",
+  "everything-bundle": "https://dailydash.gumroad.com/l/everything-bundle?wanted=true",
+  "resume-executive":  "https://dailydash.gumroad.com/l/resume-cv-pack?wanted=true",
+  "life-planner":      "https://dailydash.gumroad.com/l/life-planner?wanted=true",
+  "freelancer-kit":    "https://dailydash.gumroad.com/l/freelancer-kit?wanted=true",
+  "social-kit":        "https://dailydash.gumroad.com/l/instagram-content-kit?wanted=true",
 };
