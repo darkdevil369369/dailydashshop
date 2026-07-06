@@ -131,7 +131,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"New",
     image:"assets/img/cover-letter-pack.jpg",
-    gallery:["assets/img/cover-letter-pack.jpg"],
+    gallery:["assets/img/cover-letter-pack.jpg","assets/img/cover-letter-pack-2.jpg","assets/img/cover-letter-pack-3.jpg"],
     short:"3 recruiter-ready cover letter templates plus a follow-up email — just swap in your details and send.",
     highlights:[
       "3 cover-letter styles: professional, career-change & creative",
@@ -152,7 +152,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"Pro pick",
     image:"assets/img/interview-prep-kit.jpg",
-    gallery:["assets/img/interview-prep-kit.jpg"],
+    gallery:["assets/img/interview-prep-kit.jpg","assets/img/interview-prep-kit-2.jpg","assets/img/interview-prep-kit-3.jpg"],
     short:"Everything to walk in confident — STAR-method worksheets, 50 common questions and a thank-you note.",
     highlights:[
       "STAR-method answer worksheets to structure your stories",
@@ -173,7 +173,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"New",
     image:"assets/img/linkedin-optimization-kit.jpg",
-    gallery:["assets/img/linkedin-optimization-kit.jpg"],
+    gallery:["assets/img/linkedin-optimization-kit.jpg","assets/img/linkedin-optimization-kit-2.jpg","assets/img/linkedin-optimization-kit-3.jpg"],
     short:"Turn your LinkedIn into a recruiter magnet — headline formulas, about-me templates and a full profile checklist.",
     highlights:[
       "Full profile audit checklist (photo → featured section)",
@@ -194,7 +194,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"Bestseller",
     image:"assets/img/budget-finance-planner.jpg",
-    gallery:["assets/img/budget-finance-planner.jpg"],
+    gallery:["assets/img/budget-finance-planner.jpg","assets/img/budget-finance-planner-2.jpg","assets/img/budget-finance-planner-3.jpg"],
     short:"Take control of your money — monthly budget, bill tracker, debt payoff and savings goals in one calm printable.",
     highlights:[
       "Monthly budget with income vs. expenses",
@@ -216,7 +216,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"New",
     image:"assets/img/fitness-wellness-planner.jpg",
-    gallery:["assets/img/fitness-wellness-planner.jpg"],
+    gallery:["assets/img/fitness-wellness-planner.jpg","assets/img/fitness-wellness-planner-2.jpg","assets/img/fitness-wellness-planner-3.jpg"],
     short:"Build a stronger week — workout log, meal plan, water tracker and a habit grid, all print-ready.",
     highlights:[
       "Weekly workout log with sets & reps",
@@ -238,7 +238,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"New",
     image:"assets/img/student-study-planner.jpg",
-    gallery:["assets/img/student-study-planner.jpg"],
+    gallery:["assets/img/student-study-planner.jpg","assets/img/student-study-planner-2.jpg","assets/img/student-study-planner-3.jpg"],
     short:"Ace the semester — class timetable, assignment tracker, exam countdown and revision pages.",
     highlights:[
       "Weekly class timetable",
@@ -260,7 +260,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"New",
     image:"assets/img/meal-planner-grocery.jpg",
-    gallery:["assets/img/meal-planner-grocery.jpg"],
+    gallery:["assets/img/meal-planner-grocery.jpg","assets/img/meal-planner-grocery-2.jpg","assets/img/meal-planner-grocery-3.jpg"],
     short:"Plan the week's food in five minutes — weekly menu, auto grocery list and recipe cards.",
     highlights:[
       "Weekly meal planner (breakfast → dinner)",
@@ -281,7 +281,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"Pro pick",
     image:"assets/img/small-business-starter.jpg",
-    gallery:["assets/img/small-business-starter.jpg"],
+    gallery:["assets/img/small-business-starter.jpg","assets/img/small-business-starter-2.jpg","assets/img/small-business-starter-3.jpg"],
     short:"Launch smart — one-page business plan, SWOT analysis, marketing calendar and an expense tracker.",
     highlights:[
       "One-page business plan (lean canvas style)",
@@ -302,7 +302,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"New",
     image:"assets/img/social-media-manager-kit.jpg",
-    gallery:["assets/img/social-media-manager-kit.jpg"],
+    gallery:["assets/img/social-media-manager-kit.jpg","assets/img/social-media-manager-kit-2.jpg","assets/img/social-media-manager-kit-3.jpg"],
     short:"Run clients like a pro — content calendar, client report, rate sheet and an onboarding questionnaire.",
     highlights:[
       "Monthly content calendar",
@@ -323,7 +323,7 @@ DDS.products = [
     rating:5.0, reviews:0,
     badge:"New",
     image:"assets/img/content-calendar-planner.jpg",
-    gallery:["assets/img/content-calendar-planner.jpg"],
+    gallery:["assets/img/content-calendar-planner.jpg","assets/img/content-calendar-planner-2.jpg","assets/img/content-calendar-planner-3.jpg"],
     short:"Never run out of things to post — a monthly calendar, a post-ideas prompt bank and a hashtag planner.",
     highlights:[
       "Undated monthly content calendar (reuse every month)",
