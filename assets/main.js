@@ -8,6 +8,9 @@
   const $  = (s,r=document)=>r.querySelector(s);
   const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
   const money = p => "$"+p;
+  /* credit wallet: a template costs list-price x3 credits; members pay 25% less */
+  const credits = p => Math.round(p*3);
+  const memberPrice = p => "$"+(p*0.75).toFixed(2).replace(/\.00$/,"");
 
   /* ---- Brevo capture endpoint (server API set at deploy).
      Until wired, leads are stored locally so none are lost. ---- */
@@ -17,12 +20,13 @@
   function header(active){
     const link=(h,l)=>`<a href="${h}"${active===l?' aria-current="page"':''}>${l}</a>`;
     return `
+    <a class="skip-link" href="#content">Skip to content</a>
     <header class="hdr" id="hdr">
       <div class="wrap nav">
         <a class="brand" href="/"><span class="mark"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M24 17h13.5C47.2 17 54 24 54 33.5S47.2 50 37.5 50H24V17zm9.2 24.6c5.4 0 8.9-3.3 8.9-8.1s-3.5-8.1-8.9-8.1H32v16.2h1.2z" fill="#fff"/><rect x="6" y="24" width="12" height="4" rx="2" fill="#fff" opacity=".85"/><rect x="2" y="34" width="14" height="4" rx="2" fill="#fff" opacity=".5"/></svg></span>Daily&nbsp;Dash&nbsp;Shop</a>
         <nav class="nav-links">
           ${link('/shop.html','Shop')}
-          ${link('/#categories','Categories')}
+          ${link('/credits.html','Credits')}
           ${link('/#how','How it works')}
           ${link('/about.html','About')}
         </nav>
@@ -36,7 +40,7 @@
     <div class="drawer" id="drawer">
       <button class="close" id="drawerClose" aria-label="Close">×</button>
       <a href="/shop.html">Shop</a>
-      <a href="/#categories">Categories</a>
+      <a href="/credits.html">Credits</a>
       <a href="/#how">How it works</a>
       <a href="/about.html">About</a>
       <a href="/#join" class="btn btn-accent" style="margin-top:14px">Get 20% off</a>
@@ -57,9 +61,9 @@
           <div>
             <h4>Shop</h4>
             <a href="/shop.html">All templates</a>
+            <a href="/credits.html">Credit Wallet</a>
             <a href="/shop.html#resumes">Resumes & CV</a>
             <a href="/shop.html#planners">Planners</a>
-            <a href="/shop.html#business">Business kits</a>
           </div>
           <div>
             <h4>Company</h4>
@@ -71,6 +75,7 @@
             <h4>Legal</h4>
             <a href="/privacy.html">Privacy</a>
             <a href="/terms.html">Terms</a>
+            <a href="/license.html">Licence</a>
             <a href="/refund.html">Refund Policy</a>
           </div>
         </div>
@@ -100,6 +105,7 @@
           <span class="p-price">${cmp}${money(p.price)}</span>
           <a class="p-buy" href="/product.html?id=${p.id}">View →</a>
         </div>
+        <div class="p-wallet">🏷️ <b>${memberPrice(p.price)}</b> with a <a href="/credits.html">wallet</a> · ${credits(p.price)} cr</div>
       </div>
     </article>`;
   }
@@ -156,9 +162,13 @@
           <h1 style="font-size:clamp(1.9rem,4vw,2.7rem);margin:6px 0 10px">${p.name}</h1>
           <div class="p-rate" style="font-size:1rem">${p.reviews>0?`★ ${p.rating.toFixed(1)} <span class="muted">· `:`<span class="muted">`}${p.delivery}</span></div>
           <p style="color:var(--ink-2);font-size:1.08rem;margin:16px 0">${p.short}</p>
-          <div style="display:flex;align-items:baseline;gap:12px;margin:6px 0 20px">
+          <div style="display:flex;align-items:baseline;gap:12px;margin:6px 0 12px">
             <span class="p-price" style="font-size:2rem">${cmp}${money(p.price)}</span>
             ${off?`<span class="p-tag hot" style="position:static">${off}% off</span>`:""}
+          </div>
+          <div class="pd-wallet">
+            <span>🏷️ <b>${memberPrice(p.price)}</b> with a Credit Wallet <span class="muted">· ${credits(p.price)} credits · save 25%+</span></span>
+            <a href="/credits.html">Get a wallet →</a>
           </div>
           <ul class="pd-list">${p.highlights.map(h=>`<li>✓ ${h}</li>`).join("")}</ul>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
@@ -264,10 +274,52 @@
     addEventListener("scroll",onScroll,{passive:true}); onScroll();
   }
 
+  /* ---------- cookie / storage consent notice ----------
+     Site uses only essential local storage (leads cache, UI prefs)
+     and loads Google Fonts. Honest one-time notice, dismiss = stored. */
+  function consent(){
+    if(localStorage.getItem("dds_consent")) return;
+    const bar=document.createElement("div");
+    bar.className="consent"; bar.setAttribute("role","dialog");
+    bar.setAttribute("aria-live","polite"); bar.setAttribute("aria-label","Cookie and storage notice");
+    bar.innerHTML=`<div class="wrap consent-in">
+      <p>We use essential local storage to run the site, remember your preferences and load fonts. We don't sell your data. See our <a href="/privacy.html">Privacy Policy</a>.</p>
+      <button class="btn btn-accent" type="button" data-consent-ok>Got it</button>
+    </div>`;
+    document.body.appendChild(bar);
+    requestAnimationFrame(()=>bar.classList.add("show"));
+    bar.querySelector("[data-consent-ok]").addEventListener("click",()=>{
+      localStorage.setItem("dds_consent","1"); bar.classList.remove("show");
+      setTimeout(()=>bar.remove(),300);
+    });
+  }
+
+  /* ---------- accessibility: skip-link target ---------- */
+  function skipTarget(){
+    if($("#content")) return;
+    const first=$("section, main"); // first real content block after header
+    if(first){ first.id="content"; first.setAttribute("tabindex","-1"); }
+  }
+
+  /* ---------- credit-wallet pack buttons ----------
+     Live checkout activates once the webhook is public: set window.DDS_PAY to
+     its base URL. Until then buttons fall back to their href (email capture). */
+  function walletButtons(){
+    const base = window.DDS_PAY || "";
+    if(!base) return;                         // pre-launch: href="/#join" handles it
+    $$("[data-pack]").forEach(b=>b.addEventListener("click",e=>{
+      const pack=b.dataset.pack; if(!pack) return;
+      e.preventDefault();
+      const email=(prompt("Enter your email — your credits and receipt go here:")||"").trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ if(email) alert("Please enter a valid email."); return; }
+      location.href=`${base}/crypto-checkout?pack=${encodeURIComponent(pack)}&email=${encodeURIComponent(email)}`;
+    }));
+  }
+
   /* ---------- boot ---------- */
   document.addEventListener("DOMContentLoaded",()=>{
     const h=$("#site-header"); if(h) h.innerHTML=header(h.dataset.active||"");
     const f=$("#site-footer"); if(f) f.innerHTML=footer();
-    chrome(); renderFeatured(); renderShop(); renderProduct(); capture(); observe(); stickyCTA();
+    chrome(); skipTarget(); renderFeatured(); renderShop(); renderProduct(); capture(); observe(); stickyCTA(); walletButtons(); consent();
   });
 })();

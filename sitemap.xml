@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://dailydashshop.com/</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://dailydashshop.com/shop.html</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://dailydashshop.com/credits.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://dailydashshop.com/product.html?id=everything-bundle</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://dailydashshop.com/product.html?id=resume-executive</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://dailydashshop.com/product.html?id=life-planner</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -17,9 +18,11 @@
   <url><loc>https://dailydashshop.com/product.html?id=small-business-starter</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://dailydashshop.com/product.html?id=social-media-manager-kit</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://dailydashshop.com/product.html?id=content-calendar-planner</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://dailydashshop.com/blog/</loc><lastmod>2026-07-11</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://dailydashshop.com/about.html</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://dailydashshop.com/contact.html</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://dailydashshop.com/privacy.html</loc><lastmod>2026-07-07</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://dailydashshop.com/terms.html</loc><lastmod>2026-07-07</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://dailydashshop.com/license.html</loc><lastmod>2026-07-11</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://dailydashshop.com/refund.html</loc><lastmod>2026-07-07</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

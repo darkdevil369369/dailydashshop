@@ -6,7 +6,7 @@
   /* palette — sophisticated, warm-neutral + confident accent */
   --ink:#101014;          /* near-black text        */
   --ink-2:#3b3d47;        /* secondary text         */
-  --muted:#8a8d9b;        /* tertiary               */
+  --muted:#63667a;        /* tertiary — WCAG-AA (4.5:1) on light bg */
   --paper:#ffffff;
   --bg:#fbfaf7;           /* warm off-white canvas  */
   --bg-2:#f3f1ec;         /* raised warm panel      */
@@ -324,3 +324,47 @@ h1,h2,h3,h4,.display{font-family:"Fraunces","Sora",Georgia,serif;font-weight:600
 .drawer.open{transform:none}
 .drawer a{font-family:"Sora";font-weight:700;font-size:1.25rem;padding:14px 0;border-bottom:1px solid var(--line)}
 .drawer .close{align-self:flex-end;background:none;border:0;font-size:1.8rem;cursor:pointer}
+
+/* =========================================================
+   ACCESSIBILITY + CONSENT  (Phase 1 — trust & compliance)
+========================================================= */
+/* visible keyboard focus everywhere (mouse users unaffected) */
+:where(a,button,input,textarea,select,summary,[tabindex]):focus-visible{
+  outline:3px solid var(--brand);outline-offset:2px;border-radius:6px}
+#content:focus{outline:none}
+
+/* skip-to-content link — hidden until keyboard-focused */
+.skip-link{position:fixed;top:-60px;left:12px;z-index:200;background:var(--ink);color:#fff;
+  font-family:"Sora",sans-serif;font-weight:700;padding:12px 18px;border-radius:10px;
+  box-shadow:var(--shadow);transition:top .2s var(--ease)}
+.skip-link:focus{top:12px}
+
+/* respect reduced-motion for the whole site */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;scroll-behavior:auto !important}
+  .reveal{opacity:1 !important;transform:none !important}
+}
+
+/* cookie / storage consent notice */
+.consent{position:fixed;left:0;right:0;bottom:0;z-index:120;
+  background:color-mix(in srgb,var(--ink) 96%,transparent);color:#fff;
+  transform:translateY(110%);transition:transform .3s var(--ease);
+  box-shadow:0 -12px 40px -18px rgba(0,0,0,.6)}
+.consent.show{transform:translateY(0)}
+.consent-in{display:flex;align-items:center;gap:18px;justify-content:space-between;
+  padding-block:14px;flex-wrap:wrap}
+.consent-in p{margin:0;font-size:.92rem;color:#e7e6ee;max-width:74ch;line-height:1.5}
+.consent-in a{color:#c9b8ff;text-decoration:underline;font-weight:600}
+.consent-in .btn{flex:none}
+@media (max-width:560px){.consent-in{gap:10px}.consent-in .btn{width:100%;justify-content:center}}
+
+/* ---------- credit wallet pricing hints ---------- */
+.p-wallet{margin-top:8px;font-size:.82rem;color:var(--ink-2);border-top:1px dashed var(--line);padding-top:8px}
+.p-wallet b{color:var(--brand)}
+.p-wallet a{color:var(--brand);text-decoration:underline;font-weight:600}
+.pd-wallet{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  background:#f6f4fe;border:1px solid #e6e0fb;border-radius:12px;padding:12px 16px;margin:0 0 20px;font-size:.95rem}
+.pd-wallet b{color:var(--brand);font-size:1.1rem}
+.pd-wallet a{color:var(--brand);font-weight:700;white-space:nowrap}
