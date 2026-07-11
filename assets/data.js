@@ -346,7 +346,7 @@ DDS.storeLinks = {          // set real links when Etsy/Gumroad live; falls back
 // wallet, paid out to bank once the $100 threshold is reached. Empty → falls back to signup.
 // Own Razorpay checkout — /checkout?pid=<catalog id> creates a fresh payment link
 // (repeat-sale safe) then 302s to Razorpay's hosted page. Paid -> webhook -> auto-deliver.
-DDS.buyBase = "https://pay.dailydashshop.com/checkout?pid=";
+DDS.buyBase = "https://dds.tryrealo.com/checkout?pid=";
 DDS.buyLinks = {
   "everything-bundle":          DDS.buyBase + "everything-bundle",
   "resume-executive":           DDS.buyBase + "resume-cv-pack",

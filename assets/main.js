@@ -11,7 +11,7 @@
 
   /* ---- Brevo capture endpoint (server API set at deploy).
      Until wired, leads are stored locally so none are lost. ---- */
-  const CAPTURE_ENDPOINT = window.DDS_CAPTURE || "https://pay.dailydashshop.com/subscribe";
+  const CAPTURE_ENDPOINT = window.DDS_CAPTURE || "https://dds.tryrealo.com/subscribe";
 
   /* ---------- shared header ---------- */
   function header(active){
@@ -162,7 +162,7 @@
           </div>
           <ul class="pd-list">${p.highlights.map(h=>`<li>✓ ${h}</li>`).join("")}</ul>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
-            <a href="${buy}"${buyAttr} class="btn btn-accent btn-lg">${buyLabel}</a>
+            <a href="${buy}"${buyAttr} class="btn btn-accent btn-lg${link?' js-buy':''}"${link?` data-buy="${link}"`:''}>${buyLabel}</a>
             <a href="/shop.html" class="btn btn-ghost btn-lg">Keep browsing</a>
           </div>
           <div class="pd-meta">
@@ -178,6 +178,18 @@
       main.src=btn.dataset.src;
       host.querySelectorAll(".pd-thumb").forEach(b=>b.classList.remove("on"));
       btn.classList.add("on");
+    }));
+    // Buy: fetch the checkout link in the background, then go straight to Razorpay
+    // (buyer never sees the intermediate endpoint). Falls back to the plain href.
+    host.querySelectorAll(".js-buy").forEach(a=>a.addEventListener("click",async e=>{
+      e.preventDefault();
+      const label=a.textContent; a.style.pointerEvents="none"; a.textContent="Opening secure checkout…";
+      try{
+        const r=await fetch(a.dataset.buy+"&fmt=json",{cache:"no-store"});
+        const d=await r.json(); if(d&&d.url){ location.href=d.url; return; }
+      }catch(_){}
+      location.href=a.getAttribute("href");
+      a.style.pointerEvents=""; a.textContent=label;
     }));
   }
 
