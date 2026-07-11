@@ -11,7 +11,7 @@
 
   /* ---- Brevo capture endpoint (server API set at deploy).
      Until wired, leads are stored locally so none are lost. ---- */
-  const CAPTURE_ENDPOINT = window.DDS_CAPTURE || "https://api.dailydashshop.com/subscribe";
+  const CAPTURE_ENDPOINT = window.DDS_CAPTURE || "https://pay.dailydashshop.com/subscribe";
 
   /* ---------- shared header ---------- */
   function header(active){
