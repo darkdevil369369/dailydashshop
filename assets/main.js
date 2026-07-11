@@ -76,7 +76,7 @@
         </div>
         <div class="ft-bottom">
           <span>© ${y} Daily Dash Shop — Premium digital templates.</span>
-          <span>hello@dailydashshop.com · Instant delivery · Secure checkout</span>
+          <span>hellodailydashshop@gmail.com · Instant delivery · Secure checkout</span>
         </div>
       </div>
     </footer>`;
