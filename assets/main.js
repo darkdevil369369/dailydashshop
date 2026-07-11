@@ -134,8 +134,8 @@
   /* ---------- product detail ---------- */
   function renderProduct(){
     const host=$("#productView"); if(!host) return;
-    const id=new URLSearchParams(location.search).get("id");
-    const p=DDS.products.find(x=>x.id===id)||DDS.products[0];
+    const q=new URLSearchParams(location.search); const key=q.get("id")||q.get("slug");
+    const p=DDS.products.find(x=>x.id===key||x.slug===key)||DDS.products[0];
     document.title=`${p.name} — Daily Dash Shop`;
     const cmp=p.compareAt?`<s>${money(p.compareAt)}</s> `:"";
     const off=p.compareAt?Math.round((1-p.price/p.compareAt)*100):0;
