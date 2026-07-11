@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daily Dash — authorization</title>
+<style>
+  body{font-family:system-ui,sans-serif;background:#f5f3fb;color:#231a2e;
+       display:grid;place-items:center;min-height:100vh;margin:0;padding:24px}
+  .c{background:#fff;border-radius:20px;padding:32px;max-width:560px;
+     box-shadow:0 14px 40px rgba(60,40,110,.12);text-align:center}
+  h1{color:#7b3ff2;font-size:20px}
+  code{display:block;background:#f5f3fb;border-radius:10px;padding:14px;
+       margin:16px 0;word-break:break-all;font-size:14px}
+  button{background:#7b3ff2;color:#fff;border:0;border-radius:999px;
+         padding:12px 22px;font-size:15px;cursor:pointer}
+  small{color:#78708c}
+</style></head><body>
+<div class="c">
+  <h1>Daily Dash Shop — Pinterest authorization</h1>
+  <p id="msg">Reading authorization code…</p>
+  <code id="code"></code>
+  <button id="cp" style="display:none" onclick="copy()">Copy code</button>
+  <p><small>Copy this code and paste it back to your assistant to finish setup.</small></p>
+</div>
+<script>
+  var p=new URLSearchParams(location.search), code=p.get('code');
+  if(code){document.getElementById('msg').textContent='Authorization successful. Your code:';
+    document.getElementById('code').textContent=code;
+    document.getElementById('cp').style.display='inline-block';}
+  else{document.getElementById('msg').textContent='No code found in the URL. Re-run the authorize step.';}
+  function copy(){navigator.clipboard.writeText(code);document.getElementById('cp').textContent='Copied ✓';}
+</script>
+</body></html>
