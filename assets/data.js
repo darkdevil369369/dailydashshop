@@ -344,10 +344,23 @@ DDS.storeLinks = {          // set real links when Etsy/Gumroad live; falls back
 // Per-product buy links → Gumroad checkout (?wanted=true opens the buy form directly).
 // Gumroad = merchant of record: handles global tax + delivery. Money accrues in the Gumroad
 // wallet, paid out to bank once the $100 threshold is reached. Empty → falls back to signup.
+// Own Razorpay checkout — /checkout?pid=<catalog id> creates a fresh payment link
+// (repeat-sale safe) then 302s to Razorpay's hosted page. Paid -> webhook -> auto-deliver.
+DDS.buyBase = "https://pay.dailydashshop.com/checkout?pid=";
 DDS.buyLinks = {
-  "everything-bundle": "https://dailydash.gumroad.com/l/everything-bundle?wanted=true",
-  "resume-executive":  "https://dailydash.gumroad.com/l/resume-cv-pack?wanted=true",
-  "life-planner":      "https://dailydash.gumroad.com/l/life-planner?wanted=true",
-  "freelancer-kit":    "https://dailydash.gumroad.com/l/freelancer-kit?wanted=true",
-  "social-kit":        "https://dailydash.gumroad.com/l/instagram-content-kit?wanted=true",
+  "everything-bundle":          DDS.buyBase + "everything-bundle",
+  "resume-executive":           DDS.buyBase + "resume-cv-pack",
+  "life-planner":               DDS.buyBase + "life-planner",
+  "freelancer-kit":             DDS.buyBase + "freelancer-kit",
+  "social-kit":                 DDS.buyBase + "instagram-content-kit",
+  "cover-letter-pack":          DDS.buyBase + "cover-letter-pack",
+  "interview-prep-kit":         DDS.buyBase + "interview-prep-kit",
+  "linkedin-optimization-kit":  DDS.buyBase + "linkedin-optimization-kit",
+  "budget-finance-planner":     DDS.buyBase + "budget-finance-planner",
+  "fitness-wellness-planner":   DDS.buyBase + "fitness-wellness-planner",
+  "student-study-planner":      DDS.buyBase + "student-study-planner",
+  "meal-planner-grocery":       DDS.buyBase + "meal-planner-grocery",
+  "small-business-starter":     DDS.buyBase + "small-business-starter",
+  "social-media-manager-kit":   DDS.buyBase + "social-media-manager-kit",
+  "content-calendar-planner":   DDS.buyBase + "content-calendar-planner",
 };
