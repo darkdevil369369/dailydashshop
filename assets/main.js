@@ -81,7 +81,7 @@
           </div>
         </div>
         <div class="ft-bottom">
-          <span>© ${y} Daily Dash Shop — Premium digital templates.</span>
+          <span>© ${y} Daily Dash — Premium Templates for Ambitious Professionals.</span>
           <span>hellodailydashshop@gmail.com · Instant delivery · Secure checkout</span>
         </div>
       </div>
@@ -94,17 +94,17 @@
     const cmp = p.compareAt ? `<s>${money(p.compareAt)}</s>` : "";
     return `
     <article class="p-card reveal" data-cat="${p.category}">
-      <a class="p-thumb" href="/product.html?id=${p.id}">
+      <a class="p-thumb" href="/products/${p.slug}.html">
         ${tag}
         <img loading="lazy" src="${p.image}" alt="${p.name}">
       </a>
       <div class="p-body">
         <span class="p-cat">${(DDS.categories.find(c=>c.id===p.category)||{}).label||''}</span>
-        <a class="p-name" href="/product.html?id=${p.id}">${p.name}</a>
+        <a class="p-name" href="/products/${p.slug}.html">${p.name}</a>
         <span class="p-rate">${p.reviews>0?`★ ${p.rating.toFixed(1)} <span class="muted">· `:`<span class="muted">`}${p.formats[0]}${p.formats.length>1?' +'+(p.formats.length-1):''}</span></span>
         <div class="p-foot">
           <span class="p-price">${cmp}${money(p.price)}</span>
-          <a class="p-buy" href="/product.html?id=${p.id}">View →</a>
+          <a class="p-buy" href="/products/${p.slug}.html">View →</a>
         </div>
         <div class="p-wallet">🏷️ <b>${memberPrice(p.price)}</b> with a <a href="/credits.html">wallet</a> · ${credits(p.price)} cr</div>
       </div>
