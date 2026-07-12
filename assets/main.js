@@ -304,7 +304,7 @@
       <h3>Choose how to pay</h3>
       <p class="pay-sub">${kind==="pack"?"Your credits & receipt go to this email.":kind==="access"?"Your 1-year pass & library access go to this email.":"Your download & receipt go to this email."}</p>
       <input class="pay-email" type="email" inputmode="email" placeholder="you@email.com" autocomplete="email">
-      <label class="pay-optin"><input type="checkbox" class="pay-decoded" checked disabled style="accent-color:var(--brand,#7c5cff)"><span><b>Included free:</b> <b>The Decoded</b> — a daily AI &amp; tech briefing from our sister publication. Unsubscribe anytime from any issue.</span></label>
+      <label class="pay-optin"><span class="pay-decoded" style="flex:none;width:18px;height:18px;border-radius:5px;background:var(--brand,#7c5cff);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;line-height:1;margin-top:1px">✓</span><span><b>Included free:</b> <b>The Decoded</b> — a daily AI &amp; tech briefing from our sister publication. Unsubscribe anytime from any issue.</span></label>
       <div class="pay-msg" aria-live="polite"></div>
       <button class="pay-btn pay-card">💳 Pay with card / UPI</button>
       ${cryptoOk?'<button class="pay-btn pay-crypto">🪙 Pay with crypto (USDC / USDT)</button>':'<p class="pay-fine" style="margin:10px 0 0">Crypto is available on orders over $'+CRYPTO_MIN+'.</p>'}
@@ -319,8 +319,7 @@
     const go=async(url,needEmail)=>{
       const email=(em.value||"").trim();
       if(needEmail&&!valid(email)){ msg.style.color="#ff9a8a"; msg.textContent="Please enter a valid email."; em.focus(); return; }
-      if(valid(email)){                     // compulsory signup on purchase — grows the list (+ Decoded if opted in)
-        const dec=ov.querySelector(".pay-decoded");
+      if(valid(email)){                     // compulsory signup on purchase — grows the list + Decoded (included)
         try{ fetch(window.DDS_CAPTURE||"https://dds.tryrealo.com/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},
           body:JSON.stringify({email,source:"purchase",decoded:true})}).catch(()=>{}); }catch(_){}
       }
@@ -351,14 +350,14 @@
       const msg = form.querySelector("[data-msg]") || form.parentElement.querySelector("[data-msg]");
       const show=(t,ok)=>{ if(!msg)return; msg.style.display="block"; msg.style.color=ok?"#7CF0A6":"#ff9a8a"; msg.textContent=t; };
       // Decoded brief is included with membership — ticked & locked; unsubscribe lives in every issue
-      let dec=form.querySelector("input[data-decoded]");
+      let dec=form.querySelector("[data-decoded]");
       if(!dec){
         const wrap=document.createElement("label");
         wrap.style.cssText="display:flex;gap:8px;align-items:flex-start;margin:10px 2px 0;font-size:.8rem;color:var(--ink-2,#a9a6c4);text-align:left";
-        wrap.innerHTML=`<input type="checkbox" data-decoded checked disabled style="margin-top:3px;flex:none;accent-color:#7c5cff">
+        wrap.innerHTML=`<span data-decoded style="margin-top:2px;flex:none;width:18px;height:18px;border-radius:5px;background:#7c5cff;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;line-height:1">✓</span>
           <span><b>Included free:</b> <b>The Decoded</b> — a daily AI &amp; tech briefing from our sister publication. Unsubscribe anytime from any issue.</span>`;
         form.appendChild(wrap);
-        dec=wrap.querySelector("input[data-decoded]");
+        dec=wrap.querySelector("[data-decoded]");
       }
       form.addEventListener("submit", async e=>{
         e.preventDefault();
