@@ -4,6 +4,7 @@
    + checkout; every consumer already reads these fields.
 ========================================================= */
 window.DDS = window.DDS || {};
+window.DDS_PAY = "https://dds.tryrealo.com";
 
 DDS.categories = [
   { id:"all",       label:"All" },

@@ -308,12 +308,18 @@
   function walletButtons(){
     const base = window.DDS_PAY || "";
     if(!base) return;                         // pre-launch: href="/#join" handles it
-    $$("[data-pack]").forEach(b=>b.addEventListener("click",e=>{
+    $$("[data-pack]").forEach(b=>b.addEventListener("click",async e=>{
       const pack=b.dataset.pack; if(!pack) return;
       e.preventDefault();
       const email=(prompt("Enter your email — your credits and receipt go here:")||"").trim();
       if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ if(email) alert("Please enter a valid email."); return; }
-      location.href=`${base}/crypto-checkout?pack=${encodeURIComponent(pack)}&email=${encodeURIComponent(email)}`;
+      const lbl=b.textContent; b.style.pointerEvents="none"; b.textContent="Opening secure checkout…";
+      try{
+        const r=await fetch(`${base}/crypto-checkout?pack=${encodeURIComponent(pack)}&email=${encodeURIComponent(email)}`,{cache:"no-store"});
+        const d=await r.json(); if(d&&d.url){ location.href=d.url; return; }
+        alert((d&&d.error)||"Checkout unavailable, please try again.");
+      }catch(_){ alert("Checkout unavailable, please try again."); }
+      b.style.pointerEvents=""; b.textContent=lbl;
     }));
   }
 
