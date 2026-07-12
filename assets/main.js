@@ -360,15 +360,15 @@
         const btn=form.querySelector("button[type=submit]"); const old=btn&&btn.textContent;
         if(btn){btn.disabled=true;btn.textContent="Sending…";}
         try{
-          try{
-            await fetch(CAPTURE_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},
-              body:JSON.stringify({email,source:location.pathname,decoded:!!(dec&&dec.checked)})});
-          }catch(_){}
+          const r=await fetch(CAPTURE_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({email,source:location.pathname,decoded:!!(dec&&dec.checked)})});
+          const d=await r.json().catch(()=>({}));
+          if(!r.ok || !(d&&d.ok)) throw new Error("subscribe failed");
           const leads=JSON.parse(localStorage.getItem("dds_leads")||"[]");
           leads.push({email,t:Date.now()}); localStorage.setItem("dds_leads",JSON.stringify(leads));
           show("You're in! Check your inbox for the 20% code + free starter pack. 🎉",true);
           form.reset();
-        }catch(_){ show("Something went wrong — please try again.",false); }
+        }catch(_){ show("Hmm, that didn't go through — please try again in a moment.",false); }
         finally{ if(btn){btn.disabled=false;btn.textContent=old;} }
       });
     });
