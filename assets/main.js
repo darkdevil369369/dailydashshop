@@ -190,18 +190,72 @@
       host.querySelectorAll(".pd-thumb").forEach(b=>b.classList.remove("on"));
       btn.classList.add("on");
     }));
-    // Buy: fetch the checkout link in the background, then go straight to Razorpay
-    // (buyer never sees the intermediate endpoint). Falls back to the plain href.
-    host.querySelectorAll(".js-buy").forEach(a=>a.addEventListener("click",async e=>{
+    // Buy: offer both card (Razorpay) and crypto (NOWPayments) via the chooser.
+    host.querySelectorAll(".js-buy").forEach(a=>a.addEventListener("click",e=>{
       e.preventDefault();
-      const label=a.textContent; a.style.pointerEvents="none"; a.textContent="Opening secure checkout…";
-      try{
-        const r=await fetch(a.dataset.buy+"&fmt=json",{cache:"no-store"});
-        const d=await r.json(); if(d&&d.url){ location.href=d.url; return; }
-      }catch(_){}
-      location.href=a.getAttribute("href");
-      a.style.pointerEvents=""; a.textContent=label;
+      let pid="";
+      try{ pid=new URL(a.dataset.buy, location.origin).searchParams.get("pid")||""; }catch(_){}
+      openPay("product", pid, a.dataset.buy);
     }));
+  }
+
+  /* ---------- payment method chooser (card / crypto) ---------- */
+  function openPay(kind, ref, cardEndpoint){
+    const base = window.DDS_PAY || "";
+    const isPack = kind === "pack";
+    if(!base && isPack){ location.href="/#join"; return; }   // pre-launch fallback
+    if(!document.getElementById("payCss")){
+      const st=document.createElement("style"); st.id="payCss";
+      st.textContent=`.pay-ov{position:fixed;inset:0;background:rgba(10,8,20,.7);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.pay-box{background:var(--bg-2,#17142a);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:26px 24px;max-width:380px;width:100%;text-align:center;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.pay-box h3{font-family:Sora,sans-serif;font-size:1.35rem;margin:0 0 6px}
+.pay-sub{color:var(--ink-2,#a9a6c4);font-size:.9rem;margin:0 0 16px}
+.pay-email{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;font-size:1rem;margin-bottom:10px}
+.pay-msg{min-height:18px;font-size:.85rem;margin-bottom:8px}
+.pay-btn{width:100%;padding:13px;border-radius:11px;border:0;font-family:Sora,sans-serif;font-weight:700;font-size:1rem;cursor:pointer;margin-top:8px}
+.pay-card{background:var(--brand,#7c5cff);color:#fff}
+.pay-crypto{background:transparent;color:inherit;border:1.5px solid var(--brand,#7c5cff)}
+.pay-fine{color:var(--ink-2,#a9a6c4);font-size:.72rem;margin:14px 0 0}
+.pay-x{position:absolute;top:10px;right:14px;background:0;border:0;color:inherit;font-size:1.6rem;line-height:1;cursor:pointer;opacity:.6}`;
+      document.head.appendChild(st);
+    }
+    const ov=document.createElement("div"); ov.className="pay-ov";
+    ov.innerHTML=`<div class="pay-box" role="dialog" aria-modal="true" aria-label="Choose payment method">
+      <button class="pay-x" aria-label="Close">&times;</button>
+      <h3>Choose how to pay</h3>
+      <p class="pay-sub">${isPack?"Your credits & receipt go to this email.":"Your download & receipt go to this email."}</p>
+      <input class="pay-email" type="email" inputmode="email" placeholder="you@email.com" autocomplete="email">
+      <div class="pay-msg" aria-live="polite"></div>
+      <button class="pay-btn pay-card">💳 Pay with card / UPI</button>
+      <button class="pay-btn pay-crypto">🪙 Pay with crypto (USDC / USDT)</button>
+      <p class="pay-fine">Secure checkout · card via Razorpay · crypto via NOWPayments</p>
+    </div>`;
+    document.body.appendChild(ov);
+    const em=ov.querySelector(".pay-email"), msg=ov.querySelector(".pay-msg");
+    const close=()=>ov.remove();
+    ov.addEventListener("click",e=>{ if(e.target===ov) close(); });
+    ov.querySelector(".pay-x").addEventListener("click",close);
+    const valid=v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+    const go=async(url,needEmail)=>{
+      const email=(em.value||"").trim();
+      if(needEmail&&!valid(email)){ msg.style.color="#ff9a8a"; msg.textContent="Please enter a valid email."; em.focus(); return; }
+      const full=url.replace("{email}",encodeURIComponent(email));
+      msg.style.color="var(--ink-2,#a9a6c4)"; msg.textContent="Opening secure checkout…";
+      try{
+        const r=await fetch(full,{cache:"no-store"});
+        const d=await r.json();
+        if(d&&d.url){ location.href=d.url; return; }
+        msg.style.color="#ff9a8a"; msg.textContent=(d&&d.error)||"Checkout unavailable, try again.";
+      }catch(_){ msg.style.color="#ff9a8a"; msg.textContent="Checkout unavailable, try again."; }
+    };
+    ov.querySelector(".pay-card").addEventListener("click",()=>{
+      if(isPack) go(`${base}/checkout?item=${encodeURIComponent(ref)}&email={email}&fmt=json`,true);
+      else go(cardEndpoint+"&fmt=json",false);
+    });
+    ov.querySelector(".pay-crypto").addEventListener("click",()=>{
+      go(`${base}/crypto-checkout?item=${encodeURIComponent(ref)}&email={email}`,true);
+    });
+    setTimeout(()=>em.focus(),50);
   }
 
   /* ---------- email capture ---------- */
@@ -308,18 +362,11 @@
   function walletButtons(){
     const base = window.DDS_PAY || "";
     if(!base) return;                         // pre-launch: href="/#join" handles it
-    $$("[data-pack]").forEach(b=>b.addEventListener("click",async e=>{
-      const pack=b.dataset.pack; if(!pack) return;
+    const PACKS=["starter","popular","pro"];   // backend CREDIT_PACKS; "unlimited" is not a pack
+    $$("[data-pack]").forEach(b=>b.addEventListener("click",e=>{
+      const pack=b.dataset.pack; if(!PACKS.includes(pack)) return;  // unlimited -> href fallback
       e.preventDefault();
-      const email=(prompt("Enter your email — your credits and receipt go here:")||"").trim();
-      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ if(email) alert("Please enter a valid email."); return; }
-      const lbl=b.textContent; b.style.pointerEvents="none"; b.textContent="Opening secure checkout…";
-      try{
-        const r=await fetch(`${base}/crypto-checkout?pack=${encodeURIComponent(pack)}&email=${encodeURIComponent(email)}`,{cache:"no-store"});
-        const d=await r.json(); if(d&&d.url){ location.href=d.url; return; }
-        alert((d&&d.error)||"Checkout unavailable, please try again.");
-      }catch(_){ alert("Checkout unavailable, please try again."); }
-      b.style.pointerEvents=""; b.textContent=lbl;
+      openPay("pack", pack, null);
     }));
   }
 
