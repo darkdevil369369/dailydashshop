@@ -8,6 +8,8 @@
   const $  = (s,r=document)=>r.querySelector(s);
   const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
   const money = p => "$"+p;
+  /* root-absolute asset paths so images work from /products/ subdir pages too */
+  const A = s => !s ? s : (/^(https?:)?\/\//.test(s)||s[0]==="/") ? s : "/"+s;
   /* credit wallet: a template costs list-price x3 credits; members pay 25% less */
   const credits = p => Math.round(p*3);
   const memberPrice = p => "$"+(p*0.75).toFixed(2).replace(/\.00$/,"");
@@ -96,7 +98,7 @@
     <article class="p-card reveal" data-cat="${p.category}">
       <a class="p-thumb" href="/products/${p.slug}.html">
         ${tag}
-        <img loading="lazy" src="${p.image}" alt="${p.name}">
+        <img loading="lazy" src="${A(p.image)}" alt="${p.name}">
       </a>
       <div class="p-body">
         <span class="p-cat">${(DDS.categories.find(c=>c.id===p.category)||{}).label||''}</span>
@@ -151,7 +153,7 @@
     const buy = link || "/#join";
     const buyLabel = link ? "Buy &amp; download now →" : "Get 20% off — join the list";
     const buyAttr = link ? ' target="_blank" rel="noopener"' : '';
-    const gal = (p.gallery && p.gallery.length ? p.gallery : [p.image]);
+    const gal = (p.gallery && p.gallery.length ? p.gallery : [p.image]).map(A);
     const thumbs = gal.length>1
       ? `<div class="pd-thumbs">${gal.map((g,i)=>`<button class="pd-thumb${i===0?" on":""}" data-src="${g}" aria-label="Preview ${i+1}"><img loading="lazy" src="${g}" alt="${p.name} preview ${i+1}"></button>`).join("")}</div>`
       : "";
