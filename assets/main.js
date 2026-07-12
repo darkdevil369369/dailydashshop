@@ -8,8 +8,17 @@
   const $  = (s,r=document)=>r.querySelector(s);
   const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
   const money = p => "$"+p;
-  /* root-absolute asset paths so images work from /products/ subdir pages too */
-  const A = s => !s ? s : (/^(https?:)?\/\//.test(s)||s[0]==="/") ? s : "/"+s;
+  /* root-absolute asset paths so images work from /products/ subdir pages too.
+     Local product images get a version tag so returning visitors never see a
+     stale cached thumbnail after an art refresh — bump IMGV on every image redesign. */
+  const IMGV = "260712n";
+  const A = s => {
+    if (!s) return s;
+    let u = (/^(https?:)?\/\//.test(s)||s[0]==="/") ? s : "/"+s;
+    if (u[0]==="/" && /\.(jpe?g|png|webp)(\?|$)/i.test(u))
+      u += (u.includes("?")?"&":"?") + "v=" + IMGV;
+    return u;
+  };
   /* credit wallet: a template costs list-price x3 credits; members pay 25% less */
   const credits = p => Math.round(p*3);
   const memberPrice = p => "$"+(p*0.75).toFixed(2).replace(/\.00$/,"");
