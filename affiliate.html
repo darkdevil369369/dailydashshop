@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Affiliate Program — Daily Dash Shop</title>
+<meta name="description" content="Earn 25% commission on the first purchase of everyone you refer to Daily Dash Shop. Free to join, no cap, paid out to you.">
+<link rel="canonical" href="https://dailydashshop.com/affiliate.html"><meta name="theme-color" content="#101014">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=260712g">
+<style>
+.aff-card{background:var(--bg-2,#17142a);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:24px;max-width:520px;margin:0 auto 22px}
+.aff-card h2{font-family:Sora;font-size:1.2rem;margin:0 0 14px}
+.aff-in{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;font-size:1rem;margin-bottom:10px}
+.aff-msg{min-height:20px;font-size:.85rem;margin:6px 0}
+.aff-link{display:flex;gap:8px;margin-top:10px}
+.aff-link input{flex:1;font-family:monospace}
+.aff-stat{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.aff-stat div{background:rgba(255,255,255,.04);border-radius:10px;padding:12px;text-align:center}
+.aff-stat b{display:block;font-family:Sora;font-size:1.5rem}
+.aff-stat span{font-size:.75rem;color:var(--ink-2,#a9a6c4)}
+</style></head>
+<body>
+<div id="site-header"></div>
+<section class="page-hero"><div class="wrap"><span class="eyebrow">Partners</span><h1>Earn with Daily Dash</h1>
+  <p>Share your link. Earn <b>25% commission</b> on the first purchase of everyone you refer — templates, credit wallets and the unlimited pass all count. Free to join, no cap.</p></div></section>
+<section class="section"><div class="wrap">
+
+  <div class="aff-card">
+    <h2>Get your referral link</h2>
+    <input id="afName" class="aff-in" type="text" placeholder="Your name (optional)" autocomplete="name">
+    <input id="afEmail" class="aff-in" type="email" placeholder="you@email.com — where you get paid" autocomplete="email">
+    <button id="afGo" class="btn btn-accent" style="width:100%;justify-content:center">Create my link</button>
+    <div id="afMsg" class="aff-msg"></div>
+    <div id="afResult" style="display:none">
+      <div class="aff-link"><input id="afLink" class="aff-in" readonly style="margin:0"><button id="afCopy" class="btn btn-primary">Copy</button></div>
+      <p class="aff-msg" style="color:var(--ink-2,#a9a6c4)">Share this link anywhere. When someone buys for the first time through it, you earn 25%.</p>
+    </div>
+  </div>
+
+  <div class="aff-card">
+    <h2>Check your earnings</h2>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <input id="dashCode" class="aff-in" style="flex:1;min-width:180px;margin:0" type="text" placeholder="Your referral code (e.g. RIYA8F2A)">
+      <button id="dashGo" class="btn btn-accent">View</button>
+    </div>
+    <div id="dashMsg" class="aff-msg"></div>
+    <div id="dashStat" style="display:none">
+      <div class="aff-stat">
+        <div><b id="stClicks">0</b><span>Clicks</span></div>
+        <div><b id="stRefs">0</b><span>Referrals</span></div>
+        <div><b id="stEarned">$0</b><span>Earned</span></div>
+        <div><b id="stPending">$0</b><span>Pending</span></div>
+        <div><b id="stPaid">$0</b><span>Paid out</span></div>
+        <div><b id="stRate">25%</b><span>Your rate</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="muted" style="text-align:center;max-width:560px;margin:0 auto;font-size:.85rem">
+    Commission is earned on each referred customer's <b>first</b> purchase. Payouts are sent to your email's wallet/UPI after the refund window clears. Self-referrals and fraudulent activity are not eligible.
+  </p>
+</div></section>
+<div id="site-footer"></div>
+<script src="/assets/data.js?v=260712g"></script>
+<script src="/assets/main.js?v=260712g"></script>
+<script>
+(function(){
+  var base=window.DDS_PAY||"";
+  var $=function(s){return document.querySelector(s);};
+  function valid(v){return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);}
+  function money(n){return "$"+(Math.round(n*100)/100);}
+  // signup
+  $("#afGo").addEventListener("click",async function(){
+    var email=$("#afEmail").value.trim(), name=$("#afName").value.trim(), msg=$("#afMsg");
+    if(!valid(email)){ msg.style.color="#ff9a8a"; msg.textContent="Please enter a valid email."; return; }
+    if(!base){ msg.style.color="#ff9a8a"; msg.textContent="Program not available right now."; return; }
+    var b=$("#afGo"); b.disabled=true; var o=b.textContent; b.textContent="Creating…";
+    try{
+      var r=await fetch(base+"/aff-signup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,name:name})});
+      var d=await r.json();
+      if(d&&d.code){
+        msg.style.color="#7CF0A6"; msg.textContent=d.existing?"Welcome back — here's your link.":"You're in! Here's your link.";
+        $("#afLink").value=d.link; $("#afResult").style.display="block";
+        $("#dashCode").value=d.code;
+      } else { msg.style.color="#ff9a8a"; msg.textContent=(d&&d.error)||"Could not create link."; }
+    }catch(_){ msg.style.color="#ff9a8a"; msg.textContent="Something went wrong — try again."; }
+    b.disabled=false; b.textContent=o;
+  });
+  $("#afCopy").addEventListener("click",function(){
+    var i=$("#afLink"); i.select(); try{ document.execCommand("copy"); }catch(_){}
+    navigator.clipboard && navigator.clipboard.writeText(i.value);
+    $("#afCopy").textContent="Copied!"; setTimeout(function(){$("#afCopy").textContent="Copy";},1500);
+  });
+  // dashboard
+  async function loadDash(){
+    var code=$("#dashCode").value.trim().toUpperCase(), msg=$("#dashMsg");
+    if(!code){ msg.style.color="#ff9a8a"; msg.textContent="Enter your referral code."; return; }
+    if(!base){ msg.style.color="#ff9a8a"; msg.textContent="Program not available right now."; return; }
+    try{
+      var r=await fetch(base+"/aff-stats?code="+encodeURIComponent(code),{cache:"no-store"});
+      var d=await r.json();
+      if(d&&d.code){
+        msg.textContent="";
+        $("#stClicks").textContent=d.clicks; $("#stRefs").textContent=d.referrals;
+        $("#stEarned").textContent=money(d.earned_usd); $("#stPending").textContent=money(d.pending_usd);
+        $("#stPaid").textContent=money(d.paid_usd); $("#stRate").textContent=Math.round(d.rate*100)+"%";
+        $("#dashStat").style.display="block";
+      } else { msg.style.color="#ff9a8a"; msg.textContent="No affiliate found for that code."; $("#dashStat").style.display="none"; }
+    }catch(_){ msg.style.color="#ff9a8a"; msg.textContent="Something went wrong — try again."; }
+  }
+  $("#dashGo").addEventListener("click",loadDash);
+  $("#dashCode").addEventListener("keydown",function(e){ if(e.key==="Enter") loadDash(); });
+})();
+</script>
+</body></html>

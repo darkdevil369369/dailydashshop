@@ -69,6 +69,7 @@
             <h4>Company</h4>
             <a href="/about.html">About us</a>
             <a href="/contact.html">Contact</a>
+            <a href="/affiliate.html">Affiliates — earn 25%</a>
             <a href="/#join">Get 20% off</a>
           </div>
           <div>
@@ -199,6 +200,25 @@
     }));
   }
 
+  /* ---------- affiliate referral tracking ---------- */
+  const REF_TTL = 30*24*3600*1000;   // 30-day attribution window
+  function refTrack(){
+    try{
+      const code=(new URLSearchParams(location.search).get("ref")||"").trim().toUpperCase();
+      if(!code) return;
+      localStorage.setItem("dds_ref", JSON.stringify({code, t:Date.now()}));
+      const base=window.DDS_PAY||"";
+      if(base) fetch(`${base}/aff-click?code=${encodeURIComponent(code)}`,{cache:"no-store"}).catch(()=>{});
+    }catch(_){}
+  }
+  function getRef(){
+    try{
+      const r=JSON.parse(localStorage.getItem("dds_ref")||"null");
+      if(r && r.code && (Date.now()-r.t)<REF_TTL) return r.code;
+    }catch(_){}
+    return "";
+  }
+
   /* ---------- payment method chooser (card / crypto) ---------- */
   function openPay(kind, ref, cardEndpoint){
     const base = window.DDS_PAY || "";
@@ -239,7 +259,8 @@
     const go=async(url,needEmail)=>{
       const email=(em.value||"").trim();
       if(needEmail&&!valid(email)){ msg.style.color="#ff9a8a"; msg.textContent="Please enter a valid email."; em.focus(); return; }
-      const full=url.replace("{email}",encodeURIComponent(email));
+      let full=url.replace("{email}",encodeURIComponent(email));
+      const rc=getRef(); if(rc) full+=`&ref=${encodeURIComponent(rc)}`;
       msg.style.color="var(--ink-2,#a9a6c4)"; msg.textContent="Opening secure checkout…";
       try{
         const r=await fetch(full,{cache:"no-store"});
@@ -389,6 +410,6 @@
   document.addEventListener("DOMContentLoaded",()=>{
     const h=$("#site-header"); if(h) h.innerHTML=header(h.dataset.active||"");
     const f=$("#site-footer"); if(f) f.innerHTML=footer();
-    chrome(); skipTarget(); renderFeatured(); renderShop(); renderProduct(); capture(); observe(); stickyCTA(); walletButtons(); consent();
+    refTrack(); chrome(); skipTarget(); renderFeatured(); renderShop(); renderProduct(); capture(); observe(); stickyCTA(); walletButtons(); consent();
   });
 })();
