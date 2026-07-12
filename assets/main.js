@@ -196,7 +196,7 @@
       e.preventDefault();
       let pid="";
       try{ pid=new URL(a.dataset.buy, location.origin).searchParams.get("pid")||""; }catch(_){}
-      openPay("product", pid, a.dataset.buy);
+      openPay("product", pid, a.dataset.buy, (p.price||0) >= CRYPTO_MIN);
     }));
     // reviews / social proof
     let rpid=document.body.getAttribute("data-pid")||"";
@@ -275,9 +275,11 @@
   }
 
   /* ---------- payment method chooser (card / crypto) ---------- */
-  function openPay(kind, ref, cardEndpoint){
+  const CRYPTO_MIN = 19;   // NOWPayments account minimum (~$18.85) — crypto hidden below this
+  function openPay(kind, ref, cardEndpoint, cryptoOk){
     const base = window.DDS_PAY || "";
     const isProduct = kind === "product";       // product = one-off; pack/access = server checkout
+    if(cryptoOk===undefined) cryptoOk = true;   // packs/pass always clear the minimum
     if(!base && !isProduct){ location.href="/#join"; return; }   // pre-launch fallback
     if(!document.getElementById("payCss")){
       const st=document.createElement("style"); st.id="payCss";
@@ -302,8 +304,8 @@
       <input class="pay-email" type="email" inputmode="email" placeholder="you@email.com" autocomplete="email">
       <div class="pay-msg" aria-live="polite"></div>
       <button class="pay-btn pay-card">💳 Pay with card / UPI</button>
-      <button class="pay-btn pay-crypto">🪙 Pay with crypto (USDC / USDT)</button>
-      <p class="pay-fine">Secure checkout · card via Razorpay · crypto via NOWPayments</p>
+      ${cryptoOk?'<button class="pay-btn pay-crypto">🪙 Pay with crypto (USDC / USDT)</button>':'<p class="pay-fine" style="margin:10px 0 0">Crypto is available on orders over $'+CRYPTO_MIN+'.</p>'}
+      <p class="pay-fine">Secure checkout · card via Razorpay${cryptoOk?' · crypto via NOWPayments':''}</p>
     </div>`;
     document.body.appendChild(ov);
     const em=ov.querySelector(".pay-email"), msg=ov.querySelector(".pay-msg");
@@ -328,7 +330,8 @@
       if(!isProduct) go(`${base}/checkout?item=${encodeURIComponent(ref)}&email={email}&fmt=json`,true);
       else go(cardEndpoint+"&fmt=json",false);
     });
-    ov.querySelector(".pay-crypto").addEventListener("click",()=>{
+    const cryptoBtn=ov.querySelector(".pay-crypto");
+    if(cryptoBtn) cryptoBtn.addEventListener("click",()=>{
       go(`${base}/crypto-checkout?item=${encodeURIComponent(ref)}&email={email}`,true);
     });
     setTimeout(()=>em.focus(),50);
