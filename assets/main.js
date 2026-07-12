@@ -198,6 +198,61 @@
       try{ pid=new URL(a.dataset.buy, location.origin).searchParams.get("pid")||""; }catch(_){}
       openPay("product", pid, a.dataset.buy);
     }));
+    // reviews / social proof
+    let rpid=document.body.getAttribute("data-pid")||"";
+    if(!rpid){ try{ rpid=new URL((DDS.buyLinks||{})[p.id]||"",location.origin).searchParams.get("pid")||""; }catch(_){} }
+    if(rpid) reviews(rpid);
+  }
+
+  /* ---------- customer reviews (self-hosted social proof) ---------- */
+  function stars(n){ n=Math.round(n); return "★★★★★".slice(0,n)+"☆☆☆☆☆".slice(0,5-n); }
+  function reviews(pid){
+    const base=window.DDS_PAY||""; if(!base) return;
+    const host=document.querySelector("#productView"); if(!host) return;
+    const sec=document.createElement("section"); sec.className="rev-sec"; sec.style.marginTop="46px";
+    sec.innerHTML=`<div class="sec-head"><h2 style="font-size:1.6rem">What buyers say</h2><div id="revAgg" class="muted"></div></div>
+      <div id="revList" style="display:grid;gap:14px;margin:18px 0"></div>
+      <details class="rev-form" style="background:var(--bg-2,#17142a);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 20px;max-width:560px">
+        <summary style="cursor:pointer;font-family:Sora;font-weight:700">Write a review</summary>
+        <div style="margin-top:14px;display:grid;gap:10px">
+          <select id="rvRating" class="aff-in" style="padding:11px 13px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit">
+            <option value="5">★★★★★ — Love it</option><option value="4">★★★★☆ — Great</option>
+            <option value="3">★★★☆☆ — Good</option><option value="2">★★☆☆☆ — Okay</option><option value="1">★☆☆☆☆ — Poor</option></select>
+          <input id="rvName" placeholder="Your name" class="aff-in" style="padding:11px 13px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit">
+          <input id="rvEmail" type="email" placeholder="Your email (kept private)" class="aff-in" style="padding:11px 13px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit">
+          <textarea id="rvText" rows="3" placeholder="What did you think?" class="aff-in" style="padding:11px 13px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;resize:vertical"></textarea>
+          <div id="rvMsg" style="min-height:18px;font-size:.85rem"></div>
+          <button id="rvGo" class="btn btn-accent" type="button">Submit review</button>
+        </div>
+      </details>`;
+    host.appendChild(sec);
+    const list=sec.querySelector("#revList"), agg=sec.querySelector("#revAgg");
+    fetch(`${base}/reviews?pid=${encodeURIComponent(pid)}`,{cache:"no-store"}).then(r=>r.json()).then(d=>{
+      const a=d.aggregate||{count:0};
+      if(a.count>0){
+        agg.innerHTML=`<span style="color:#ffb020;letter-spacing:2px">${stars(a.avg)}</span> ${a.avg} · ${a.count} review${a.count>1?"s":""}`;
+        // inject aggregateRating for rich snippets
+        const ld={"@context":"https://schema.org","@type":"AggregateRating","ratingValue":a.avg,"reviewCount":a.count,"bestRating":5,"worstRating":1};
+        const s=document.createElement("script"); s.type="application/ld+json"; s.textContent=JSON.stringify(ld); document.head.appendChild(s);
+      } else { agg.textContent="Be the first to review this template."; }
+      list.innerHTML=(d.reviews||[]).map(r=>`<div class="f-card" style="text-align:left">
+        <div style="color:#ffb020;letter-spacing:2px">${stars(r.rating)}</div>
+        <p style="margin:8px 0 6px">${r.text}</p>
+        <div class="muted" style="font-size:.82rem">— ${r.name}${r.verified?' · <span style="color:#7CF0A6">✓ Verified purchase</span>':''}</div></div>`).join("");
+    }).catch(()=>{});
+    sec.querySelector("#rvGo").addEventListener("click",async()=>{
+      const msg=sec.querySelector("#rvMsg");
+      const payload={pid,rating:sec.querySelector("#rvRating").value,name:sec.querySelector("#rvName").value,
+                     email:sec.querySelector("#rvEmail").value,text:sec.querySelector("#rvText").value};
+      const emailOk=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((payload.email||"").trim());
+      if(!emailOk || !payload.text.trim()){ msg.style.color="#ff9a8a"; msg.textContent="Add your email and a short review."; return; }
+      try{
+        const r=await fetch(`${base}/review-submit`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+        const d=await r.json();
+        if(d&&d.ok){ msg.style.color="#7CF0A6"; msg.textContent="Thank you! Your review will appear once approved."; }
+        else { msg.style.color="#ff9a8a"; msg.textContent=(d&&d.error)||"Could not submit — try again."; }
+      }catch(_){ msg.style.color="#ff9a8a"; msg.textContent="Something went wrong — try again."; }
+    });
   }
 
   /* ---------- affiliate referral tracking ---------- */
