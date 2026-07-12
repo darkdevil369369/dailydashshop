@@ -288,6 +288,8 @@
 .pay-box h3{font-family:Sora,sans-serif;font-size:1.35rem;margin:0 0 6px}
 .pay-sub{color:var(--ink-2,#a9a6c4);font-size:.9rem;margin:0 0 16px}
 .pay-email{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;font-size:1rem;margin-bottom:10px}
+.pay-optin{display:flex;gap:8px;align-items:flex-start;text-align:left;font-size:.78rem;color:var(--ink-2,#a9a6c4);margin:0 2px 10px;cursor:pointer}
+.pay-optin input{margin-top:3px;flex:none}
 .pay-msg{min-height:18px;font-size:.85rem;margin-bottom:8px}
 .pay-btn{width:100%;padding:13px;border-radius:11px;border:0;font-family:Sora,sans-serif;font-weight:700;font-size:1rem;cursor:pointer;margin-top:8px}
 .pay-card{background:var(--brand,#7c5cff);color:#fff}
@@ -302,6 +304,7 @@
       <h3>Choose how to pay</h3>
       <p class="pay-sub">${kind==="pack"?"Your credits & receipt go to this email.":kind==="access"?"Your 1-year pass & library access go to this email.":"Your download & receipt go to this email."}</p>
       <input class="pay-email" type="email" inputmode="email" placeholder="you@email.com" autocomplete="email">
+      <label class="pay-optin"><input type="checkbox" class="pay-decoded"><span>Also send me <b>The Decoded</b> — a free daily AI &amp; tech briefing from our sister publication. Unsubscribe anytime.</span></label>
       <div class="pay-msg" aria-live="polite"></div>
       <button class="pay-btn pay-card">💳 Pay with card / UPI</button>
       ${cryptoOk?'<button class="pay-btn pay-crypto">🪙 Pay with crypto (USDC / USDT)</button>':'<p class="pay-fine" style="margin:10px 0 0">Crypto is available on orders over $'+CRYPTO_MIN+'.</p>'}
@@ -316,6 +319,11 @@
     const go=async(url,needEmail)=>{
       const email=(em.value||"").trim();
       if(needEmail&&!valid(email)){ msg.style.color="#ff9a8a"; msg.textContent="Please enter a valid email."; em.focus(); return; }
+      if(valid(email)){                     // compulsory signup on purchase — grows the list (+ Decoded if opted in)
+        const dec=ov.querySelector(".pay-decoded");
+        try{ fetch(window.DDS_CAPTURE||"https://dds.tryrealo.com/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({email,source:"purchase",decoded:!!(dec&&dec.checked)})}).catch(()=>{}); }catch(_){}
+      }
       let full=url.replace("{email}",encodeURIComponent(email));
       const rc=getRef(); if(rc) full+=`&ref=${encodeURIComponent(rc)}`;
       msg.style.color="var(--ink-2,#a9a6c4)"; msg.textContent="Opening secure checkout…";
