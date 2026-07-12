@@ -3,21 +3,6 @@
   <url><loc>https://dailydashshop.com/</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://dailydashshop.com/shop.html</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://dailydashshop.com/credits.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=everything-bundle</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=resume-executive</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=life-planner</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=freelancer-kit</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=social-kit</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=cover-letter-pack</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=interview-prep-kit</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=linkedin-optimization-kit</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=budget-finance-planner</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=fitness-wellness-planner</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=student-study-planner</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=meal-planner-grocery</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=small-business-starter</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=social-media-manager-kit</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dailydashshop.com/product.html?id=content-calendar-planner</loc><lastmod>2026-07-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://dailydashshop.com/blog/</loc><lastmod>2026-07-11</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://dailydashshop.com/about.html</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://dailydashshop.com/contact.html</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -25,4 +10,20 @@
   <url><loc>https://dailydashshop.com/terms.html</loc><lastmod>2026-07-07</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://dailydashshop.com/license.html</loc><lastmod>2026-07-11</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://dailydashshop.com/refund.html</loc><lastmod>2026-07-07</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+
+  <url><loc>https://dailydashshop.com/products/everything-bundle.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/executive-resume-cv-pack.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/ultimate-life-planner.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/freelancer-starter-kit.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/instagram-content-kit.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/cover-letter-pack.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/interview-prep-kit.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/linkedin-optimization-kit.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/budget-finance-planner.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/fitness-wellness-planner.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/student-study-planner.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/meal-planner-grocery.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/small-business-starter.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/social-media-manager-kit.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailydashshop.com/products/content-calendar-planner.html</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
