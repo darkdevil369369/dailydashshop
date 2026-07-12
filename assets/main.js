@@ -342,13 +342,13 @@
     $$("form[data-capture]").forEach(form=>{
       const msg = form.querySelector("[data-msg]") || form.parentElement.querySelector("[data-msg]");
       const show=(t,ok)=>{ if(!msg)return; msg.style.display="block"; msg.style.color=ok?"#7CF0A6":"#ff9a8a"; msg.textContent=t; };
-      // GDPR-visible cross-subscribe opt-in (pre-ticked, user can untick)
+      // GDPR opt-in: unticked by default — genuine consent, user opts in
       let dec=form.querySelector("input[data-decoded]");
       if(!dec){
         const wrap=document.createElement("label");
         wrap.style.cssText="display:flex;gap:8px;align-items:flex-start;margin:10px 2px 0;font-size:.8rem;color:var(--ink-2,#a9a6c4);text-align:left;cursor:pointer";
-        wrap.innerHTML=`<input type="checkbox" data-decoded checked style="margin-top:3px;flex:none">
-          <span>Also send me <b>The Decoded</b> — a free AI &amp; tech briefing from our sister publication. Unsubscribe anytime.</span>`;
+        wrap.innerHTML=`<input type="checkbox" data-decoded style="margin-top:3px;flex:none">
+          <span>Also send me <b>The Decoded</b> — a free daily AI &amp; tech briefing from our sister publication. Unsubscribe anytime.</span>`;
         form.appendChild(wrap);
         dec=wrap.querySelector("input[data-decoded]");
       }
