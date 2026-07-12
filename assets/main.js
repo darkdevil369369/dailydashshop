@@ -304,7 +304,7 @@
       <h3>Choose how to pay</h3>
       <p class="pay-sub">${kind==="pack"?"Your credits & receipt go to this email.":kind==="access"?"Your 1-year pass & library access go to this email.":"Your download & receipt go to this email."}</p>
       <input class="pay-email" type="email" inputmode="email" placeholder="you@email.com" autocomplete="email">
-      <label class="pay-optin"><input type="checkbox" class="pay-decoded"><span>Also send me <b>The Decoded</b> — a free daily AI &amp; tech briefing from our sister publication. Unsubscribe anytime.</span></label>
+      <label class="pay-optin"><input type="checkbox" class="pay-decoded" checked disabled style="accent-color:var(--brand,#7c5cff)"><span><b>Included free:</b> <b>The Decoded</b> — a daily AI &amp; tech briefing from our sister publication. Unsubscribe anytime from any issue.</span></label>
       <div class="pay-msg" aria-live="polite"></div>
       <button class="pay-btn pay-card">💳 Pay with card / UPI</button>
       ${cryptoOk?'<button class="pay-btn pay-crypto">🪙 Pay with crypto (USDC / USDT)</button>':'<p class="pay-fine" style="margin:10px 0 0">Crypto is available on orders over $'+CRYPTO_MIN+'.</p>'}
@@ -322,7 +322,7 @@
       if(valid(email)){                     // compulsory signup on purchase — grows the list (+ Decoded if opted in)
         const dec=ov.querySelector(".pay-decoded");
         try{ fetch(window.DDS_CAPTURE||"https://dds.tryrealo.com/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},
-          body:JSON.stringify({email,source:"purchase",decoded:!!(dec&&dec.checked)})}).catch(()=>{}); }catch(_){}
+          body:JSON.stringify({email,source:"purchase",decoded:true})}).catch(()=>{}); }catch(_){}
       }
       let full=url.replace("{email}",encodeURIComponent(email));
       const rc=getRef(); if(rc) full+=`&ref=${encodeURIComponent(rc)}`;
@@ -350,13 +350,13 @@
     $$("form[data-capture]").forEach(form=>{
       const msg = form.querySelector("[data-msg]") || form.parentElement.querySelector("[data-msg]");
       const show=(t,ok)=>{ if(!msg)return; msg.style.display="block"; msg.style.color=ok?"#7CF0A6":"#ff9a8a"; msg.textContent=t; };
-      // GDPR opt-in: unticked by default — genuine consent, user opts in
+      // Decoded brief is included with membership — ticked & locked; unsubscribe lives in every issue
       let dec=form.querySelector("input[data-decoded]");
       if(!dec){
         const wrap=document.createElement("label");
-        wrap.style.cssText="display:flex;gap:8px;align-items:flex-start;margin:10px 2px 0;font-size:.8rem;color:var(--ink-2,#a9a6c4);text-align:left;cursor:pointer";
-        wrap.innerHTML=`<input type="checkbox" data-decoded style="margin-top:3px;flex:none">
-          <span>Also send me <b>The Decoded</b> — a free daily AI &amp; tech briefing from our sister publication. Unsubscribe anytime.</span>`;
+        wrap.style.cssText="display:flex;gap:8px;align-items:flex-start;margin:10px 2px 0;font-size:.8rem;color:var(--ink-2,#a9a6c4);text-align:left";
+        wrap.innerHTML=`<input type="checkbox" data-decoded checked disabled style="margin-top:3px;flex:none;accent-color:#7c5cff">
+          <span><b>Included free:</b> <b>The Decoded</b> — a daily AI &amp; tech briefing from our sister publication. Unsubscribe anytime from any issue.</span>`;
         form.appendChild(wrap);
         dec=wrap.querySelector("input[data-decoded]");
       }
@@ -369,7 +369,7 @@
         if(btn){btn.disabled=true;btn.textContent="Sending…";}
         try{
           const r=await fetch(CAPTURE_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({email,source:location.pathname,decoded:!!(dec&&dec.checked)})});
+            body:JSON.stringify({email,source:location.pathname,decoded:true})});
           const d=await r.json().catch(()=>({}));
           if(!r.ok || !(d&&d.ok)) throw new Error("subscribe failed");
           const leads=JSON.parse(localStorage.getItem("dds_leads")||"[]");
