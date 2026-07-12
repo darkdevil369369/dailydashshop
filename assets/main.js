@@ -202,8 +202,8 @@
   /* ---------- payment method chooser (card / crypto) ---------- */
   function openPay(kind, ref, cardEndpoint){
     const base = window.DDS_PAY || "";
-    const isPack = kind === "pack";
-    if(!base && isPack){ location.href="/#join"; return; }   // pre-launch fallback
+    const isProduct = kind === "product";       // product = one-off; pack/access = server checkout
+    if(!base && !isProduct){ location.href="/#join"; return; }   // pre-launch fallback
     if(!document.getElementById("payCss")){
       const st=document.createElement("style"); st.id="payCss";
       st.textContent=`.pay-ov{position:fixed;inset:0;background:rgba(10,8,20,.7);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
@@ -223,7 +223,7 @@
     ov.innerHTML=`<div class="pay-box" role="dialog" aria-modal="true" aria-label="Choose payment method">
       <button class="pay-x" aria-label="Close">&times;</button>
       <h3>Choose how to pay</h3>
-      <p class="pay-sub">${isPack?"Your credits & receipt go to this email.":"Your download & receipt go to this email."}</p>
+      <p class="pay-sub">${kind==="pack"?"Your credits & receipt go to this email.":kind==="access"?"Your 1-year pass & library access go to this email.":"Your download & receipt go to this email."}</p>
       <input class="pay-email" type="email" inputmode="email" placeholder="you@email.com" autocomplete="email">
       <div class="pay-msg" aria-live="polite"></div>
       <button class="pay-btn pay-card">💳 Pay with card / UPI</button>
@@ -249,7 +249,7 @@
       }catch(_){ msg.style.color="#ff9a8a"; msg.textContent="Checkout unavailable, try again."; }
     };
     ov.querySelector(".pay-card").addEventListener("click",()=>{
-      if(isPack) go(`${base}/checkout?item=${encodeURIComponent(ref)}&email={email}&fmt=json`,true);
+      if(!isProduct) go(`${base}/checkout?item=${encodeURIComponent(ref)}&email={email}&fmt=json`,true);
       else go(cardEndpoint+"&fmt=json",false);
     });
     ov.querySelector(".pay-crypto").addEventListener("click",()=>{
@@ -263,6 +263,16 @@
     $$("form[data-capture]").forEach(form=>{
       const msg = form.querySelector("[data-msg]") || form.parentElement.querySelector("[data-msg]");
       const show=(t,ok)=>{ if(!msg)return; msg.style.display="block"; msg.style.color=ok?"#7CF0A6":"#ff9a8a"; msg.textContent=t; };
+      // GDPR-visible cross-subscribe opt-in (pre-ticked, user can untick)
+      let dec=form.querySelector("input[data-decoded]");
+      if(!dec){
+        const wrap=document.createElement("label");
+        wrap.style.cssText="display:flex;gap:8px;align-items:flex-start;margin:10px 2px 0;font-size:.8rem;color:var(--ink-2,#a9a6c4);text-align:left;cursor:pointer";
+        wrap.innerHTML=`<input type="checkbox" data-decoded checked style="margin-top:3px;flex:none">
+          <span>Also send me <b>The Decoded</b> — a free AI &amp; tech briefing from our sister publication. Unsubscribe anytime.</span>`;
+        form.appendChild(wrap);
+        dec=wrap.querySelector("input[data-decoded]");
+      }
       form.addEventListener("submit", async e=>{
         e.preventDefault();
         const input=form.querySelector('input[type=email]');
@@ -273,7 +283,7 @@
         try{
           try{
             await fetch(CAPTURE_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},
-              body:JSON.stringify({email,source:location.pathname})});
+              body:JSON.stringify({email,source:location.pathname,decoded:!!(dec&&dec.checked)})});
           }catch(_){}
           const leads=JSON.parse(localStorage.getItem("dds_leads")||"[]");
           leads.push({email,t:Date.now()}); localStorage.setItem("dds_leads",JSON.stringify(leads));
@@ -364,9 +374,14 @@
     if(!base) return;                         // pre-launch: href="/#join" handles it
     const PACKS=["starter","popular","pro"];   // backend CREDIT_PACKS; "unlimited" is not a pack
     $$("[data-pack]").forEach(b=>b.addEventListener("click",e=>{
-      const pack=b.dataset.pack; if(!PACKS.includes(pack)) return;  // unlimited -> href fallback
+      const pack=b.dataset.pack; if(!PACKS.includes(pack)) return;  // unlimited -> access handler
       e.preventDefault();
       openPay("pack", pack, null);
+    }));
+    // 1-year unlimited pass ($369 one-time)
+    $$('[data-pack="unlimited"], [data-access]').forEach(b=>b.addEventListener("click",e=>{
+      e.preventDefault();
+      openPay("access", b.dataset.access || "unlimited-1yr", null);
     }));
   }
 
