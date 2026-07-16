@@ -24,10 +24,13 @@
 </div>
 <script>
   var p=new URLSearchParams(location.search), code=p.get('code');
-  if(code){document.getElementById('msg').textContent='Authorization successful. Your code:';
-    document.getElementById('code').textContent=code;
-    document.getElementById('cp').style.display='inline-block';}
-  else{document.getElementById('msg').textContent='No code found in the URL. Re-run the authorize step.';}
-  function copy(){navigator.clipboard.writeText(code);document.getElementById('cp').textContent='Copied ✓';}
+  var err=p.get('error'), full=location.search || '(empty — no parameters returned)';
+  var out=code||full;
+  if(code){document.getElementById('msg').textContent='Authorization successful. Your code:';}
+  else if(err){document.getElementById('msg').textContent='Etsy returned an error — copy this and send it back:';}
+  else{document.getElementById('msg').textContent='No code. Copy the full details below and send them back:';}
+  document.getElementById('code').textContent=out;
+  document.getElementById('cp').style.display='inline-block';
+  function copy(){navigator.clipboard.writeText(out);document.getElementById('cp').textContent='Copied ✓';}
 </script>
 </body></html>
