@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Invoice Generator — Make & Download a Professional Invoice | Daily Dash Shop</title>
+<meta name="description" content="Create a professional invoice free in your browser and download it as PDF. Add your logo details, line items, tax and notes — no signup, no watermark. Built by Daily Dash Shop.">
+<link rel="canonical" href="https://dailydashshop.com/free-invoice-generator.html">
+<meta name="theme-color" content="#101014">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dailydashshop.com/free-invoice-generator.html">
+<meta property="og:title" content="Free Invoice Generator — Download a Professional Invoice PDF">
+<meta property="og:description" content="Fill it in, download the PDF. Free, no signup, no watermark. Plus AI-written payment terms.">
+<meta property="og:image" content="https://dailydashshop.com/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=260716b">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Free Invoice Generator","url":"https://dailydashshop.com/free-invoice-generator.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"Daily Dash Shop","url":"https://dailydashshop.com/"}}
+</script>
+<style>
+.inv-hero{padding:56px 0 20px;text-align:center}
+.inv-hero h1{font-size:clamp(2rem,5vw,3rem);margin:10px 0 12px}
+.inv-hero .lead{max-width:60ch;margin:0 auto}
+.inv-wrap{max-width:1180px;margin:0 auto;padding:0 20px 70px;display:grid;grid-template-columns:1fr 1.05fr;gap:26px;align-items:start}
+@media(max-width:920px){.inv-wrap{grid-template-columns:1fr}}
+.inv-form{background:var(--bg-2,#17142a);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:22px;position:sticky;top:88px}
+@media(max-width:920px){.inv-form{position:static}}
+.inv-form h3{font-family:Sora,sans-serif;font-size:1rem;margin:18px 0 8px;color:#c9b8ff}
+.inv-form h3:first-child{margin-top:0}
+.frow{display:flex;gap:10px;flex-wrap:wrap}
+.fld{flex:1;min-width:130px;margin-bottom:8px;display:flex;flex-direction:column;gap:4px}
+.fld label{font-size:.74rem;color:var(--ink-2,#a9a6c4)}
+.fld input,.fld textarea,.fld select{padding:9px 11px;border-radius:9px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;font-size:.9rem;font-family:Inter,sans-serif}
+.fld textarea{resize:vertical;min-height:60px}
+.items-tbl{width:100%;margin-top:6px}
+.item-line{display:grid;grid-template-columns:1fr 58px 82px 26px;gap:7px;margin-bottom:7px;align-items:center}
+.item-line input{padding:8px 9px;border-radius:8px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;font-size:.86rem;width:100%}
+.item-del{background:0;border:0;color:#ff9a8a;font-size:1.2rem;cursor:pointer;line-height:1}
+.item-head{display:grid;grid-template-columns:1fr 58px 82px 26px;gap:7px;font-size:.7rem;color:var(--ink-2,#a9a6c4);margin-bottom:4px;padding:0 2px}
+.btn-sm{padding:8px 13px;font-size:.85rem;border-radius:9px;border:1px dashed rgba(124,92,255,.5);background:transparent;color:#c9b8ff;cursor:pointer;font-family:Sora,sans-serif;font-weight:600}
+.inv-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.ai-btn{background:rgba(124,92,255,.14);border:1px solid rgba(124,92,255,.4);color:#c9b8ff;border-radius:10px;padding:10px 14px;cursor:pointer;font-family:Sora,sans-serif;font-weight:600;font-size:.85rem}
+.ai-msg{font-size:.78rem;color:var(--ink-2,#a9a6c4);margin-top:6px;min-height:14px}
+/* ---- the invoice paper (always light, like a real document) ---- */
+.paper-scroll{overflow-x:auto}
+.invoice-paper{background:#fff;color:#1a1c24;border-radius:14px;padding:40px 42px;box-shadow:0 20px 50px rgba(0,0,0,.4);font-family:Inter,Arial,sans-serif;min-width:520px}
+.ip-top{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-start}
+.ip-title{font-family:Sora,sans-serif;font-weight:800;font-size:2rem;letter-spacing:.04em;color:#7c5cff;margin:0}
+.ip-from b{font-size:1.05rem}
+.ip-meta{text-align:right;font-size:.86rem;color:#555}
+.ip-meta b{color:#1a1c24}
+.ip-parties{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:26px 0 8px}
+.ip-lbl{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#8a8fa3;margin-bottom:3px}
+.ip-tbl{width:100%;border-collapse:collapse;margin-top:14px;font-size:.9rem}
+.ip-tbl th{text-align:left;background:#f4f2fb;color:#4a4a68;font-weight:600;padding:9px 10px;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+.ip-tbl th.r,.ip-tbl td.r{text-align:right}
+.ip-tbl td{padding:10px;border-bottom:1px solid #eee}
+.ip-tot{margin-left:auto;width:min(280px,100%);margin-top:14px;font-size:.92rem}
+.ip-tot .row{display:flex;justify-content:space-between;padding:5px 0}
+.ip-tot .grand{border-top:2px solid #1a1c24;margin-top:6px;padding-top:9px;font-family:Sora,sans-serif;font-weight:800;font-size:1.2rem;color:#7c5cff}
+.ip-notes{margin-top:26px;font-size:.84rem;color:#555;border-top:1px solid #eee;padding-top:14px;white-space:pre-wrap}
+.ip-thanks{margin-top:10px;font-size:.9rem;color:#1a1c24;font-weight:600}
+.upsell{margin-top:24px;background:linear-gradient(135deg,#2a1d5e,#17142a);border:1px solid rgba(124,92,255,.3);border-radius:16px;padding:22px;text-align:center}
+.upsell h3{font-family:Sora,sans-serif;font-size:1.2rem;margin:0 0 8px}
+.upsell p{color:var(--ink-2,#c9c6de);max-width:52ch;margin:0 auto 14px;font-size:.94rem}
+.rz-cap{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:440px;margin:14px auto 0}
+.rz-cap input{flex:1;min-width:200px;padding:11px 14px;border-radius:11px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:inherit}
+.spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(124,92,255,.3);border-top-color:#c9b8ff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media print{
+  body>*{display:none!important}
+  #printArea{display:block!important}
+  #printArea *{visibility:visible}
+  .invoice-paper{box-shadow:none;border-radius:0;padding:0;min-width:0}
+  .paper-scroll{overflow:visible}
+  @page{margin:14mm}
+}
+</style>
+</head>
+<body>
+<div id="site-header" data-active=""></div>
+
+<section class="inv-hero">
+  <div class="wrap">
+    <span class="pill"><span class="dot"></span> Free · No signup · No watermark</span>
+    <h1>Free <span class="ink-grad">invoice generator</span></h1>
+    <p class="lead">Fill it in, watch it build live, and download a clean professional invoice as PDF — in under a minute. Nothing is stored, and there's no watermark.</p>
+  </div>
+</section>
+
+<div class="inv-wrap">
+  <!-- FORM -->
+  <form class="inv-form" id="invForm" autocomplete="off" novalidate>
+    <h3>Your business</h3>
+    <div class="frow">
+      <div class="fld"><label>Business / your name</label><input data-f="fromName" placeholder="Your Business Ltd"></div>
+      <div class="fld"><label>Email</label><input data-f="fromEmail" placeholder="you@business.com"></div>
+    </div>
+    <div class="fld"><label>Address / details</label><textarea data-f="fromAddr" placeholder="Street, City, Tax ID / GST…"></textarea></div>
+
+    <h3>Bill to</h3>
+    <div class="frow">
+      <div class="fld"><label>Client name</label><input data-f="toName" placeholder="Client Co."></div>
+      <div class="fld"><label>Client email</label><input data-f="toEmail" placeholder="client@company.com"></div>
+    </div>
+    <div class="fld"><label>Client address</label><textarea data-f="toAddr" placeholder="Client address"></textarea></div>
+
+    <h3>Invoice details</h3>
+    <div class="frow">
+      <div class="fld"><label>Invoice #</label><input data-f="number" placeholder="INV-0001"></div>
+      <div class="fld"><label>Currency</label><select data-f="currency">
+        <option value="$">$ USD</option><option value="€">€ EUR</option><option value="£">£ GBP</option>
+        <option value="₹">₹ INR</option><option value="A$">A$ AUD</option><option value="C$">C$ CAD</option></select></div>
+    </div>
+    <div class="frow">
+      <div class="fld"><label>Issue date</label><input type="date" data-f="issue"></div>
+      <div class="fld"><label>Due date</label><input type="date" data-f="due"></div>
+    </div>
+
+    <h3>Items</h3>
+    <div class="item-head"><span>Description</span><span>Qty</span><span>Rate</span><span></span></div>
+    <div id="itemRows"></div>
+    <button type="button" class="btn-sm" id="addItem">+ Add item</button>
+
+    <h3>Totals &amp; notes</h3>
+    <div class="frow">
+      <div class="fld"><label>Tax %</label><input type="number" data-f="tax" placeholder="0" min="0" step="0.1"></div>
+      <div class="fld"><label>Discount (amount)</label><input type="number" data-f="discount" placeholder="0" min="0" step="0.01"></div>
+    </div>
+    <div class="fld"><label>Notes / payment terms</label><textarea data-f="notes" placeholder="Payment due within 14 days…"></textarea></div>
+    <button type="button" class="ai-btn" id="aiPolish">✨ AI: write professional payment terms</button>
+    <div class="ai-msg" id="aiMsg"></div>
+
+    <div class="inv-actions">
+      <button type="button" class="btn btn-accent btn-lg" id="dlBtn">⬇ Download / Save PDF</button>
+      <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+    </div>
+  </form>
+
+  <!-- LIVE PREVIEW -->
+  <div>
+    <div id="printArea"><div class="paper-scroll"><div class="invoice-paper" id="paper"></div></div></div>
+
+    <div class="upsell">
+      <h3>Send invoices that look like a real business — every time.</h3>
+      <p>This makes one invoice. Our Freelancer &amp; Business Kits give you branded invoice, quote, contract and proposal templates you own forever — editable in Word, Canva or Google Docs.</p>
+      <a href="/shop.html#business" class="btn btn-accent btn-lg">Browse business kits →</a>
+      <form class="rz-cap" id="invCap" novalidate>
+        <input type="email" placeholder="you@email.com" aria-label="Email" autocomplete="email" required>
+        <button type="submit" class="btn btn-primary">Email me 20% off + a free kit</button>
+      </form>
+      <div class="ai-msg" id="capMsg" style="text-align:center"></div>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="/assets/data.js?v=260716b"></script>
+<script src="/assets/main.js?v=260716b"></script>
+<script>
+(function(){
+  var BASE=window.DDS_PAY||"https://dds.tryrealo.com";
+  var form=document.getElementById("invForm"), paper=document.getElementById("paper"), rows=document.getElementById("itemRows");
+  var S={fromName:"",fromEmail:"",fromAddr:"",toName:"",toEmail:"",toAddr:"",number:"INV-0001",currency:"$",issue:"",due:"",tax:"",discount:"",notes:"",thanks:""};
+  var items=[{d:"",q:"1",r:""}];
+  var esc=function(s){var d=document.createElement("div");d.textContent=(s==null?"":String(s));return d.innerHTML;};
+  var fmt=function(n){return (isFinite(n)?n:0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});};
+
+  function today(off){var d=new Date();d.setDate(d.getDate()+(off||0));return d.toISOString().slice(0,10);}
+  function pretty(d){ if(!d) return "—"; var x=new Date(d+"T00:00:00"); return isNaN(x)? d : x.toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}); }
+
+  function drawItems(){
+    rows.innerHTML="";
+    items.forEach(function(it,i){
+      var line=document.createElement("div"); line.className="item-line";
+      line.innerHTML='<input placeholder="Item or service" value="'+esc(it.d)+'" data-i="'+i+'" data-k="d">'+
+        '<input type="number" min="0" step="1" value="'+esc(it.q)+'" data-i="'+i+'" data-k="q">'+
+        '<input type="number" min="0" step="0.01" placeholder="0.00" value="'+esc(it.r)+'" data-i="'+i+'" data-k="r">'+
+        '<button type="button" class="item-del" data-del="'+i+'" aria-label="Remove">×</button>';
+      rows.appendChild(line);
+    });
+  }
+  function totals(){
+    var sub=items.reduce(function(a,it){return a+(parseFloat(it.q)||0)*(parseFloat(it.r)||0);},0);
+    var tax=sub*((parseFloat(S.tax)||0)/100);
+    var disc=parseFloat(S.discount)||0;
+    return {sub:sub,tax:tax,disc:disc,total:Math.max(0,sub+tax-disc)};
+  }
+  function render(){
+    var c=esc(S.currency), t=totals();
+    var lines=items.filter(function(it){return it.d||it.r;}).map(function(it){
+      var amt=(parseFloat(it.q)||0)*(parseFloat(it.r)||0);
+      return '<tr><td>'+esc(it.d||"—")+'</td><td class="r">'+esc(it.q||"0")+'</td><td class="r">'+c+fmt(parseFloat(it.r)||0)+'</td><td class="r">'+c+fmt(amt)+'</td></tr>';
+    }).join("") || '<tr><td colspan="4" style="color:#aaa;text-align:center;padding:18px">Add your first item on the left →</td></tr>';
+    paper.innerHTML=
+      '<div class="ip-top"><div class="ip-from"><b>'+esc(S.fromName||"Your Business")+'</b>'+
+      (S.fromEmail?'<div>'+esc(S.fromEmail)+'</div>':'')+(S.fromAddr?'<div style="color:#666;white-space:pre-wrap;font-size:.86rem;margin-top:2px">'+esc(S.fromAddr)+'</div>':'')+'</div>'+
+      '<div style="text-align:right"><h2 class="ip-title">INVOICE</h2><div class="ip-meta"><div><b>'+esc(S.number||"INV-0001")+'</b></div>'+
+      '<div>Issued: <b>'+pretty(S.issue)+'</b></div><div>Due: <b>'+pretty(S.due)+'</b></div></div></div></div>'+
+      '<div class="ip-parties"><div><div class="ip-lbl">Bill to</div><b>'+esc(S.toName||"Client")+'</b>'+
+      (S.toEmail?'<div style="font-size:.86rem;color:#666">'+esc(S.toEmail)+'</div>':'')+
+      (S.toAddr?'<div style="font-size:.86rem;color:#666;white-space:pre-wrap">'+esc(S.toAddr)+'</div>':'')+'</div></div>'+
+      '<table class="ip-tbl"><thead><tr><th>Description</th><th class="r">Qty</th><th class="r">Rate</th><th class="r">Amount</th></tr></thead><tbody>'+lines+'</tbody></table>'+
+      '<div class="ip-tot"><div class="row"><span>Subtotal</span><span>'+c+fmt(t.sub)+'</span></div>'+
+      ((parseFloat(S.tax)||0)?'<div class="row"><span>Tax ('+esc(S.tax)+'%)</span><span>'+c+fmt(t.tax)+'</span></div>':'')+
+      (t.disc?'<div class="row"><span>Discount</span><span>−'+c+fmt(t.disc)+'</span></div>':'')+
+      '<div class="row grand"><span>Total</span><span>'+c+fmt(t.total)+'</span></div></div>'+
+      (S.notes?'<div class="ip-notes">'+esc(S.notes)+'</div>':'')+
+      (S.thanks?'<div class="ip-thanks">'+esc(S.thanks)+'</div>':'');
+  }
+  function redraw(){ render(); }
+
+  // bind top-level fields
+  form.querySelectorAll("[data-f]").forEach(function(el){
+    el.addEventListener("input",function(){ S[el.getAttribute("data-f")]=el.value; render(); saveBiz(); });
+  });
+  // item events (delegated)
+  rows.addEventListener("input",function(e){
+    var el=e.target, i=el.getAttribute("data-i"), k=el.getAttribute("data-k");
+    if(i!=null){ items[i][k]=el.value; render(); }
+  });
+  rows.addEventListener("click",function(e){
+    var d=e.target.getAttribute&&e.target.getAttribute("data-del");
+    if(d!=null){ items.splice(+d,1); if(!items.length)items.push({d:"",q:"1",r:""}); drawItems(); render(); }
+  });
+  document.getElementById("addItem").addEventListener("click",function(){ items.push({d:"",q:"1",r:""}); drawItems(); render(); });
+
+  // convenience: remember only the seller's own details locally
+  function saveBiz(){ try{ localStorage.setItem("dds_inv_biz",JSON.stringify({fromName:S.fromName,fromEmail:S.fromEmail,fromAddr:S.fromAddr,currency:S.currency})); }catch(_){}}
+  function loadBiz(){ try{ var b=JSON.parse(localStorage.getItem("dds_inv_biz")||"null"); if(b){ Object.assign(S,b); } }catch(_){}}
+
+  document.getElementById("dlBtn").addEventListener("click",function(){ window.print(); });
+  document.getElementById("resetBtn").addEventListener("click",function(){
+    items=[{d:"",q:"1",r:""}]; S.notes=""; S.thanks=""; S.tax=""; S.discount="";
+    form.querySelectorAll('[data-f="notes"],[data-f="tax"],[data-f="discount"]').forEach(function(el){el.value="";});
+    drawItems(); render();
+  });
+
+  // AI polish -> payment terms + thank-you
+  var aiMsg=document.getElementById("aiMsg");
+  document.getElementById("aiPolish").addEventListener("click",function(){
+    var btn=this; btn.disabled=true; aiMsg.style.color=""; aiMsg.innerHTML='<span class="spin"></span> Writing…';
+    var itemsTxt=items.map(function(it){return it.d;}).filter(Boolean).join(", ");
+    fetch(BASE+"/tool/invoice-polish",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({business:S.fromName,items:itemsTxt})})
+      .then(function(r){return r.json();}).then(function(d){
+        if(d&&d.result){
+          if(d.result.payment_terms){ S.notes=d.result.payment_terms; form.querySelector('[data-f="notes"]').value=S.notes; }
+          if(d.result.thank_you){ S.thanks=d.result.thank_you; }
+          render(); aiMsg.style.color="#7CF0A6"; aiMsg.textContent="Added — edit it freely.";
+        } else { aiMsg.style.color="#ff9a8a"; aiMsg.textContent=(d&&d.error)||"Try again."; }
+      }).catch(function(){ aiMsg.style.color="#ff9a8a"; aiMsg.textContent="Try again in a moment."; })
+      .finally(function(){ btn.disabled=false; });
+  });
+
+  // email capture -> Brevo lead funnel
+  var cap=document.getElementById("invCap"), capMsg=document.getElementById("capMsg");
+  cap.addEventListener("submit",function(e){
+    e.preventDefault();
+    var email=(cap.querySelector("input").value||"").trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ capMsg.style.color="#ff9a8a"; capMsg.textContent="Enter a valid email."; return; }
+    capMsg.style.color=""; capMsg.textContent="Sending…";
+    fetch(BASE+"/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,source:"tool-invoice",decoded:true})})
+      .then(function(r){return r.json();}).then(function(d){
+        if(d&&d.ok){ capMsg.style.color="#7CF0A6"; capMsg.textContent="Done! Check your inbox for 20% off + a free kit. 🎉"; cap.reset(); }
+        else { capMsg.style.color="#ff9a8a"; capMsg.textContent="Try again in a moment."; }
+      }).catch(function(){ capMsg.style.color="#ff9a8a"; capMsg.textContent="Try again in a moment."; });
+  });
+
+  // init
+  loadBiz();
+  S.issue=S.issue||today(0); S.due=S.due||today(14);
+  form.querySelectorAll("[data-f]").forEach(function(el){ var k=el.getAttribute("data-f"); if(S[k]!=null&&S[k]!=="") el.value=S[k]; });
+  drawItems(); render();
+})();
+</script>
+</body>
+</html>
