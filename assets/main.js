@@ -37,6 +37,7 @@
         <a class="brand" href="/"><span class="mark"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M24 17h13.5C47.2 17 54 24 54 33.5S47.2 50 37.5 50H24V17zm9.2 24.6c5.4 0 8.9-3.3 8.9-8.1s-3.5-8.1-8.9-8.1H32v16.2h1.2z" fill="#fff"/><rect x="6" y="24" width="12" height="4" rx="2" fill="#fff" opacity=".85"/><rect x="2" y="34" width="14" height="4" rx="2" fill="#fff" opacity=".5"/></svg></span>Daily&nbsp;Dash&nbsp;Shop</a>
         <nav class="nav-links">
           ${link('/shop.html','Shop')}
+          ${link('/free-resume-check.html','Free tools')}
           ${link('/credits.html','Credits')}
           ${link('/#how','How it works')}
           ${link('/about.html','About')}
@@ -51,6 +52,7 @@
     <div class="drawer" id="drawer">
       <button class="close" id="drawerClose" aria-label="Close">×</button>
       <a href="/shop.html">Shop</a>
+      <a href="/free-resume-check.html">Free tools</a>
       <a href="/credits.html">Credits</a>
       <a href="/#how">How it works</a>
       <a href="/about.html">About</a>
