@@ -20,7 +20,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=260716a">
+<link rel="stylesheet" href="/assets/style.css?v=260716b">
+<style>
+.statstrip{border-block:1px solid rgba(124,92,255,.14);background:linear-gradient(180deg,rgba(124,92,255,.05),transparent)}
+.statstrip .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;padding:22px 20px}
+.statstrip .stat{flex:1 1 150px;max-width:220px;text-align:center;padding:10px 14px}
+.statstrip .stat b{display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.1;background:linear-gradient(120deg,#a98bff,#7c5cff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.statstrip .stat span{display:block;margin-top:4px;font-size:.8rem;color:var(--ink-2,#a9a6c4);letter-spacing:.02em}
+</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"Organization","@id":"https://dailydashshop.com/#org","name":"Daily Dash Shop","alternateName":["DailyDashShop","Daily Dash Shop official"],"url":"https://dailydashshop.com/","logo":"https://dailydashshop.com/assets/favicon.svg","image":"https://dailydashshop.com/assets/img/og.jpg","email":"hellodailydashshop@gmail.com","description":"Premium ready-to-edit digital templates — resumes, planners, business and social media kits. Instant download.","sameAs":["https://dailydash.gumroad.com"]},
@@ -69,6 +76,9 @@
     <div class="trust-item">🔒 Secure checkout</div>
   </div>
 </div>
+
+<!-- ================= LIVE STATS (honest, from real catalog data) ================= -->
+<div class="statstrip"><div class="wrap" id="homeStats"></div></div>
 
 <!-- ================= CATEGORIES ================= -->
 <section class="section" id="categories">
@@ -139,6 +149,14 @@
   </div>
 </section>
 
+<!-- ================= REVIEWS (real, verified — never fabricated) ================= -->
+<section class="section tint" id="homeReviews">
+  <div class="wrap">
+    <div class="sec-head reveal center" id="hrHead"></div>
+    <div class="f-grid reveal" id="hrList" style="margin-top:8px"></div>
+  </div>
+</section>
+
 <!-- ================= LEAD MAGNET / CAPTURE ================= -->
 <section class="section" id="join">
   <div class="wrap">
@@ -206,7 +224,7 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="/assets/data.js?v=260716a"></script>
-<script src="/assets/main.js?v=260716a"></script>
+<script src="/assets/data.js?v=260716b"></script>
+<script src="/assets/main.js?v=260716b"></script>
 </body>
 </html>

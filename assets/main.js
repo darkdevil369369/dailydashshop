@@ -186,7 +186,7 @@
           <ul class="pd-list">${p.highlights.map(h=>`<li>✓ ${h}</li>`).join("")}</ul>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
             <a href="${buy}"${buyAttr} class="btn btn-accent btn-lg${link?' js-buy':''}"${link?` data-buy="${link}"`:''}>${buyLabel}</a>
-            <a href="/shop.html" class="btn btn-ghost btn-lg">Keep browsing</a>
+            <button type="button" class="btn btn-ghost btn-lg js-preview">👁 Preview template</button>
           </div>
           <div class="pd-meta">
             <div><b>Formats</b><span>${p.formats.join(" · ")}</span></div>
@@ -195,6 +195,9 @@
           </div>
         </div>
       </div>`;
+    // "Preview template": open a lightbox of the real template design images
+    const pv=host.querySelector(".js-preview");
+    if(pv) pv.addEventListener("click",()=>openPreview(gal, p.name));
     // gallery: click a thumbnail to swap the main image
     const main=$("#pdMainImg");
     host.querySelectorAll(".pd-thumb").forEach(btn=>btn.addEventListener("click",()=>{
@@ -264,6 +267,136 @@
         else { msg.style.color="#ff9a8a"; msg.textContent=(d&&d.error)||"Could not submit — try again."; }
       }catch(_){ msg.style.color="#ff9a8a"; msg.textContent="Something went wrong — try again."; }
     });
+  }
+
+  /* ---------- template preview lightbox ---------- */
+  function openPreview(images, title){
+    images=(images||[]).filter(Boolean);
+    if(!images.length) return;
+    if(!document.getElementById("pvCss")){
+      const st=document.createElement("style"); st.id="pvCss";
+      st.textContent=`.pv-ov{position:fixed;inset:0;background:rgba(8,6,16,.84);backdrop-filter:blur(5px);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;gap:14px}
+.pv-cap{color:#fff;font-family:Sora,sans-serif;font-weight:700;font-size:1.05rem;text-align:center}
+.pv-cap small{display:block;color:#c9c6de;font-weight:400;font-size:.78rem;margin-top:3px}
+.pv-stage{max-width:min(880px,94vw);display:flex;align-items:center;justify-content:center}
+.pv-stage img{max-width:100%;max-height:70vh;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.pv-nav{display:flex;gap:14px;align-items:center}
+.pv-nav button{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff;border-radius:10px;padding:9px 16px;font-family:Sora,sans-serif;font-weight:700;cursor:pointer}
+.pv-dots{color:#c9c6de;font-size:.85rem;min-width:56px;text-align:center}
+.pv-x{position:absolute;top:14px;right:20px;background:0;border:0;color:#fff;font-size:2rem;line-height:1;cursor:pointer;opacity:.8}`;
+      document.head.appendChild(st);
+    }
+    let i=0;
+    const ov=document.createElement("div"); ov.className="pv-ov"; ov.setAttribute("role","dialog"); ov.setAttribute("aria-modal","true");
+    ov.innerHTML=`<button class="pv-x" aria-label="Close">&times;</button>
+      <div class="pv-cap">${title} — a look inside<small>Actual template design · edit it to make it yours</small></div>
+      <div class="pv-stage"><img alt="${title} preview"></div>
+      <div class="pv-nav"><button class="pv-prev" aria-label="Previous">← Prev</button><span class="pv-dots"></span><button class="pv-next" aria-label="Next">Next →</button></div>`;
+    document.body.appendChild(ov);
+    const img=ov.querySelector("img"), dots=ov.querySelector(".pv-dots"), nav=ov.querySelector(".pv-nav");
+    if(images.length<2) nav.style.display="none";
+    const show=()=>{ img.src=images[i]; dots.textContent=`${i+1} / ${images.length}`; };
+    const step=d=>{ i=(i+d+images.length)%images.length; show(); };
+    const key=e=>{ if(e.key==="Escape")close(); else if(e.key==="ArrowRight")step(1); else if(e.key==="ArrowLeft")step(-1); };
+    const close=()=>{ ov.remove(); document.removeEventListener("keydown",key); };
+    ov.querySelector(".pv-x").addEventListener("click",close);
+    ov.querySelector(".pv-prev").addEventListener("click",()=>step(-1));
+    ov.querySelector(".pv-next").addEventListener("click",()=>step(1));
+    ov.addEventListener("click",e=>{ if(e.target===ov)close(); });
+    document.addEventListener("keydown",key);
+    show();
+  }
+
+  /* ---------- homepage: honest live stats strip ---------- */
+  function renderStats(){
+    const host=$("#homeStats"); if(!host) return;
+    const cell=(t,l)=>`<div class="stat"><b>${t}</b><span>${l}</span></div>`;
+    const draw=(s)=>{
+      const cells=[
+        cell(s.templates||DDS.products.length, "premium templates"),
+        cell((DDS.categories.length-1)||6, "categories"),
+        cell("2 min", "to a pro result"),
+        cell("Instant", "download delivery"),
+      ];
+      if(s.reviews && s.reviews.count>0)
+        cells.splice(2,0,cell("★ "+s.reviews.avg, s.reviews.count+" verified review"+(s.reviews.count>1?"s":"")));
+      host.innerHTML=cells.join("");
+    };
+    draw({templates:DDS.products.length});            // instant honest fallback from catalog
+    const base=window.DDS_PAY||"";
+    if(base) fetch(`${base}/stats`,{cache:"no-store"}).then(r=>r.json()).then(draw).catch(()=>{});
+  }
+
+  /* ---------- homepage: real reviews only (no fabricated social proof) ---------- */
+  function homeReviews(){
+    const host=$("#homeReviews"); if(!host) return;
+    const head=host.querySelector("#hrHead"), list=host.querySelector("#hrList");
+    const base=window.DDS_PAY||"";
+    if(!base){ host.style.display="none"; return; }
+    fetch(`${base}/reviews-all`,{cache:"no-store"}).then(r=>r.json()).then(d=>{
+      const revs=d.reviews||[], a=d.aggregate||{count:0};
+      if(!revs.length){
+        if(head) head.innerHTML=`<span class="eyebrow">Real reviews only</span><h2>Be one of our first reviews.</h2><p style="margin-inline:auto">We're a new shop and we show only genuine, verified buyer reviews — never fakes. Bought a template? Your honest review helps the next person decide.</p>`;
+        if(list) list.innerHTML="";
+        return;
+      }
+      if(head) head.innerHTML=`<span class="eyebrow">What buyers say</span><h2>Loved by real customers.</h2><p style="margin-inline:auto"><span style="color:#ffb020;letter-spacing:2px">${stars(a.avg)}</span> ${a.avg} average · ${a.count} verified review${a.count>1?"s":""}</p>`;
+      if(list) list.innerHTML=revs.map(r=>`<div class="f-card" style="text-align:left"><div style="color:#ffb020;letter-spacing:2px">${stars(r.rating)}</div><p style="margin:8px 0 6px">${r.text}</p><div class="muted" style="font-size:.82rem">— ${r.name}${r.verified?' · <span style="color:#7CF0A6">✓ Verified purchase</span>':''}</div></div>`).join("");
+    }).catch(()=>{ host.style.display="none"; });
+  }
+
+  /* ---------- AI support chatbot (grounded on real catalog) ---------- */
+  function chatbot(){
+    const base=window.DDS_PAY||""; if(!base || document.getElementById("ddChatBtn")) return;
+    const css=document.createElement("style");
+    css.textContent=`#ddChatBtn{position:fixed;bottom:22px;right:22px;z-index:9997;width:56px;height:56px;border-radius:50%;border:0;background:var(--brand,#7c5cff);color:#fff;font-size:1.5rem;cursor:pointer;box-shadow:0 10px 30px rgba(124,92,255,.5);transition:transform .15s}
+#ddChatBtn:hover{transform:scale(1.07)}
+.ddc-panel{position:fixed;bottom:88px;right:22px;z-index:9997;width:min(370px,calc(100vw - 32px));height:min(520px,72vh);background:var(--bg-2,#17142a);border:1px solid rgba(255,255,255,.12);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.55);display:none;flex-direction:column;overflow:hidden}
+.ddc-panel.open{display:flex}
+.ddc-head{padding:15px 18px;background:linear-gradient(135deg,#7c5cff,#9d7bff);color:#fff}
+.ddc-head b{font-family:Sora,sans-serif;font-size:1.05rem;display:block}
+.ddc-head span{font-size:.78rem;opacity:.9}
+.ddc-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.ddc-msg{max-width:82%;padding:10px 13px;border-radius:14px;font-size:.9rem;line-height:1.45;white-space:pre-wrap}
+.ddc-bot{background:rgba(255,255,255,.06);align-self:flex-start;border-bottom-left-radius:4px}
+.ddc-user{background:var(--brand,#7c5cff);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.ddc-typing{font-size:.8rem;color:var(--ink-2,#a9a6c4);align-self:flex-start;padding:2px 4px}
+.ddc-foot{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(255,255,255,.1)}
+.ddc-foot input{flex:1;padding:10px 13px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:inherit;font-size:.9rem}
+.ddc-foot button{background:var(--brand,#7c5cff);color:#fff;border:0;border-radius:10px;padding:0 15px;cursor:pointer;font-size:1.1rem}`;
+    document.head.appendChild(css);
+    const btn=document.createElement("button");
+    btn.id="ddChatBtn"; btn.setAttribute("aria-label","Chat with Daily Dash"); btn.innerHTML="💬";
+    document.body.appendChild(btn);
+    const panel=document.createElement("div");
+    panel.className="ddc-panel"; panel.setAttribute("role","dialog"); panel.setAttribute("aria-label","Support chat");
+    panel.innerHTML=`<div class="ddc-head"><b>Daily Dash Assistant</b><span>Instant answers · templates, orders &amp; help</span></div>
+      <div class="ddc-body" id="ddcBody"></div>
+      <div class="ddc-foot"><input id="ddcIn" placeholder="Ask about a template, pricing…" autocomplete="off"><button id="ddcSend" aria-label="Send">➤</button></div>`;
+    document.body.appendChild(panel);
+    const body=panel.querySelector("#ddcBody"), input=panel.querySelector("#ddcIn"), send=panel.querySelector("#ddcSend");
+    const hist=[]; let greeted=false;
+    const add=(text,who)=>{ const m=document.createElement("div"); m.className="ddc-msg ddc-"+who; m.textContent=text; body.appendChild(m); body.scrollTop=body.scrollHeight; };
+    const toggle=()=>{ panel.classList.toggle("open");
+      if(panel.classList.contains("open")){
+        if(!greeted){ add("Hi! 👋 I can help you pick the right template, or answer anything about pricing, delivery and licensing. What are you looking for?","bot"); greeted=true; }
+        input.focus();
+      }};
+    btn.addEventListener("click",toggle);
+    const ask=async()=>{
+      const q=(input.value||"").trim(); if(!q) return;
+      input.value=""; add(q,"user"); hist.push({role:"user",text:q});
+      const typing=document.createElement("div"); typing.className="ddc-typing"; typing.textContent="typing…";
+      body.appendChild(typing); body.scrollTop=body.scrollHeight;
+      try{
+        const r=await fetch(`${base}/chat`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:q,history:hist})});
+        const d=await r.json(); typing.remove();
+        const reply=(d&&d.reply)||"Sorry, please email hellodailydashshop@gmail.com and a human will help.";
+        add(reply,"bot"); hist.push({role:"assistant",text:reply});
+      }catch(_){ typing.remove(); add("Connection issue — please try again, or email hellodailydashshop@gmail.com.","bot"); }
+    };
+    send.addEventListener("click",ask);
+    input.addEventListener("keydown",e=>{ if(e.key==="Enter")ask(); });
   }
 
   /* ---------- affiliate referral tracking ---------- */
@@ -487,6 +620,6 @@
   document.addEventListener("DOMContentLoaded",()=>{
     const h=$("#site-header"); if(h) h.innerHTML=header(h.dataset.active||"");
     const f=$("#site-footer"); if(f) f.innerHTML=footer();
-    refTrack(); chrome(); skipTarget(); renderFeatured(); renderShop(); renderProduct(); capture(); observe(); stickyCTA(); walletButtons(); consent();
+    refTrack(); chrome(); skipTarget(); renderFeatured(); renderShop(); renderProduct(); renderStats(); homeReviews(); capture(); observe(); stickyCTA(); walletButtons(); chatbot(); consent();
   });
 })();
