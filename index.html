@@ -41,6 +41,8 @@
 .hc-1{inset:5% 14% 5% 14%;transform:var(--rot);--rot:rotate(-3deg);z-index:4}
 .hc-2{inset:0 0 auto auto;width:47%;aspect-ratio:4/5;transform:var(--rot);--rot:rotate(7deg);z-index:2}
 .hc-3{inset:auto auto 0 0;width:45%;aspect-ratio:4/5;transform:var(--rot);--rot:rotate(-6deg);z-index:3}
+/* Value band: 6 items in a balanced 3x2 grid on desktop (was 4+2 with dead space) */
+@media(min-width:900px){.vgrid{grid-template-columns:repeat(3,1fr)}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
