@@ -443,3 +443,131 @@ h1,h2,h3,h4,.display{font-family:"Fraunces","Sora",Georgia,serif;font-weight:600
  color:#fff;background:rgba(16,16,20,.62);backdrop-filter:blur(4px);pointer-events:none}
 .ba .ba-tag.l{left:12px}.ba .ba-tag.r{right:12px}
 .ba-cap{padding:9px 12px;font-size:.82rem;color:var(--ink-2);text-align:center;background:var(--bg-2)}
+
+/* =========================================================
+   APPLE-LEVEL PREMIUM LAYER — 2026-07-17
+   Additive refinement only. Overrides specific properties to
+   lift the whole site to a couture, Apple-grade finish while
+   keeping the indigo + gold brand and every existing class.
+   Levers: optical typography · generous air · soft layered
+   depth · true glass · refined micro-detail · calm motion.
+========================================================= */
+:root{
+  --bg:#fcfbf9;                /* cooler, cleaner canvas   */
+  --bg-2:#f4f2ee;
+  --paper:#ffffff;
+  --line:#ece8e1;             /* softer hairline          */
+  --line-2:#f2efe9;
+
+  /* couture depth — wide, soft, low-opacity (Apple signature) */
+  --shadow-sm:0 2px 6px -3px rgba(28,22,60,.10),0 8px 22px -14px rgba(28,22,60,.14);
+  --shadow:0 10px 30px -14px rgba(28,22,60,.16),0 34px 70px -34px rgba(28,22,60,.20);
+  --shadow-lg:0 18px 44px -18px rgba(28,22,60,.22),0 60px 120px -50px rgba(28,22,60,.30);
+  --ring-gold:inset 0 0 0 1px rgba(201,162,75,.20);
+
+  --maxw:1200px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+
+/* --- refined type: optical Fraunces, airier body --- */
+body{line-height:1.66;letter-spacing:-.005em;font-feature-settings:"cv11","ss01";background:var(--bg)}
+h1,h2,h3,h4,.display{font-optical-sizing:auto;font-variation-settings:"opsz" 96;letter-spacing:-.022em}
+.hero h1{font-size:clamp(2.7rem,6.6vw,5rem);line-height:1.02;font-weight:600;font-variation-settings:"opsz" 144}
+.hero .lead{font-size:clamp(1.12rem,2.1vw,1.36rem);line-height:1.55;color:var(--ink-2);max-width:36ch;font-weight:400}
+.sec-head h2{font-size:clamp(2rem,4.2vw,3.15rem);line-height:1.06;font-variation-settings:"opsz" 120}
+.sec-head p{font-size:clamp(1.04rem,1.6vw,1.14rem);color:var(--muted);line-height:1.6}
+.eyebrow{letter-spacing:.2em;font-size:.7rem}
+
+/* --- more generous vertical rhythm --- */
+.section{padding:clamp(64px,10vw,132px) 0}
+.hero{padding:clamp(64px,10vw,120px) 0 clamp(48px,7vw,80px)}
+
+/* --- true glass header --- */
+.hdr{background:color-mix(in srgb,var(--bg) 62%,transparent);
+  backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px)}
+.hdr.scrolled{background:color-mix(in srgb,var(--bg) 82%,transparent);
+  border-color:var(--line);box-shadow:0 1px 0 rgba(28,22,60,.03),0 12px 30px -24px rgba(28,22,60,.30)}
+.nav{height:74px}
+.brand .mark{border-radius:11px;box-shadow:0 8px 22px -10px rgba(79,47,230,.75),var(--ring-gold),inset 0 1px 0 rgba(255,255,255,.4)}
+
+/* --- couture buttons: subtle top-light + calmer motion --- */
+.btn{--py:15px;--px:28px;letter-spacing:-.01em;transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out),background .35s}
+.btn-primary{background:linear-gradient(180deg,#26242e,var(--ink));box-shadow:var(--shadow-sm),inset 0 1px 0 rgba(255,255,255,.10)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 44px -18px rgba(20,18,40,.55),inset 0 1px 0 rgba(255,255,255,.14)}
+.btn-accent{box-shadow:0 12px 30px -12px rgba(255,106,61,.55),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn-accent:hover{transform:translateY(-2px)}
+.btn-gold{box-shadow:0 12px 30px -12px rgba(184,134,47,.5),inset 0 1px 0 rgba(255,255,255,.4)}
+.btn-lg{--py:19px;--px:36px}
+
+/* --- pills / eyebrows: crisper, lighter --- */
+.pill{background:color-mix(in srgb,var(--paper) 86%,transparent);border-color:var(--line);
+  box-shadow:0 1px 2px rgba(28,22,60,.04),inset 0 1px 0 rgba(255,255,255,.6);backdrop-filter:blur(6px)}
+
+/* --- cards: near-invisible hairline, top highlight, soft lift --- */
+.f-card,.p-card,.promise,.t-card{border-color:var(--line);border-radius:22px;
+  box-shadow:0 1px 2px rgba(28,22,60,.04),0 18px 40px -28px rgba(28,22,60,.20)}
+.f-card::after,.p-card .p-body::after{content:none}
+.f-card{padding:32px}
+.f-card:hover,.promise:hover{transform:translateY(-6px);box-shadow:var(--shadow),var(--ring-gold)}
+.f-ic{border-radius:15px;background:linear-gradient(180deg,#fff,var(--bg-2));
+  box-shadow:inset 0 0 0 1px rgba(201,162,75,.28),0 6px 16px -10px rgba(79,47,230,.4)}
+.p-card{transition:transform .4s var(--ease-out),box-shadow .4s var(--ease-out)}
+.p-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.p-thumb{aspect-ratio:4/5}
+.p-name{font-size:1.1rem;line-height:1.3}
+.p-buy{background:linear-gradient(180deg,#26242e,var(--ink));box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+
+/* --- steps: connected timeline feel --- */
+.step .n{border-radius:14px;box-shadow:0 10px 24px -12px rgba(79,47,230,.7),inset 0 1px 0 rgba(255,255,255,.35)}
+
+/* --- refined section tint + gold hairline --- */
+.section.tint{background:linear-gradient(180deg,var(--paper),color-mix(in srgb,var(--bg-2) 40%,var(--paper)))}
+
+/* --- hero visual: gentle float + premium frames --- */
+.hero-card{border-radius:24px;border-color:var(--line);
+  box-shadow:0 30px 70px -30px rgba(28,22,60,.4),inset 0 0 0 1px rgba(255,255,255,.5)}
+@media (prefers-reduced-motion:no-preference){
+  .hc-1{animation:floaty 7s var(--ease) infinite}
+  .hc-2{animation:floaty 8s var(--ease) infinite .4s}
+  .hc-3{animation:floaty 6.5s var(--ease) infinite .8s}
+}
+@keyframes floaty{0%,100%{transform:var(--rot) translateY(0)}50%{transform:var(--rot) translateY(-9px)}}
+.hc-1{--rot:rotate(-5deg)}.hc-2{--rot:rotate(6deg)}.hc-3{--rot:rotate(3deg)}
+.hero-badge{border-radius:18px;backdrop-filter:blur(8px);
+  box-shadow:0 20px 44px -18px rgba(10,8,30,.5),inset 0 0 0 1px rgba(230,193,92,.5)}
+
+/* --- calmer, richer scroll reveal (clears a soft blur) --- */
+.reveal{transform:translateY(26px);filter:blur(6px);
+  transition:opacity .8s var(--ease-out),transform .8s var(--ease-out),filter .8s var(--ease-out)}
+.reveal.in{filter:none}
+@media (prefers-reduced-motion:reduce){.reveal{filter:none}}
+
+/* --- fine grain overlay: the "expensive matte" finish --- */
+body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E")}
+
+/* --- value band (exposes full offer breadth) --- */
+.valueband{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.valueband::before{content:"";position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(48rem 30rem at 8% -20%,rgba(123,63,242,.34),transparent 55%),
+  radial-gradient(42rem 28rem at 100% 120%,rgba(201,162,75,.22),transparent 55%)}
+.valueband .wrap{position:relative;z-index:2;padding-block:clamp(52px,8vw,84px)}
+.valueband .eyebrow{color:#c9b8ff}
+.valueband h2{color:#fff}
+.valueband .sub{color:#c9c7de;font-size:1.08rem;max-width:56ch;margin-top:12px}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:44px}
+.vitem{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:26px 24px;
+  transition:transform .4s var(--ease-out),background .4s,border-color .4s}
+.vitem:hover{transform:translateY(-5px);background:rgba(255,255,255,.06);border-color:rgba(230,193,92,.35)}
+.vitem .vn{font-family:"Sora",sans-serif;font-weight:800;font-size:1.7rem;line-height:1;
+  background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.vitem h3{font-family:"Sora",sans-serif;font-weight:700;font-size:1.06rem;color:#fff;margin:12px 0 6px;letter-spacing:-.01em}
+.vitem p{color:#b8b6cf;font-size:.94rem;line-height:1.55}
+.vitem .vic{font-size:1.5rem;line-height:1}
+
+/* --- polish for tiny screens --- */
+@media(max-width:560px){
+  .section{padding:clamp(48px,12vw,64px) 0}
+  .hero h1{font-size:clamp(2.3rem,10vw,3rem)}
+}
