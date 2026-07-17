@@ -33,6 +33,13 @@
 .trustribbon .stat b{font-family:Sora,sans-serif;font-weight:800;font-size:1.05rem;line-height:1;background:linear-gradient(120deg,#a98bff,#7c5cff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .trustribbon .stat span{font-size:.82rem;color:var(--ink-2,#8a879e);letter-spacing:.01em}
 @media(max-width:640px){.trustribbon .wrap{justify-content:center;text-align:center}.trustribbon #homeStats{justify-content:center}}
+/* Hero = real product covers, fanned as portrait 4:5 cards */
+.hero-visual{aspect-ratio:4/5;max-width:470px}
+.hero-card{display:block}
+.hero-card img{object-position:center top}
+.hc-1{inset:5% 14% 5% 14%;transform:var(--rot);--rot:rotate(-3deg);z-index:4}
+.hc-2{inset:0 0 auto auto;width:47%;aspect-ratio:4/5;transform:var(--rot);--rot:rotate(7deg);z-index:2}
+.hc-3{inset:auto auto 0 0;width:45%;aspect-ratio:4/5;transform:var(--rot);--rot:rotate(-6deg);z-index:3}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -65,9 +72,9 @@
       </div>
     </div>
     <div class="hero-visual reveal in">
-      <div class="hero-card hc-2"><img src="/assets/img/hero-2.jpg" alt="Digital planner template"></div>
-      <div class="hero-card hc-3"><img src="/assets/img/hero-3.jpg" alt="Social media templates"></div>
-      <div class="hero-card hc-1"><img src="/assets/img/hero-1.jpg" alt="Executive resume template"></div>
+      <a class="hero-card hc-2" href="/products/ultimate-life-planner.html"><img src="/assets/img/life-planner.jpg" alt="Ultimate Life Planner template"></a>
+      <a class="hero-card hc-3" href="/products/instagram-content-kit.html"><img src="/assets/img/social-kit.jpg" alt="Instagram content kit templates"></a>
+      <a class="hero-card hc-1" href="/products/executive-resume-cv-pack.html"><img src="/assets/img/resume-executive.jpg" alt="Executive Resume & CV pack template"></a>
       <div class="hero-badge"><b>2 min</b><small>to a pro result</small></div>
     </div>
   </div>
