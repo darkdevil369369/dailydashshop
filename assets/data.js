@@ -50,6 +50,7 @@ DDS.products = [
     badge:"Bestseller", hot:true,
     image:"assets/img/resume-executive.jpg",
     gallery:["assets/img/resume-executive.jpg","assets/img/resume-executive-2.jpg","assets/img/resume-executive-3.jpg"],
+    ba:{before:"assets/img/executive-resume-cv-pack-before.jpg",after:"assets/img/executive-resume-cv-pack-after.jpg",caption:"Drag to see a plain DIY resume become the Daily Dash template"},
     short:"Recruiter-approved, ATS-friendly resume + matching cover letter and references — fully editable in minutes.",
     highlights:[
       "3 editable layouts: Classic ATS, Modern Two-Column & Executive",

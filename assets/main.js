@@ -165,12 +165,18 @@
     const buyLabel = link ? "Buy &amp; download now →" : "Get 20% off — join the list";
     const buyAttr = link ? ' target="_blank" rel="noopener"' : '';
     const gal = (p.gallery && p.gallery.length ? p.gallery : [p.image]).map(A);
+    const ba = p.ba && p.ba.before && p.ba.after ? `<div class="ba" id="baSlide" style="--x:50%">
+        <img class="ba-after" src="${A(p.ba.after)}" alt="${p.name} — designed template">
+        <img class="ba-before" src="${A(p.ba.before)}" alt="${p.name} — plain version">
+        <span class="ba-tag l">Before</span><span class="ba-tag r">After</span>
+        <div class="ba-line"></div><div class="ba-grip">⇄</div>
+      </div>${p.ba.caption?`<div class="ba-cap">${p.ba.caption}</div>`:""}` : "";
     const thumbs = gal.length>1
       ? `<div class="pd-thumbs">${gal.map((g,i)=>`<button class="pd-thumb${i===0?" on":""}" data-src="${g}" aria-label="Preview ${i+1}"><img loading="lazy" src="${g}" alt="${p.name} preview ${i+1}"></button>`).join("")}</div>`
       : "";
     host.innerHTML=`
       <div class="pd-grid">
-        <div class="pd-media"><img id="pdMainImg" src="${gal[0]}" alt="${p.name}">${thumbs}</div>
+        <div class="pd-media">${ba}<img id="pdMainImg" src="${gal[0]}" alt="${p.name}">${thumbs}</div>
         <div class="pd-info">
           <a href="/shop.html" class="muted" style="font-family:Sora;font-weight:600;font-size:.9rem">← All templates</a>
           <span class="p-cat" style="margin-top:14px;display:block">${(DDS.categories.find(c=>c.id===p.category)||{}).label}</span>
@@ -207,6 +213,23 @@
       host.querySelectorAll(".pd-thumb").forEach(b=>b.classList.remove("on"));
       btn.classList.add("on");
     }));
+    // before/after slider: drag anywhere on the image to wipe between the two
+    const baEl=host.querySelector("#baSlide");
+    if(baEl){
+      const set=e=>{
+        const r=baEl.getBoundingClientRect();
+        const cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+        const pct=Math.max(0,Math.min(100,(cx/r.width)*100));
+        baEl.style.setProperty("--x",pct+"%");
+      };
+      let on=false;
+      const start=e=>{on=true;set(e);e.preventDefault();};
+      const move=e=>{if(on)set(e);};
+      const end=()=>{on=false;};
+      baEl.addEventListener("mousedown",start); baEl.addEventListener("touchstart",start,{passive:false});
+      window.addEventListener("mousemove",move); baEl.addEventListener("touchmove",move,{passive:false});
+      window.addEventListener("mouseup",end); baEl.addEventListener("touchend",end);
+    }
     // Buy: offer both card (Razorpay) and crypto (NOWPayments) via the chooser.
     host.querySelectorAll(".js-buy").forEach(a=>a.addEventListener("click",e=>{
       e.preventDefault();
