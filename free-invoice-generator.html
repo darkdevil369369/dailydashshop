@@ -71,6 +71,12 @@
 .rz-cap input{flex:1;min-width:200px;padding:11px 14px;border-radius:11px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:inherit}
 .spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(124,92,255,.3);border-top-color:#c9b8ff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
 @keyframes sp{to{transform:rotate(360deg)}}
+.inv-gate{margin-top:14px;background:linear-gradient(135deg,rgba(124,92,255,.16),rgba(124,92,255,.05));border:1px solid rgba(124,92,255,.34);border-radius:14px;padding:18px}
+.inv-gate h4{font-family:Sora,sans-serif;font-size:1rem;margin:0 0 4px}
+.inv-gate p{color:var(--ink-2,#c9c6de);font-size:.85rem;margin:0 0 12px}
+.inv-gate form{display:flex;gap:10px;flex-wrap:wrap}
+.inv-gate input{flex:1;min-width:180px;padding:11px 13px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:inherit}
+.inv-gate .privacy{font-size:.74rem;color:var(--ink-2,#a9a6c4);margin-top:9px}
 @media print{
   body>*{display:none!important}
   #printArea{display:block!important}
@@ -138,6 +144,16 @@
     <div class="inv-actions">
       <button type="button" class="btn btn-accent btn-lg" id="dlBtn">⬇ Download / Save PDF</button>
       <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+    </div>
+    <div class="inv-gate" id="invGate" style="display:none">
+      <h4>🔓 One step — where should we send your invoice tips?</h4>
+      <p>Enter your email to unlock free PDF download (no watermark). Unlocks instantly and stays unlocked on this device.</p>
+      <form id="invGateForm" novalidate>
+        <input type="email" placeholder="you@email.com" aria-label="Email" autocomplete="email" required>
+        <button type="submit" class="btn btn-accent">Unlock &amp; download PDF</button>
+      </form>
+      <div class="ai-msg" id="invGateMsg" style="min-height:14px"></div>
+      <div class="privacy">One email. No spam — invoicing tips + occasional template offers. Unsubscribe anytime.</div>
     </div>
   </form>
 
@@ -233,7 +249,27 @@
   function saveBiz(){ try{ localStorage.setItem("dds_inv_biz",JSON.stringify({fromName:S.fromName,fromEmail:S.fromEmail,fromAddr:S.fromAddr,currency:S.currency})); }catch(_){}}
   function loadBiz(){ try{ var b=JSON.parse(localStorage.getItem("dds_inv_biz")||"null"); if(b){ Object.assign(S,b); } }catch(_){}}
 
-  document.getElementById("dlBtn").addEventListener("click",function(){ window.print(); });
+  var GATEKEY="dds_tool_gate";
+  function unlocked(){ try{ return localStorage.getItem(GATEKEY)==="1"; }catch(_){ return false; } }
+  var gate=document.getElementById("invGate"), gForm=document.getElementById("invGateForm"), gMsg=document.getElementById("invGateMsg");
+  document.getElementById("dlBtn").addEventListener("click",function(){
+    if(unlocked()){ window.print(); return; }
+    gate.style.display="";
+    gate.scrollIntoView({behavior:"smooth",block:"nearest"});
+    var inp=gForm.querySelector("input"); if(inp) inp.focus();
+  });
+  gForm.addEventListener("submit",function(e){
+    e.preventDefault();
+    var email=(gForm.querySelector("input").value||"").trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ gMsg.style.color="#ff9a8a"; gMsg.textContent="Enter a valid email."; return; }
+    gMsg.style.color=""; gMsg.textContent="Unlocking…";
+    fetch(BASE+"/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,source:"tool-invoice",decoded:true})})
+      .then(function(r){return r.json();}).then(function(d){
+        if(d&&d.ok){ try{localStorage.setItem(GATEKEY,"1");}catch(_){}
+          gate.style.display="none"; window.print();
+        } else { gMsg.style.color="#ff9a8a"; gMsg.textContent="Try again in a moment."; }
+      }).catch(function(){ gMsg.style.color="#ff9a8a"; gMsg.textContent="Try again in a moment."; });
+  });
   document.getElementById("resetBtn").addEventListener("click",function(){
     items=[{d:"",q:"1",r:""}]; S.notes=""; S.thanks=""; S.tax=""; S.discount="";
     form.querySelectorAll('[data-f="notes"],[data-f="tax"],[data-f="discount"]').forEach(function(el){el.value="";});

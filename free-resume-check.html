@@ -52,6 +52,26 @@
 .rz-cap input{flex:1;min-width:200px;padding:12px 15px;border-radius:11px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:inherit}
 .spin{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-3px}
 @keyframes sp{to{transform:rotate(360deg)}}
+.rz-gate{margin-top:22px;background:linear-gradient(135deg,rgba(124,92,255,.16),rgba(124,92,255,.05));border:1px solid rgba(124,92,255,.34);border-radius:16px;padding:24px;text-align:center}
+.rz-gate h3{font-family:Sora,sans-serif;font-size:1.15rem;margin:0 0 6px}
+.rz-gate p{color:var(--ink-2,#c9c6de);max-width:46ch;margin:0 auto 14px;font-size:.92rem}
+.rz-gate .locks{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.rz-gate .locks span{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:5px 12px;font-size:.82rem}
+.rz-gate .privacy{font-size:.76rem;color:var(--ink-2,#a9a6c4);margin-top:9px}
+.dl-row{margin-top:20px;text-align:center}
+@media print{
+  #site-header,#site-footer,.tool-hero,.tool-card,.upsell,.rz-gate,.dl-row,#rzErr{display:none!important}
+  body{background:#fff!important}
+  .tool-wrap{padding:0 6mm}
+  #rzOut{display:block!important;color:#12121a}
+  .score-band{background:#f4f2fb!important;border-color:#d9d2f5!important;color:#12121a}
+  .score-ring div{background:#fff!important;color:#4a2fb0}
+  .rz-block h3{color:#12121a}
+  .rz-list li{background:#f7f6fb!important;border-color:#e6e2f3!important;color:#12121a;break-inside:avoid}
+  .rz-ba .a{color:#1a7a45!important}.rz-ba .b{color:#b4402f!important}
+  .rz-miss{background:#fbeee9!important;border-color:#f2c7ba!important;color:#b4402f!important}
+  @page{margin:14mm}
+}
 </style>
 </head>
 <body>
@@ -89,13 +109,28 @@
       <h3>🛠 Top fixes (biggest impact first)</h3>
       <ul class="rz-list" id="rzFixes"></ul>
     </div>
-    <div class="rz-block" id="rzBulletsWrap">
+    <div class="rz-gate" id="rzGate">
+      <h3>🔓 Unlock the rest of your analysis — free</h3>
+      <p>Your score and fixes are ready above. Enter your email to reveal the high-value part and download your full report.</p>
+      <div class="locks"><span>✍️ AI-rewritten bullet points</span><span>⚠️ Missing sections to add</span><span>⬇️ Downloadable PDF report</span></div>
+      <form class="rz-cap" id="rzGateForm" novalidate>
+        <input type="email" placeholder="you@email.com" aria-label="Email" autocomplete="email" required>
+        <button type="submit" class="btn btn-accent">Unlock my full analysis</button>
+      </form>
+      <div class="tool-note" id="rzGateMsg" style="margin-top:8px;min-height:16px"></div>
+      <div class="privacy">One email. No spam — just your report, resume tips and an occasional template offer. Unsubscribe anytime.</div>
+    </div>
+
+    <div class="rz-block" id="rzBulletsWrap" style="display:none">
       <h3>✍️ Your bullets, rewritten stronger</h3>
       <ul class="rz-list" id="rzBullets"></ul>
     </div>
-    <div class="rz-block" id="rzMissWrap">
+    <div class="rz-block" id="rzMissWrap" style="display:none">
       <h3>⚠️ Missing — add these</h3>
       <div id="rzMiss"></div>
+    </div>
+    <div class="dl-row" id="rzDlRow" style="display:none">
+      <button type="button" class="btn btn-primary btn-lg" id="rzDl">⬇ Download my full report (PDF)</button>
     </div>
 
     <div class="upsell">
@@ -134,7 +169,10 @@
       .catch(function(){ err.textContent="Connection issue — please try again."; })
       .finally(function(){ go.disabled=false; go.innerHTML=old; });
   }
+  var GATEKEY="dds_tool_gate", lastR=null;
+  function unlocked(){ try{ return localStorage.getItem(GATEKEY)==="1"; }catch(_){ return false; } }
   function render(r){
+    lastR=r;
     var score=Math.max(0,Math.min(100,parseInt(r.ats_score,10)||0));
     document.getElementById("rzScore").textContent=score;
     document.getElementById("rzRing").style.setProperty("--v",score);
@@ -142,17 +180,37 @@
     var sw=document.getElementById("rzStrengthsWrap"), sl=document.getElementById("rzStrengths");
     if(r.strengths&&r.strengths.length){ sl.innerHTML=r.strengths.map(function(s){return "<li>"+esc(s)+"</li>";}).join(""); sw.style.display=""; } else sw.style.display="none";
     document.getElementById("rzFixes").innerHTML=(r.top_fixes||[]).map(function(f){return '<li class="rz-fix">'+esc(f)+"</li>";}).join("");
-    var bw=document.getElementById("rzBulletsWrap"), bl=document.getElementById("rzBullets");
-    if(r.rewritten_bullets&&r.rewritten_bullets.length){
-      bl.innerHTML=r.rewritten_bullets.map(function(b){return '<li class="rz-ba"><span class="b"><s>'+esc(b.before)+'</s></span><span class="a">✓ '+esc(b.after)+"</span></li>";}).join("");
-      bw.style.display="";
-    } else bw.style.display="none";
-    var mw=document.getElementById("rzMissWrap");
-    if(r.missing&&r.missing.length){ document.getElementById("rzMiss").innerHTML=r.missing.map(function(m){return '<span class="rz-miss">'+esc(m)+"</span>";}).join(""); mw.style.display=""; } else mw.style.display="none";
+    var bl=document.getElementById("rzBullets");
+    bl.innerHTML=(r.rewritten_bullets||[]).map(function(b){return '<li class="rz-ba"><span class="b"><s>'+esc(b.before)+'</s></span><span class="a">✓ '+esc(b.after)+"</span></li>";}).join("");
+    document.getElementById("rzMiss").innerHTML=(r.missing||[]).map(function(m){return '<span class="rz-miss">'+esc(m)+"</span>";}).join("");
+    applyGate();
     out.style.display="block";
     out.scrollIntoView({behavior:"smooth",block:"start"});
   }
+  function applyGate(){
+    var r=lastR||{}, u=unlocked();
+    var hasB=r.rewritten_bullets&&r.rewritten_bullets.length, hasM=r.missing&&r.missing.length;
+    document.getElementById("rzGate").style.display=u?"none":"";
+    document.getElementById("rzBulletsWrap").style.display=(u&&hasB)?"":"none";
+    document.getElementById("rzMissWrap").style.display=(u&&hasM)?"":"none";
+    document.getElementById("rzDlRow").style.display=u?"":"none";
+  }
   go.addEventListener("click",analyse);
+  var gForm=document.getElementById("rzGateForm"), gMsg=document.getElementById("rzGateMsg");
+  gForm.addEventListener("submit",function(e){
+    e.preventDefault();
+    var email=(gForm.querySelector("input").value||"").trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ gMsg.style.color="#ff9a8a"; gMsg.textContent="Please enter a valid email."; return; }
+    gMsg.style.color=""; gMsg.textContent="Unlocking…";
+    fetch(BASE+"/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,source:"tool-resume",decoded:true})})
+      .then(function(r){return r.json();}).then(function(d){
+        if(d&&d.ok){ try{localStorage.setItem(GATEKEY,"1");}catch(_){}
+          applyGate();
+          document.getElementById("rzBulletsWrap").scrollIntoView({behavior:"smooth",block:"start"});
+        } else { gMsg.style.color="#ff9a8a"; gMsg.textContent="Hmm, try again in a moment."; }
+      }).catch(function(){ gMsg.style.color="#ff9a8a"; gMsg.textContent="Try again in a moment."; });
+  });
+  document.getElementById("rzDl").addEventListener("click",function(){ window.print(); });
   var cap=document.getElementById("rzCap"), capMsg=document.getElementById("rzCapMsg");
   cap.addEventListener("submit",function(e){
     e.preventDefault();
