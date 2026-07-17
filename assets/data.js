@@ -93,6 +93,7 @@ DDS.products = [
     badge:"Pro pick",
     image:"assets/img/freelancer-kit.jpg",
     gallery:["assets/img/freelancer-kit.jpg","assets/img/freelancer-kit-2.jpg","assets/img/freelancer-kit-3.jpg"],
+    ba:{before:"assets/img/freelancer-starter-kit-before.jpg",after:"assets/img/freelancer-starter-kit-after.jpg",caption:"Drag to see a basic DIY invoice become the Daily Dash template"},
     short:"Everything to run a freelance business — invoice, proposal, contract, pricing sheet and client onboarding.",
     highlights:[
       "6 pro documents: proposal, agreement, NDA, invoice, pricing sheet & onboarding checklist",
@@ -135,6 +136,7 @@ DDS.products = [
     badge:"New",
     image:"assets/img/cover-letter-pack.jpg",
     gallery:["assets/img/cover-letter-pack.jpg","assets/img/cover-letter-pack-2.jpg","assets/img/cover-letter-pack-3.jpg"],
+    ba:{before:"assets/img/cover-letter-pack-before.jpg",after:"assets/img/cover-letter-pack-after.jpg",caption:"Drag to see a plain DIY letter become the Daily Dash template"},
     short:"3 recruiter-ready cover letter templates plus a follow-up email — just swap in your details and send.",
     highlights:[
       "3 cover-letter styles: professional, career-change & creative",
