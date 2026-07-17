@@ -158,6 +158,7 @@ DDS.products = [
     badge:"Pro pick",
     image:"assets/img/interview-prep-kit.jpg",
     gallery:["assets/img/interview-prep-kit.jpg","assets/img/interview-prep-kit-2.jpg","assets/img/interview-prep-kit-3.jpg"],
+    ba:{before:"assets/img/interview-prep-kit-before.jpg",after:"assets/img/interview-prep-kit-after.jpg",caption:"Drag to see a plain question list become the Daily Dash prep guide"},
     short:"Everything to walk in confident — STAR-method worksheets, 50 common questions and a thank-you note.",
     highlights:[
       "STAR-method answer worksheets to structure your stories",
@@ -179,6 +180,7 @@ DDS.products = [
     badge:"New",
     image:"assets/img/linkedin-optimization-kit.jpg",
     gallery:["assets/img/linkedin-optimization-kit.jpg","assets/img/linkedin-optimization-kit-2.jpg","assets/img/linkedin-optimization-kit-3.jpg"],
+    ba:{before:"assets/img/linkedin-optimization-kit-before.jpg",after:"assets/img/linkedin-optimization-kit-after.jpg",caption:"Drag to see a plain checklist become the Daily Dash audit guide"},
     short:"Turn your LinkedIn into a recruiter magnet — headline formulas, about-me templates and a full profile checklist.",
     highlights:[
       "Full profile audit checklist (photo → featured section)",
