@@ -2,21 +2,39 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Daily Dash — connecting to Etsy</title>
+<title>Daily Dash — Etsy OAuth diagnostic</title>
+<style>body{font-family:system-ui;padding:1.2rem;max-width:900px;margin:auto}
+a.btn{display:inline-block;margin:.3rem 0;padding:.5rem .9rem;background:#111;color:#fff;border-radius:6px;text-decoration:none}
+pre{white-space:pre-wrap;word-break:break-all;background:#f4f4f4;padding:.6rem;border-radius:6px;font-size:12px}</style>
 </head><body>
-<p style="font-family:system-ui;padding:2rem">Redirecting to Etsy authorization…</p>
+<h3>Etsy OAuth — variant test</h3>
+<p>Click a button to try that variant. If it lands on <code>etsy-oauth.html?code=...</code> it worked — paste the code back.</p>
+
+<p><b>A</b> raw redirect_uri + multi-scope %20<br><a class="btn" id="a" href="#">Try A</a></p>
+<p><b>B</b> raw redirect_uri + single scope (listings_r)<br><a class="btn" id="b" href="#">Try B</a></p>
+<p><b>C</b> encoded redirect_uri + single scope (listings_r)<br><a class="btn" id="c" href="#">Try C</a></p>
+
+<h4>Exactly what the browser resolves each URL to (copy this back):</h4>
+<pre id="out"></pre>
+
 <script>
-// Assigning a fully-formed URL to location.href navigates verbatim — the browser
-// does NOT re-encode existing %20 or the :// in redirect_uri, so Etsy receives
-// the exact documented format (avoids invalid_target / invalid_scope from
-// double-encoding via paste or link shorteners).
-var u = "https://www.etsy.com/oauth/connect?response_type=code"
-  + "&redirect_uri=https://dailydashshop.com/etsy-oauth.html"
-  + "&scope=listings_r%20listings_w%20shops_r%20transactions_r"
-  + "&client_id=u3l939yvw5vxhhrfnz74x0dv"
+var base = "https://www.etsy.com/oauth/connect?response_type=code";
+var ru_raw = "&redirect_uri=https://dailydashshop.com/etsy-oauth.html";
+var ru_enc = "&redirect_uri=https%3A%2F%2Fdailydashshop.com%2Fetsy-oauth.html";
+var tail = "&client_id=u3l939yvw5vxhhrfnz74x0dv"
   + "&state=af9256c15b7ea46d"
   + "&code_challenge=W2uC55aBj7BE9x43oksmEKwXmFDwmY8ze2zopLz2KDU"
   + "&code_challenge_method=S256";
-location.href = u;
+var A = base + ru_raw + "&scope=listings_r%20listings_w%20shops_r%20transactions_r" + tail;
+var B = base + ru_raw + "&scope=listings_r" + tail;
+var C = base + ru_enc + "&scope=listings_r" + tail;
+document.getElementById('a').href = A;
+document.getElementById('b').href = B;
+document.getElementById('c').href = C;
+// show the browser-resolved href (what Etsy will actually receive)
+document.getElementById('out').textContent =
+  "A -> " + document.getElementById('a').href + "\n\n" +
+  "B -> " + document.getElementById('b').href + "\n\n" +
+  "C -> " + document.getElementById('c').href;
 </script>
 </body></html>
