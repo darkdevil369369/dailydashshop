@@ -22,17 +22,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=260717d">
 <style>
-.statstrip{border-block:1px solid rgba(124,92,255,.14);background:linear-gradient(180deg,rgba(124,92,255,.05),transparent)}
-.statstrip .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;padding:22px 20px}
-.statstrip .stat{flex:1 1 150px;max-width:220px;text-align:center;padding:10px 14px}
-.statstrip .stat b{display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.1;background:linear-gradient(120deg,#a98bff,#7c5cff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.statstrip .stat span{display:block;margin-top:4px;font-size:.8rem;color:var(--ink-2,#a9a6c4);letter-spacing:.02em}
-.brandstrip{border-bottom:1px solid rgba(124,92,255,.12)}
-.brandstrip .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 30px;padding:20px}
-.brandstrip .lbl{font-size:.82rem;letter-spacing:.04em;color:var(--ink-2,#a9a6c4);text-transform:uppercase}
-.brandstrip .marks{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 26px}
-.brandstrip .mk{font-family:Sora,sans-serif;font-weight:700;font-size:1rem;color:var(--ink,#e9e7f5);opacity:.72;letter-spacing:.01em}
-.foundingtag{display:inline-block;margin-bottom:6px;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:#c9b8ff;font-weight:700}
+/* One clean trust ribbon — replaces the old 3 stacked strips */
+.trustribbon{border-block:1px solid rgba(124,92,255,.14);background:linear-gradient(180deg,rgba(124,92,255,.045),transparent)}
+.trustribbon .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 40px;padding:18px 20px}
+.trustribbon .tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px}
+.trustribbon .tools .lbl{font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2,#8a879e);font-weight:600}
+.trustribbon .tools .mk{font-family:Sora,sans-serif;font-weight:700;font-size:.95rem;color:var(--ink,#1a1a24);opacity:.66}
+.trustribbon #homeStats{display:flex;flex-wrap:wrap;align-items:center;gap:6px 26px}
+.trustribbon .stat{display:flex;align-items:baseline;gap:7px;white-space:nowrap}
+.trustribbon .stat b{font-family:Sora,sans-serif;font-weight:800;font-size:1.05rem;line-height:1;background:linear-gradient(120deg,#a98bff,#7c5cff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.trustribbon .stat span{font-size:.82rem;color:var(--ink-2,#8a879e);letter-spacing:.01em}
+@media(max-width:640px){.trustribbon .wrap{justify-content:center;text-align:center}.trustribbon #homeStats{justify-content:center}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -73,41 +73,43 @@
   </div>
 </section>
 
-<!-- ================= TRUST BAR ================= -->
-<div class="trustbar">
+<!-- ================= TRUST RIBBON (tools + live stats, one clean line) ================= -->
+<div class="trustribbon">
   <div class="wrap">
-    <div class="trust-item">⚡ Instant download</div>
-    <div class="trust-item">✎ Fully editable</div>
-    <div class="trust-item">♾ Buy once, keep forever</div>
-    <div class="trust-item">🎨 Designed by pros</div>
-    <div class="trust-item">🔒 Secure checkout</div>
-  </div>
-</div>
-
-<!-- ================= BRAND / COMPATIBILITY STRIP (borrowed authority) ================= -->
-<div class="brandstrip">
-  <div class="wrap">
-    <span class="lbl">Opens in the tools you already own</span>
-    <div class="marks">
+    <div class="tools">
+      <span class="lbl">Opens in</span>
       <span class="mk">Canva</span>
-      <span class="mk">Microsoft Word</span>
+      <span class="mk">Word</span>
       <span class="mk">Google Docs</span>
       <span class="mk">PowerPoint</span>
-      <span class="mk">Adobe PDF</span>
+      <span class="mk">PDF</span>
     </div>
+    <div id="homeStats"></div>
   </div>
 </div>
 
-<!-- ================= LIVE STATS (honest, from real catalog data) ================= -->
-<div class="statstrip"><div class="wrap" id="homeStats"></div></div>
+<!-- ================= FEATURED PRODUCTS (lead with the goods — Amazon-style) ================= -->
+<section class="section" id="featured-sec">
+  <div class="wrap">
+    <div class="sec-head reveal" style="display:flex;justify-content:space-between;align-items:end;max-width:none;flex-wrap:wrap;gap:16px">
+      <div style="max-width:52ch">
+        <span class="eyebrow">This week's drops</span>
+        <h2>Bestsellers, ready to download.</h2>
+        <p>Real, usable templates — not stock filler. Preview any design in one click.</p>
+      </div>
+      <a href="/shop.html" class="btn btn-ghost">View all templates →</a>
+    </div>
+    <div class="p-grid" id="featured" style="margin-top:40px"></div>
+  </div>
+</section>
 
 <!-- ================= CATEGORIES ================= -->
-<section class="section" id="categories">
+<section class="section tint" id="categories">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head reveal center">
       <span class="eyebrow">Browse by category</span>
       <h2>Templates for every part of your hustle.</h2>
-      <p>Hand-crafted, on-trend designs — pick a category and you're minutes from done.</p>
+      <p style="margin-inline:auto">Hand-crafted, on-trend designs — pick a category and you're minutes from done.</p>
     </div>
     <div class="f-grid">
       <a class="f-card reveal" href="/shop.html#resumes"><div class="f-ic">📄</div><h3>Resumes & CV</h3><p>ATS-friendly, recruiter-approved layouts with matching cover letters.</p></a>
@@ -131,26 +133,9 @@
       <div class="vitem"><span class="vic">🧰</span><h3>Free pro tools</h3><p>Score your resume and generate invoices free — no signup, no catch. Real utility, not a paywall demo.</p></div>
       <div class="vitem"><span class="vic">⚡</span><h3>Instant &amp; forever</h3><p>Download the second you buy, then reuse it as many times as you like. No subscriptions, no repeat fees.</p></div>
       <div class="vitem"><span class="vic">📜</span><h3>Commercial licence</h3><p>Use every template for yourself <em>and</em> for paying clients — a full personal &amp; commercial licence is included.</p></div>
-      <div class="vitem"><span class="vic">🏷️</span><h3>Credit Wallet savings</h3><p>Top up once and every future template costs less — member pricing that rewards you for coming back.</p></div>
-      <div class="vitem"><span class="vic">🤝</span><h3>Earn 25% as an affiliate</h3><p>Love a template? Share it and earn 25% on every referral. Your recommendation pays you back.</p></div>
-      <div class="vitem"><span class="vic">🎁</span><h3>Free starter pack</h3><p>Join the list for a free Modern Resume Kit + 20% welcome code — try our quality before you spend a rupee.</p></div>
+      <div class="vitem"><span class="vic">🏅</span><h3>Founder pricing</h3><p>Come in early and lock our lowest launch prices — before they rise as the catalogue grows.</p></div>
       <div class="vitem"><span class="vic">🙋</span><h3>A real person behind it</h3><p>Founder-run. Email us and a human answers — and your feedback shapes the very next drop.</p></div>
     </div>
-  </div>
-</section>
-
-<!-- ================= FEATURED PRODUCTS ================= -->
-<section class="section tint">
-  <div class="wrap">
-    <div class="sec-head reveal" style="display:flex;justify-content:space-between;align-items:end;max-width:none;flex-wrap:wrap;gap:16px">
-      <div style="max-width:52ch">
-        <span class="eyebrow">This week's drops</span>
-        <h2>Bestsellers, ready to download.</h2>
-        <p>Real, usable templates — not stock filler. Preview any design in one click.</p>
-      </div>
-      <a href="/shop.html" class="btn btn-ghost">View all templates →</a>
-    </div>
-    <div class="p-grid" id="featured" style="margin-top:40px"></div>
   </div>
 </section>
 
@@ -223,27 +208,8 @@
   </div>
 </section>
 
-<!-- ================= PROMISE / GUARANTEE ================= -->
-<section class="section tint">
-  <div class="wrap">
-    <div class="sec-head reveal center">
-      <span class="foundingtag">Founding-customer access</span>
-      <span class="eyebrow">The Daily Dash promise</span>
-      <h2>Get in early. Get founder pricing.</h2>
-      <p style="margin-inline:auto">Daily Dash launched with one obsession: templates good enough that you'd happily pay a designer for them. Every design is crafted and quality-checked to a professional bar before it goes live — and as an early customer, you get launch pricing <b>and</b> a direct line to the team that builds them.</p>
-    </div>
-    <div class="promise-grid">
-      <div class="promise reveal"><div class="ic">🏅</div><h3>Founder pricing</h3><p>Early customers lock in our lowest launch prices — before they rise as the catalogue grows.</p></div>
-      <div class="promise reveal"><div class="ic">✨</div><h3>Obsessive quality</h3><p>Every template is designed and checked to a professional bar — clean, modern and ready to use.</p></div>
-      <div class="promise reveal"><div class="ic">⚡</div><h3>Instant &amp; yours forever</h3><p>Download the second you buy, then keep and reuse it as many times as you like — no repeat fees.</p></div>
-      <div class="promise reveal"><div class="ic">🙋</div><h3>Direct line to the team</h3><p>A real person answers at hellodailydashshop@gmail.com — and your feedback shapes the next drop.</p></div>
-    </div>
-    <div class="center"><span class="guarantee-note reveal">🔒 <span>Secure checkout · Instant delivery · <b>Personal &amp; commercial licence</b> included</span></span></div>
-  </div>
-</section>
-
 <!-- ================= FAQ ================= -->
-<section class="section">
+<section class="section tint">
   <div class="wrap">
     <div class="sec-head reveal center"><span class="eyebrow">Good to know</span><h2>Questions, answered.</h2></div>
     <div class="faq reveal">
