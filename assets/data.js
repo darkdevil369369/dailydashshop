@@ -19,6 +19,7 @@ DDS.categories = [
 DDS.products = [
   {
     id:"everything-bundle",
+    ba:{before:"assets/img/everything-bundle-before.jpg",after:"assets/img/everything-bundle-after.jpg",caption:"Drag to see a plain DIY version become the Daily Dash template"},
     slug:"everything-bundle",
     name:"The Everything Bundle — All 4 Packs",
     category:"bundles",
@@ -63,6 +64,7 @@ DDS.products = [
   },
   {
     id:"life-planner",
+    ba:{before:"assets/img/ultimate-life-planner-before.jpg",after:"assets/img/ultimate-life-planner-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"ultimate-life-planner",
     name:"Ultimate Life & Goals Planner",
     category:"planners",
@@ -106,6 +108,7 @@ DDS.products = [
   },
   {
     id:"social-kit",
+    ba:{before:"assets/img/instagram-content-kit-before.jpg",after:"assets/img/instagram-content-kit-after.jpg",caption:"Drag to see a plain content list become the Daily Dash template"},
     slug:"instagram-content-kit",
     name:"Instagram Growth Kit — Playbook + 14 Templates",
     category:"social",
@@ -193,6 +196,7 @@ DDS.products = [
   },
   {
     id:"budget-finance-planner",
+    ba:{before:"assets/img/budget-finance-planner-before.jpg",after:"assets/img/budget-finance-planner-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"budget-finance-planner",
     name:"Budget & Finance Planner",
     category:"planners",
@@ -215,6 +219,7 @@ DDS.products = [
   },
   {
     id:"fitness-wellness-planner",
+    ba:{before:"assets/img/fitness-wellness-planner-before.jpg",after:"assets/img/fitness-wellness-planner-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"fitness-wellness-planner",
     name:"Fitness & Wellness Planner",
     category:"planners",
@@ -237,6 +242,7 @@ DDS.products = [
   },
   {
     id:"student-study-planner",
+    ba:{before:"assets/img/student-study-planner-before.jpg",after:"assets/img/student-study-planner-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"student-study-planner",
     name:"Student Study Planner",
     category:"planners",
@@ -259,6 +265,7 @@ DDS.products = [
   },
   {
     id:"meal-planner-grocery",
+    ba:{before:"assets/img/meal-planner-grocery-before.jpg",after:"assets/img/meal-planner-grocery-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"meal-planner-grocery",
     name:"Meal Planner & Grocery Kit",
     category:"planners",
@@ -280,6 +287,7 @@ DDS.products = [
   },
   {
     id:"small-business-starter",
+    ba:{before:"assets/img/small-business-starter-before.jpg",after:"assets/img/small-business-starter-after.jpg",caption:"Drag to see a basic DIY document become the Daily Dash template"},
     slug:"small-business-starter",
     name:"Small Business Starter Kit",
     category:"business",
@@ -301,6 +309,7 @@ DDS.products = [
   },
   {
     id:"social-media-manager-kit",
+    ba:{before:"assets/img/social-media-manager-kit-before.jpg",after:"assets/img/social-media-manager-kit-after.jpg",caption:"Drag to see a basic DIY document become the Daily Dash template"},
     slug:"social-media-manager-kit",
     name:"Social Media Manager Kit",
     category:"business",
@@ -322,6 +331,7 @@ DDS.products = [
   },
   {
     id:"content-calendar-planner",
+    ba:{before:"assets/img/content-calendar-planner-before.jpg",after:"assets/img/content-calendar-planner-after.jpg",caption:"Drag to see a plain content list become the Daily Dash template"},
     slug:"content-calendar-planner",
     name:"Content Calendar & Planner",
     category:"social",
@@ -343,6 +353,7 @@ DDS.products = [
   },
   {
     id:"debt-payoff-networth-builder",
+    ba:{before:"assets/img/debt-payoff-networth-builder-before.jpg",after:"assets/img/debt-payoff-networth-builder-after.jpg",caption:"Drag to see a basic DIY document become the Daily Dash template"},
     slug:"debt-payoff-networth-builder",
     name:"Debt Payoff & Net-Worth Builder",
     category:"business",
@@ -364,6 +375,7 @@ DDS.products = [
   },
   {
     id:"gamified-goal-quest-planner",
+    ba:{before:"assets/img/gamified-goal-quest-planner-before.jpg",after:"assets/img/gamified-goal-quest-planner-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"gamified-goal-quest-planner",
     name:"Gamified Goal & Habit Quest Planner",
     category:"planners",
@@ -385,6 +397,7 @@ DDS.products = [
   },
   {
     id:"coach-consultant-client-crm",
+    ba:{before:"assets/img/coach-consultant-client-crm-before.jpg",after:"assets/img/coach-consultant-client-crm-after.jpg",caption:"Drag to see a basic DIY document become the Daily Dash template"},
     slug:"coach-consultant-client-crm",
     name:"Coach & Consultant Client CRM",
     category:"business",
@@ -406,6 +419,7 @@ DDS.products = [
   },
   {
     id:"creator-business-os",
+    ba:{before:"assets/img/creator-business-os-before.jpg",after:"assets/img/creator-business-os-after.jpg",caption:"Drag to see a plain content list become the Daily Dash template"},
     slug:"creator-business-os",
     name:"Creator Monetization OS",
     category:"social",
@@ -427,6 +441,7 @@ DDS.products = [
   },
   {
     id:"that-girl-life-reset-bundle",
+    ba:{before:"assets/img/that-girl-life-reset-bundle-before.jpg",after:"assets/img/that-girl-life-reset-bundle-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"that-girl-life-reset-bundle",
     name:"That Girl Life Reset Bundle",
     category:"planners",
@@ -448,6 +463,7 @@ DDS.products = [
   },
   {
     id:"digital-detox-wellness-planner",
+    ba:{before:"assets/img/digital-detox-wellness-planner-before.jpg",after:"assets/img/digital-detox-wellness-planner-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"digital-detox-wellness-planner",
     name:"Digital Detox & Wellness Planner",
     category:"planners",
@@ -469,6 +485,7 @@ DDS.products = [
   },
   {
     id:"sustainable-business-roadmap-kit",
+    ba:{before:"assets/img/sustainable-business-roadmap-kit-before.jpg",after:"assets/img/sustainable-business-roadmap-kit-after.jpg",caption:"Drag to see a basic DIY document become the Daily Dash template"},
     slug:"sustainable-business-roadmap-kit",
     name:"Sustainable Business Roadmap & ESG Kit",
     category:"business",
@@ -490,6 +507,7 @@ DDS.products = [
   },
   {
     id:"ai-content-workflow-prompt-kit",
+    ba:{before:"assets/img/ai-content-workflow-prompt-kit-before.jpg",after:"assets/img/ai-content-workflow-prompt-kit-after.jpg",caption:"Drag to see a plain content list become the Daily Dash template"},
     slug:"ai-content-workflow-prompt-kit",
     name:"AI Content Workflow & Prompt Kit",
     category:"social",
@@ -511,6 +529,7 @@ DDS.products = [
   },
   {
     id:"future-ready-work-designer-kit",
+    ba:{before:"assets/img/future-ready-work-designer-kit-before.jpg",after:"assets/img/future-ready-work-designer-kit-after.jpg",caption:"Drag to see a basic DIY document become the Daily Dash template"},
     slug:"future-ready-work-designer-kit",
     name:"Future-Ready Work Designer Kit",
     category:"business",
@@ -532,6 +551,7 @@ DDS.products = [
   },
   {
     id:"neuro-inclusive-daily-planner",
+    ba:{before:"assets/img/neuro-inclusive-daily-planner-before.jpg",after:"assets/img/neuro-inclusive-daily-planner-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"neuro-inclusive-daily-planner",
     name:"Neuro-Inclusive Daily Planner",
     category:"planners",
@@ -553,6 +573,7 @@ DDS.products = [
   },
   {
     id:"wedding-event-planner-kit",
+    ba:{before:"assets/img/wedding-event-planner-kit-before.jpg",after:"assets/img/wedding-event-planner-kit-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"wedding-event-planner-kit",
     name:"Wedding & Event Planner Kit",
     category:"planners",
@@ -575,6 +596,7 @@ DDS.products = [
   },
   {
     id:"brand-identity-style-guide-kit",
+    ba:{before:"assets/img/brand-identity-style-guide-kit-before.jpg",after:"assets/img/brand-identity-style-guide-kit-after.jpg",caption:"Drag to see a basic DIY document become the Daily Dash template"},
     slug:"brand-identity-style-guide-kit",
     name:"Brand Identity & Style Guide Kit",
     category:"business",
@@ -597,6 +619,7 @@ DDS.products = [
   },
   {
     id:"home-management-command-center",
+    ba:{before:"assets/img/home-management-command-center-before.jpg",after:"assets/img/home-management-command-center-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"home-management-command-center",
     name:"Home Management Command Center Binder",
     category:"planners",
@@ -619,6 +642,7 @@ DDS.products = [
   },
   {
     id:"travel-trip-itinerary-kit",
+    ba:{before:"assets/img/travel-trip-itinerary-kit-before.jpg",after:"assets/img/travel-trip-itinerary-kit-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"travel-trip-itinerary-kit",
     name:"Travel & Trip Itinerary Kit",
     category:"planners",
@@ -641,6 +665,7 @@ DDS.products = [
   },
   {
     id:"baby-first-year-new-parent-planner",
+    ba:{before:"assets/img/baby-first-year-new-parent-planner-before.jpg",after:"assets/img/baby-first-year-new-parent-planner-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"baby-first-year-new-parent-planner",
     name:"Baby's First Year & New Parent Planner",
     category:"planners",
@@ -663,6 +688,7 @@ DDS.products = [
   },
   {
     id:"real-estate-agent-client-listing-kit",
+    ba:{before:"assets/img/real-estate-agent-client-listing-kit-before.jpg",after:"assets/img/real-estate-agent-client-listing-kit-after.jpg",caption:"Drag to see a basic DIY document become the Daily Dash template"},
     slug:"real-estate-agent-client-listing-kit",
     name:"Real Estate Agent Client & Listing Kit",
     category:"business",
@@ -685,6 +711,7 @@ DDS.products = [
   },
   {
     id:"teacher-classroom-planner",
+    ba:{before:"assets/img/teacher-classroom-planner-before.jpg",after:"assets/img/teacher-classroom-planner-after.jpg",caption:"Drag to see a plain timetable become the Daily Dash template"},
     slug:"teacher-classroom-planner",
     name:"Teacher & Classroom Planner",
     category:"education",
@@ -707,6 +734,7 @@ DDS.products = [
   },
   {
     id:"homeschool-curriculum-planner-pack",
+    ba:{before:"assets/img/homeschool-curriculum-planner-pack-before.jpg",after:"assets/img/homeschool-curriculum-planner-pack-after.jpg",caption:"Drag to see a plain timetable become the Daily Dash template"},
     slug:"homeschool-curriculum-planner-pack",
     name:"Homeschool Curriculum & Planner Pack",
     category:"education",
@@ -729,6 +757,7 @@ DDS.products = [
   },
   {
     id:"family-life-admin-emergency-organizer",
+    ba:{before:"assets/img/family-life-admin-emergency-organizer-before.jpg",after:"assets/img/family-life-admin-emergency-organizer-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"family-life-admin-emergency-organizer",
     name:"Family Life-Admin & Emergency Organizer Binder",
     category:"planners",
@@ -751,6 +780,7 @@ DDS.products = [
   },
   {
     id:"mindful-self-care-mental-health-journal",
+    ba:{before:"assets/img/mindful-self-care-mental-health-journal-before.jpg",after:"assets/img/mindful-self-care-mental-health-journal-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"mindful-self-care-mental-health-journal",
     name:"Mindful Self-Care & Mental-Health Journal",
     category:"planners",
@@ -773,6 +803,7 @@ DDS.products = [
   },
   {
     id:"etsy-digital-shop-seller-launch-kit",
+    ba:{before:"assets/img/etsy-digital-shop-seller-launch-kit-before.jpg",after:"assets/img/etsy-digital-shop-seller-launch-kit-after.jpg",caption:"Drag to see a basic DIY document become the Daily Dash template"},
     slug:"etsy-digital-shop-seller-launch-kit",
     name:"Etsy / Digital Shop Seller Launch Kit",
     category:"business",
@@ -795,6 +826,7 @@ DDS.products = [
   },
   {
     id:"photographer-client-booking-kit",
+    ba:{before:"assets/img/photographer-client-booking-kit-before.jpg",after:"assets/img/photographer-client-booking-kit-after.jpg",caption:"Drag to see a basic DIY document become the Daily Dash template"},
     slug:"photographer-client-booking-kit",
     name:"Photographer Client & Booking Kit",
     category:"business",
@@ -817,6 +849,7 @@ DDS.products = [
   },
   {
     id:"reading-book-journal-booktok",
+    ba:{before:"assets/img/reading-book-journal-booktok-before.jpg",after:"assets/img/reading-book-journal-booktok-after.jpg",caption:"Drag to see a plain DIY planner become the Daily Dash template"},
     slug:"reading-book-journal-booktok",
     name:"Reading & Book Journal (BookTok)",
     category:"planners",
