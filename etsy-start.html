@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daily Dash — connecting to Etsy</title>
+</head><body>
+<p style="font-family:system-ui;padding:2rem">Redirecting to Etsy authorization…</p>
+<script>
+// Assigning a fully-formed URL to location.href navigates verbatim — the browser
+// does NOT re-encode existing %20 or the :// in redirect_uri, so Etsy receives
+// the exact documented format (avoids invalid_target / invalid_scope from
+// double-encoding via paste or link shorteners).
+var u = "https://www.etsy.com/oauth/connect?response_type=code"
+  + "&redirect_uri=https://dailydashshop.com/etsy-oauth.html"
+  + "&scope=listings_r%20listings_w%20shops_r%20transactions_r"
+  + "&client_id=u3l939yvw5vxhhrfnz74x0dv"
+  + "&state=af9256c15b7ea46d"
+  + "&code_challenge=W2uC55aBj7BE9x43oksmEKwXmFDwmY8ze2zopLz2KDU"
+  + "&code_challenge_method=S256";
+location.href = u;
+</script>
+</body></html>
