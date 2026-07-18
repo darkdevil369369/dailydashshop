@@ -870,6 +870,29 @@ DDS.products = [
     formats:["PDF (print-ready A4)"],
     delivery:"Instant download",
   },
+  {
+    id:"perimenopause-menopause-wellness-tracker",
+    slug:"perimenopause-menopause-wellness-tracker",
+    name:"Perimenopause & Menopause Wellness Tracker",
+    category:"planners",
+    seller:"dailydash",
+    price:16, currency:"USD",
+    rating:5.0, reviews:0,
+    badge:"New",
+    image:"assets/img/perimenopause-menopause-wellness-tracker.jpg",
+    gallery:["assets/img/perimenopause-menopause-wellness-tracker.jpg","assets/img/perimenopause-menopause-wellness-tracker-2.jpg","assets/img/perimenopause-menopause-wellness-tracker-3.jpg"],
+    short:"A calm, clinician-ready wellness tracker for women 40+ navigating perimenopause and menopause — a month-at-a-glance symptom tracker, sleep & night-sweats and mood & energy logs, nutrition & movement logs, an HRT/medication-response log, and doctor-visit prep.",
+    highlights:[
+      "Symptom master tracker — your month at a glance",
+      "Sleep & night-sweats and mood & energy logs",
+      "Nutrition, supplement & hydration tracker",
+      "Movement & strength log — bone & muscle focus",
+      "HRT / medication & symptom-response log",
+      "Doctor-visit prep, trigger insights & monthly review",
+    ],
+    formats:["PDF (print-ready A4)"],
+    delivery:"Instant download",
+  },
 ];
 
 DDS.storeLinks = {          // set real links when Etsy/Gumroad live; falls back to signup
@@ -922,4 +945,5 @@ DDS.buyLinks = {
   "etsy-digital-shop-seller-launch-kit": DDS.buyBase + "etsy-digital-shop-seller-launch-kit",
   "photographer-client-booking-kit": DDS.buyBase + "photographer-client-booking-kit",
   "reading-book-journal-booktok": DDS.buyBase + "reading-book-journal-booktok",
+  "perimenopause-menopause-wellness-tracker": DDS.buyBase + "perimenopause-menopause-wellness-tracker",
 };
