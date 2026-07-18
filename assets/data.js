@@ -1333,28 +1333,6 @@ DDS.products = [
     formats:["Transparent PNG"],
     delivery:"Instant download",
   },
-  {
-    id:"boho-wedding-invitation-suite",
-    slug:"boho-wedding-invitation-suite",
-    name:"Boho Wedding Invitation Suite",
-    category:"social",
-    seller:"dailydash",
-    price:14, currency:"USD",
-    rating:5.0, reviews:0,
-    badge:"New",
-    image:"assets/img/boho-wedding-invitation-suite.jpg",
-    gallery:["assets/img/boho-wedding-invitation-suite.jpg","assets/img/boho-wedding-invitation-suite-2.jpg","assets/img/boho-wedding-invitation-suite-3.jpg"],
-    short:"An elegant boho wedding invitation — earthy terracotta line-art botanicals on an arched, airy layout. Fully editable Canva template (change names, date, venue) plus a print-ready A4 PDF and high-res PNG.",
-    highlights:[
-      "Editable Canva template",
-      "Change names, date, venue & RSVP",
-      "Print-ready A4 PDF included",
-      "High-resolution PNG",
-      "Free Canva account — easy to edit",
-    ],
-    formats:["Editable Canva template","Print PDF","PNG"],
-    delivery:"Instant download",
-  },
 ];
 
 DDS.storeLinks = {          // set real links when Etsy/Gumroad live; falls back to signup
