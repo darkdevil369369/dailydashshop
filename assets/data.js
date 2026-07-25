@@ -2090,4 +2090,11 @@ DDS.buyLinks = {
   "bachelorette-party-planner-games-kit": DDS.buyBase + "bachelorette-party-planner-games-kit",
   "danish-pastel-gallery-wall-art-set": DDS.buyBase + "danish-pastel-gallery-wall-art-set",
 
+  "small-business-bookkeeping-tax-tracker": DDS.buyBase + "small-business-bookkeeping-tax-tracker",
+  "rental-property-landlord-income-tracker": DDS.buyBase + "rental-property-landlord-income-tracker",
+  "notion-second-brain-life-os": DDS.buyBase + "notion-second-brain-life-os",
+  "notion-content-creator-command-center": DDS.buyBase + "notion-content-creator-command-center",
+  "notion-personal-finance-networth-dashboard": DDS.buyBase + "notion-personal-finance-networth-dashboard",
+  "boho-affirmation-quote-wall-art-set": DDS.buyBase + "boho-affirmation-quote-wall-art-set",
+  "digital-planner-sticker-book": DDS.buyBase + "digital-planner-sticker-book",
 };
