@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taking you there… — Daily Dash Shop</title><meta name="robots" content="noindex">
+<meta name="theme-color" content="#101014"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css?v=260717d"></head>
+<body>
+<section class="page-hero" style="min-height:60vh;display:grid;align-items:center"><div class="wrap center" style="margin-inline:auto">
+  <span class="eyebrow">Daily Dash Shop</span>
+  <h1 id="go-title">Taking you to the template…</h1>
+  <p id="go-sub" style="margin-inline:auto">One second — instant download, no Etsy account needed.</p>
+  <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a id="go-link" href="/shop.html" class="btn btn-primary">Continue</a>
+    <a href="/shop.html" class="btn btn-accent">Browse all templates</a>
+  </div>
+</div></section>
+<script src="/assets/data.js?v=260717c"></script>
+<script>
+/* Universal off-platform router. Every external channel (Pinterest, Etsy About,
+   LinkedIn, email, blog) can link to /go.html?p=<slug|id> and always land on a
+   live product page — never a marketplace error page. */
+(function(){
+  var q = new URLSearchParams(location.search);
+  var key = (q.get("p") || q.get("slug") || q.get("id") || "").trim().toLowerCase();
+  var list = (window.DDS && DDS.products) || [];
+  var dest = "/shop.html";
+
+  function norm(s){ return (s||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim(); }
+
+  var hit = list.find(function(p){ return p.slug===key || p.id===key; });
+  if (!hit && key) {                       // fuzzy: best token overlap
+    var want = norm(key).split(" ").filter(function(w){ return w.length>2; });
+    var best = null, bestScore = 0;
+    list.forEach(function(p){
+      var hay = norm(p.slug + " " + p.name + " " + p.category).split(" ");
+      var score = want.filter(function(w){ return hay.indexOf(w) > -1; }).length;
+      if (score > bestScore) { bestScore = score; best = p; }
+    });
+    if (bestScore >= 2) hit = best;
+  }
+  if (hit) dest = "/products/" + hit.slug + ".html";
+
+  var src = q.get("src");
+  if (src) dest += (dest.indexOf("?")>-1 ? "&" : "?") + "src=" + encodeURIComponent(src);
+
+  document.getElementById("go-link").href = dest;
+  if (!hit) {
+    document.getElementById("go-title").textContent = "Here's the full template shop";
+    document.getElementById("go-sub").textContent = "We couldn't match that exact link — everything is listed below.";
+  }
+  setTimeout(function(){ location.replace(dest); }, hit ? 250 : 1500);
+})();
+</script>
+</body></html>

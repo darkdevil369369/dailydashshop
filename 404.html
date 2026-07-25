@@ -18,4 +18,29 @@
 </div></section>
 <div id="site-footer"></div>
 <script src="/assets/data.js?v=260717c"></script><script src="/assets/main.js?v=260717c"></script>
+<script>
+/* Self-healing 404: an old or mistyped product link resolves to the closest
+   live product instead of dead-ending. */
+(function(){
+  var list = (window.DDS && DDS.products) || [];
+  var path = decodeURIComponent(location.pathname).toLowerCase()
+               .replace(/\.html?$/,"").split("/").filter(Boolean).pop() || "";
+  if (!path || !list.length) return;
+  function norm(s){ return (s||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim(); }
+  var hit = list.find(function(p){ return p.slug===path || p.id===path; });
+  if (!hit) {
+    var want = norm(path).split(" ").filter(function(w){ return w.length>2; });
+    var best=null, bestScore=0;
+    list.forEach(function(p){
+      var hay = norm(p.slug+" "+p.name+" "+p.category).split(" ");
+      var score = want.filter(function(w){ return hay.indexOf(w)>-1; }).length;
+      if (score>bestScore){ bestScore=score; best=p; }
+    });
+    if (bestScore>=2) hit=best;
+  }
+  if (!hit) return;
+  document.querySelector("h1").textContent = "Found it — taking you there…";
+  location.replace("/products/"+hit.slug+".html");
+})();
+</script>
 </body></html>
