@@ -56,6 +56,9 @@
       <input type="email" placeholder="you@email.com" aria-label="Email" autocomplete="email" required>
       <button type="submit" class="btn btn-accent btn-lg">Send me the free template</button>
     </form>
+    <label class="ft-note" style="display:flex;align-items:center;gap:8px;justify-content:center;cursor:pointer">
+      <input type="checkbox" id="ftDecoded"> Also send me Decoded AI's free tech news digest
+    </label>
     <div class="ft-note" id="ftMsg" style="min-height:16px"></div>
     <div class="ft-note">One email. No spam — just your template and an occasional offer. Unsubscribe anytime.</div>
     <div class="ft-done" id="ftDone">
@@ -79,7 +82,8 @@
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg.style.color="#ff9a8a"; msg.textContent="Please enter a valid email."; return; }
     msg.style.color=""; msg.textContent="Sending…";
     btn.disabled=true; var old=btn.innerHTML; btn.innerHTML='<span class="spin"></span> Sending…';
-    fetch(BASE+"/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,source:"free-template-giveaway",decoded:true})})
+    var decoded=document.getElementById("ftDecoded").checked;
+    fetch(BASE+"/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,source:"free-template-giveaway",decoded:decoded})})
       .then(function(r){return r.json();}).then(function(d){
         if(d&&d.ok){ msg.textContent=""; form.style.display="none"; done.style.display="block"; }
         else { msg.style.color="#ff9a8a"; msg.textContent="Hmm, try again in a moment."; }
