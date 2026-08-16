@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free Resume Template — Instant Download | Daily Dash Shop</title>
-<meta name="description" content="Get a free, recruiter-ready resume template instantly by email. No signup form, no payment — just enter your email and download.">
+<title id="ftTitle">Free Template — Instant Download | Daily Dash Shop</title>
+<meta name="description" content="Get today's free premium Daily Dash template instantly by email. No payment — just enter your email and we send the download link.">
 <link rel="canonical" href="https://dailydashshop.com/free-template.html">
 <meta name="theme-color" content="#101014">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://dailydashshop.com/free-template.html">
-<meta property="og:title" content="Free Resume Template — Instant Download">
-<meta property="og:description" content="Get a free, recruiter-ready resume template instantly by email.">
+<meta property="og:title" content="Free Template — Instant Download">
+<meta property="og:description" content="Get today's free premium Daily Dash template instantly by email.">
 <meta property="og:image" content="https://dailydashshop.com/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
@@ -19,7 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=260717d">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Free Resume Template Download","url":"https://dailydashshop.com/free-template.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"Daily Dash Shop","url":"https://dailydashshop.com/"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Free Template Download","url":"https://dailydashshop.com/free-template.html","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"Daily Dash Shop","url":"https://dailydashshop.com/"}}
 </script>
 <style>
 .tool-hero{padding:64px 0 26px;text-align:center}
@@ -44,14 +44,15 @@
 <section class="tool-hero">
   <div class="wrap">
     <span class="pill"><span class="dot"></span> Free download · No payment required</span>
-    <h1>Your free <span class="ink-grad">resume template</span></h1>
-    <p class="lead">Enter your email and we'll send the download link straight to your inbox — recruiter-ready, editable in Word or Google Docs.</p>
+    <h1>Your free <span class="ink-grad" id="ftName">template</span></h1>
+    <p class="lead" id="ftLead">Enter your email and we'll send the download link straight to your inbox — the full premium template, editable in the tools you already use.</p>
   </div>
 </section>
 
 <div class="tool-wrap">
   <div class="ft-card">
-    <div class="locks"><span>⬇️ Instant email delivery</span><span>✏️ Fully editable</span><span>🎁 100% free</span></div>
+    <img id="ftImg" alt="" style="display:none;width:100%;border-radius:12px;margin-bottom:18px">
+    <div class="locks"><span>⬇️ Instant email delivery</span><span>✏️ Fully editable</span><span id="ftValue">🎁 100% free</span></div>
     <form class="ft-cap" id="ftForm" novalidate>
       <input type="email" placeholder="you@email.com" aria-label="Email" autocomplete="email" required>
       <button type="submit" class="btn btn-accent btn-lg">Send me the free template</button>
@@ -73,13 +74,30 @@
   var BASE = window.DDS_PAY || "https://dds.tryrealo.com";
   var form=document.getElementById("ftForm"), msg=document.getElementById("ftMsg"),
       done=document.getElementById("ftDone"), btn=form.querySelector("button");
+
+  /* ?p=<catalog id|slug> — today's giveaway product from the LinkedIn/X post.
+     Without it the page stays generic and the backend falls back to the
+     standard welcome kit, so an old bare link never breaks. */
+  var key=(new URLSearchParams(location.search).get("p")||"").trim().toLowerCase();
+  var list=(window.DDS&&DDS.products)||[];
+  var hit=list.filter(function(p){ return p.id===key||p.slug===key; })[0];
+  if(hit){
+    document.getElementById("ftName").textContent=hit.name;
+    document.getElementById("ftLead").textContent=
+      "Free today only. Enter your email and we'll send the "+hit.name+" download link straight to your inbox — the full paid version, nothing stripped out.";
+    document.title="Free today: "+hit.name+" | Daily Dash Shop";
+    document.getElementById("ftValue").textContent="🎁 Free today (normally $"+hit.price+")";
+    var img=document.getElementById("ftImg");
+    if(hit.image){ img.src="/"+hit.image.replace(/^\//,""); img.alt=hit.name; img.style.display="block"; }
+    btn.textContent="Send me "+(hit.name.length>28?"the free template":hit.name);
+  }
   form.addEventListener("submit",function(e){
     e.preventDefault();
     var email=(form.querySelector("input").value||"").trim();
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg.style.color="#ff9a8a"; msg.textContent="Please enter a valid email."; return; }
     msg.style.color=""; msg.textContent="Sending…";
     btn.disabled=true; var old=btn.innerHTML; btn.innerHTML='<span class="spin"></span> Sending…';
-    fetch(BASE+"/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,source:"free-template-giveaway",decoded:true})})
+    fetch(BASE+"/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,source:"free-template-giveaway",pid:(hit?hit.id:key),decoded:true})})
       .then(function(r){return r.json();}).then(function(d){
         if(d&&d.ok){ msg.textContent=""; form.style.display="none"; done.style.display="block"; }
         else { msg.style.color="#ff9a8a"; msg.textContent="Hmm, try again in a moment."; }
