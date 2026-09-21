@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connected — NOCT Publisher</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#121212">
+<style>
+:root{--cream:#f3ede1;--ink:#121212;--muted:#5a5449}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.65 Inter,-apple-system,Segoe UI,Arial,sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:56px 24px}
+h1{font-size:28px;margin:0 0 8px;letter-spacing:-.02em}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+p{margin:0 0 14px}
+code{display:block;word-break:break-all;background:rgba(18,18,18,.06);border:1px solid rgba(18,18,18,.15);
+     border-radius:8px;padding:14px;font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin:0 0 14px}
+button{font:600 15px Inter,Arial,sans-serif;background:var(--ink);color:var(--cream);border:0;
+       border-radius:8px;padding:11px 18px;cursor:pointer}
+.err{color:#8a2020}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">NOCT Publisher</span>
+  <h1 id="head">Finishing sign-in…</h1>
+  <p id="msg">Reading the authorisation response.</p>
+  <code id="out" hidden></code>
+  <button id="copy" hidden>Copy code</button>
+</div>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var code = q.get("code"), err = q.get("error"), head = document.getElementById("head"),
+      msg = document.getElementById("msg"), out = document.getElementById("out"),
+      copy = document.getElementById("copy");
+  if (err) {
+    head.textContent = "Sign-in was not completed";
+    msg.className = "err";
+    msg.textContent = err + (q.get("error_description") ? " — " + q.get("error_description") : "");
+    return;
+  }
+  if (!code) {
+    head.textContent = "Nothing to finish";
+    msg.textContent = "Open this page only from the sign-in flow.";
+    return;
+  }
+  head.textContent = "Account connected";
+  msg.textContent = "Copy this one-time code into the publisher to finish setup. It expires in a few minutes.";
+  out.textContent = code;
+  out.hidden = copy.hidden = false;
+  copy.onclick = function () {
+    navigator.clipboard.writeText(code).then(function () { copy.textContent = "Copied"; });
+  };
+})();
+</script>
+</body></html>
