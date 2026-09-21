@@ -66,6 +66,15 @@ const send = (p, body) => fetch(API + p, {
   body: JSON.stringify(body)
 }).then(r => r.json());
 
+// Render filenames are "<date>-<episode-slug>-<nn>-<short-slug>.mp4"; the
+// episode slug repeats on every cut, so only the short's own slug is shown.
+function pretty(name) {
+  const s = name.replace(/\.mp4$/, "").replace(/^\d{4}-\d{2}-\d{2}-/, "");
+  const cut = s.match(/-(\d\d)-(.+)$/);
+  const text = (cut ? cut[2] : s).replace(/-/g, " ").trim();
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 function ready() {
   const on = connected && chosen;
   $("post").disabled = $("draft").disabled = !on;
@@ -110,14 +119,12 @@ async function loadVideos() {
     if (!v.videos.length) { $("vids").innerHTML = '<li class="muted">No rendered videos found.</li>'; return; }
     $("vids").innerHTML = v.videos.map((f, i) =>
       '<li><input type="radio" name="v" id="v' + i + '" value="' + f.name + '">' +
-      '<label for="v' + i + '" style="margin:0;color:inherit;flex:1">' + f.name + '</label>' +
+      '<label for="v' + i + '" style="margin:0;color:inherit;flex:1;word-break:break-word">' +
+      pretty(f.name) + '</label>' +
       '<span class="mb">' + f.mb + ' MB</span></li>').join("");
     $("vids").onchange = e => {
       chosen = e.target.value;
-      if (!$("title").value) {
-        $("title").value = chosen.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/-\d\d-/, " ")
-          .replace(/\.mp4$/, "").replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-      }
+      if (!$("title").value) $("title").value = pretty(chosen);
       ready();
     };
   } catch (e) {
