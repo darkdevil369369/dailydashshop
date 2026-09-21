@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Publisher — NOCT</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#121212">
+<style>
+:root{--cream:#f3ede1;--ink:#121212;--muted:#5a5449;--line:rgba(18,18,18,.15)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.6 Inter,-apple-system,Segoe UI,Arial,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:30px;margin:4px 0 6px;letter-spacing:-.02em}
+h2{font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.card{border:1px solid var(--line);border-radius:12px;padding:20px;margin:22px 0;background:rgba(255,255,255,.35)}
+button{font:600 15px Inter,Arial,sans-serif;background:var(--ink);color:var(--cream);border:0;border-radius:8px;padding:11px 18px;cursor:pointer}
+button[disabled]{opacity:.4;cursor:default}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+input,select{font:15px Inter,Arial,sans-serif;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);width:100%}
+label{display:block;font-size:13px;color:var(--muted);margin:14px 0 6px}
+ul{list-style:none;margin:0;padding:0}
+li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+li:last-child{border-bottom:0}
+.mb{color:var(--muted);white-space:nowrap}
+.who{display:flex;align-items:center;gap:12px}
+.who img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.muted{color:var(--muted);font-size:14px}
+.err{color:#8a2020;font-size:14px}
+.row{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">NOCT</span>
+  <h1>Publisher</h1>
+  <p class="muted">Posts NOCT's own rendered videos to NOCT's own TikTok account.</p>
+
+  <div class="card">
+    <h2>1 · Account</h2>
+    <div id="acct"><p class="muted">Checking…</p></div>
+  </div>
+
+  <div class="card">
+    <h2>2 · Video</h2>
+    <ul id="vids"><li class="muted">Loading videos…</li></ul>
+    <label for="title">Title</label>
+    <input id="title" maxlength="150" placeholder="Why unfinished tasks haunt your mind">
+    <label for="privacy">Who can see this post</label>
+    <select id="privacy"><option value="SELF_ONLY">Only me</option></select>
+    <div class="row">
+      <button id="post" disabled>Post to TikTok</button>
+      <button id="draft" class="ghost" disabled>Save as draft</button>
+    </div>
+    <p id="msg" class="muted"></p>
+  </div>
+</div>
+<script>
+const API = "http://127.0.0.1:8787/api";
+const $ = id => document.getElementById(id);
+let chosen = null, connected = false;
+
+const get = p => fetch(API + p).then(r => r.json());
+const send = (p, body) => fetch(API + p, {
+  method: "POST", headers: {"Content-Type": "application/json"},
+  body: JSON.stringify(body)
+}).then(r => r.json());
+
+function ready() {
+  const on = connected && chosen;
+  $("post").disabled = $("draft").disabled = !on;
+}
+
+async function loadAccount() {
+  try {
+    const s = await get("/status");
+    if (s.connected && s.user) {
+      connected = true;
+      $("acct").innerHTML = '<div class="who"><img src="' + (s.user.avatar_url || "") + '" alt="">' +
+        '<div><strong>' + (s.user.display_name || "NOCT") + '</strong>' +
+        '<div class="muted">Connected to TikTok</div></div></div>';
+      loadPrivacy();
+    } else {
+      $("acct").innerHTML = '<p class="muted">No TikTok account connected yet.</p>' +
+        '<div class="row"><button id="connect">Connect TikTok</button></div>' +
+        (s.error ? '<p class="err">' + s.error + '</p>' : '');
+      $("connect").onclick = async () => {
+        const a = await get("/auth-url");
+        if (a.ok) location.href = a.url; else $("acct").innerHTML += '<p class="err">' + a.error + '</p>';
+      };
+    }
+  } catch (e) {
+    $("acct").innerHTML = '<p class="err">Publisher service is not running on this machine.</p>';
+  }
+  ready();
+}
+
+async function loadPrivacy() {
+  const c = await get("/creator");
+  if (!c.ok) return;
+  const opts = (c.creator.privacy_level_options || ["SELF_ONLY"]);
+  const label = {PUBLIC_TO_EVERYONE: "Everyone", MUTUAL_FOLLOW_FRIENDS: "Friends",
+                 FOLLOWER_OF_CREATOR: "Followers", SELF_ONLY: "Only me"};
+  $("privacy").innerHTML = opts.map(o => '<option value="' + o + '">' + (label[o] || o) + '</option>').join("");
+}
+
+async function loadVideos() {
+  try {
+    const v = await get("/videos");
+    if (!v.videos.length) { $("vids").innerHTML = '<li class="muted">No rendered videos found.</li>'; return; }
+    $("vids").innerHTML = v.videos.map((f, i) =>
+      '<li><input type="radio" name="v" id="v' + i + '" value="' + f.name + '">' +
+      '<label for="v' + i + '" style="margin:0;color:inherit;flex:1">' + f.name + '</label>' +
+      '<span class="mb">' + f.mb + ' MB</span></li>').join("");
+    $("vids").onchange = e => {
+      chosen = e.target.value;
+      if (!$("title").value) {
+        $("title").value = chosen.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/-\d\d-/, " ")
+          .replace(/\.mp4$/, "").replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      }
+      ready();
+    };
+  } catch (e) {
+    $("vids").innerHTML = '<li class="err">Publisher service is not running.</li>';
+  }
+}
+
+async function publish(draft) {
+  $("post").disabled = $("draft").disabled = true;
+  $("msg").className = "muted";
+  $("msg").textContent = draft ? "Uploading to drafts…" : "Uploading to TikTok…";
+  const r = await send("/post", {name: chosen, title: $("title").value,
+                                 privacy: $("privacy").value, draft: draft});
+  if (!r.ok) { $("msg").className = "err"; $("msg").textContent = r.error; ready(); return; }
+  $("msg").textContent = "Uploaded. Waiting for TikTok to process…";
+  for (let i = 0; i < 20; i++) {
+    await new Promise(t => setTimeout(t, 3000));
+    const s = await get("/post-status?id=" + encodeURIComponent(r.publish_id));
+    const st = s.ok ? (s.status.status || "") : "";
+    if (st === "PUBLISH_COMPLETE") { $("msg").textContent = "Posted to TikTok."; break; }
+    if (st === "FAILED") { $("msg").className = "err"; $("msg").textContent = "TikTok rejected it: " + (s.status.fail_reason || ""); break; }
+    $("msg").textContent = "TikTok is processing the video… (" + (st || "pending") + ")";
+  }
+  ready();
+}
+
+$("post").onclick = () => publish(false);
+$("draft").onclick = () => publish(true);
+loadAccount();
+loadVideos();
+</script>
+</body></html>

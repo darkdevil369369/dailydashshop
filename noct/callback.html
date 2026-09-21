@@ -45,13 +45,28 @@ button{font:600 15px Inter,Arial,sans-serif;background:var(--ink);color:var(--cr
     msg.textContent = "Open this page only from the sign-in flow.";
     return;
   }
-  head.textContent = "Account connected";
-  msg.textContent = "Copy this one-time code into the publisher to finish setup. It expires in a few minutes.";
-  out.textContent = code;
-  out.hidden = copy.hidden = false;
-  copy.onclick = function () {
-    navigator.clipboard.writeText(code).then(function () { copy.textContent = "Copied"; });
-  };
+  // The publisher service holds the client secret, so the exchange happens
+  // there; this page only hands the one-time code over. If it is not running,
+  // fall back to showing the code so it can be pasted in by hand.
+  fetch("http://127.0.0.1:8787/api/connect", {
+    method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({code: code})
+  }).then(function (r) { return r.json(); }).then(function (res) {
+    if (!res.ok) throw new Error(res.error);
+    head.textContent = "Account connected";
+    msg.textContent = "Signed in as " + ((res.user && res.user.display_name) || "NOCT") + ".";
+    copy.textContent = "Back to publisher";
+    copy.hidden = false;
+    copy.onclick = function () { location.href = "/noct/publisher.html"; };
+  }).catch(function (e) {
+    head.textContent = "Account authorised";
+    msg.textContent = "Copy this one-time code into the publisher to finish setup (" + e.message + ").";
+    out.textContent = code;
+    out.hidden = copy.hidden = false;
+    copy.onclick = function () {
+      navigator.clipboard.writeText(code).then(function () { copy.textContent = "Copied"; });
+    };
+  });
 })();
 </script>
 </body></html>
