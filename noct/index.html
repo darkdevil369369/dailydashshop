@@ -2,58 +2,108 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NOCT Publisher — scheduled publishing for the NOCT channel</title>
-<meta name="description" content="NOCT Publisher is the internal tool that publishes NOCT's own hand-drawn explainer videos to the NOCT social accounts on a schedule.">
+<title>NOCT — hand-drawn explainers on the mind and the deep past</title>
+<meta name="description" content="NOCT is a hand-drawn stick-figure explainer channel: psychology, named effects, and what ancient humans actually did. New episodes every Tuesday and Friday on YouTube and TikTok.">
 <link rel="canonical" href="https://dailydashshop.com/noct/">
+<meta property="og:title" content="NOCT — hand-drawn explainers">
+<meta property="og:description" content="Psychology, named effects and what ancient humans actually did, drawn one stick figure at a time.">
+<meta property="og:url" content="https://dailydashshop.com/noct/">
+<meta property="og:type" content="website">
+<!--noct:head-->
+<link rel="icon" href="/noct/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/noct/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/noct/icon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/noct/apple-touch-icon.png">
+<link rel="manifest" href="/noct/site.webmanifest">
+<meta property="og:site_name" content="NOCT">
+<meta property="og:image" content="https://dailydashshop.com/noct/icon-512.png">
 <meta name="theme-color" content="#121212">
-<style>
-:root{--cream:#f3ede1;--ink:#121212;--muted:#5a5449}
-*{box-sizing:border-box}
-body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.65 Inter,-apple-system,Segoe UI,Arial,sans-serif}
-.wrap{max-width:720px;margin:0 auto;padding:56px 24px}
-h1{font-size:34px;line-height:1.2;margin:0 0 8px;letter-spacing:-.02em}
-h2{font-size:20px;margin:34px 0 8px;letter-spacing:-.01em}
-.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-p{margin:0 0 14px}
-ul{margin:0 0 14px;padding-left:20px}
-a{color:var(--ink)}
-hr{border:0;border-top:1px solid rgba(18,18,18,.15);margin:40px 0}
-footer{font-size:13px;color:var(--muted)}
-</style>
+<!--/noct:head-->
+<link rel="stylesheet" href="/noct/noct.css">
 </head>
 <body>
-<div class="wrap">
-  <span class="eyebrow">NOCT</span>
-  <h1>NOCT Publisher</h1>
-  <p>NOCT is a hand-drawn explainer channel: every episode starts with a fact that argues with itself, then pulls the contradiction apart in plain English, with a drawing for every beat. New episodes land twice a week, and short cuts land on the days in between.</p>
+<!--noct:nav-->
+<header class="site-head"><div class="wrap"><a class="brand" href="/noct/"><img src="/noct/apple-touch-icon.png" alt="NOCT icon" width="40" height="40">NOCT</a><nav class="nav" aria-label="Main"><a href="/noct/" aria-current="page">Home</a><a href="/noct/episodes.html">Episodes</a><a href="/noct/about.html">About</a><a href="/noct/publisher.html">Publisher</a><a href="/noct/contact.html">Contact</a></nav></div></header>
+<!--/noct:nav-->
+<main>
+<section class="hero"><div class="wrap">
+  <div>
+    <span class="eyebrow">Hand-drawn explainers &middot; @noct.88</span>
+    <h1>The mind, the past, and the facts that argue with themselves.</h1>
+    <p class="lede">NOCT is a stick-figure explainer channel about psychology, named effects and what ancient humans actually did. Every episode starts with something you think you know, finds the place where the evidence disagrees, and draws its way to the answer.</p>
+    <div class="btns">
+      <a class="btn dark" href="https://www.youtube.com/@noct.88" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg>Watch on YouTube</a>
+      <a class="btn ghost" href="https://www.tiktok.com/@noct.88" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9a7.4 7.4 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5Z"/></svg>Follow on TikTok</a>
+    </div>
+  </div>
+  <img class="hero-icon" src="/noct/icon-512.png" alt="The NOCT icon: a stick figure walking in front of a mustard sun" width="420" height="420">
+</div></section>
 
-  <h2>What this app does</h2>
-  <p>NOCT Publisher is our own internal publishing tool. It takes videos we produced ourselves and uploads them to our own NOCT social accounts on a schedule, so a person does not have to be awake at the publish slot.</p>
-  <ul>
-    <li>Reads a video file that our render pipeline has already produced.</li>
-    <li>Signs in to our own NOCT account with that platform's official login, with our permission.</li>
-    <li>Uploads the video with its title and description at the scheduled time.</li>
-  </ul>
+<section class="section"><div class="wrap">
+  <div class="sec-head">
+    <div><span class="eyebrow">Latest episodes</span><h2>New on the channel</h2></div>
+    <a href="/noct/episodes.html">All episodes and shorts &rarr;</a>
+  </div>
+<!--noct:latest-->
+<div class="grid"><a class="card" href="https://www.youtube.com/watch?v=cVQcKm0BWD8" rel="noopener"><div class="thumb"><img src="https://i.ytimg.com/vi/cVQcKm0BWD8/maxresdefault.jpg" alt="Why Nobody Could Sleep Through The Night Before 1800" loading="lazy"><span class="tag">Episode</span><span class="dur">9:20</span></div><div class="card-body"><div class="date">25 Sep 2026</div><h3>Why Nobody Could Sleep Through The Night Before 1800</h3><p>Why people slept differently before 1800: Your ancestors didn&#x27;t sleep through the night. Here&#x27;s why.</p></div></a><a class="card" href="https://www.youtube.com/watch?v=6lD7aBMn60E" rel="noopener"><div class="thumb"><img src="https://i.ytimg.com/vi/6lD7aBMn60E/maxresdefault.jpg" alt="The Zeigarnik Effect: Why Unfinished Tasks Stick In Your Mind" loading="lazy"><span class="tag">Episode</span><span class="dur">8:31</span></div><div class="card-body"><div class="date">22 Sep 2026</div><h3>The Zeigarnik Effect: Why Unfinished Tasks Stick In Your Mind</h3><p>Zeigarnik effect explained: Unfinished tasks stick in your mind, but it&#x27;s not for the reason you think.</p></div></a></div>
+<!--/noct:latest-->
+  <div class="sec-head" style="margin-top:56px">
+    <div><span class="eyebrow">Under a minute</span><h2>Latest shorts</h2></div>
+    <a href="https://www.tiktok.com/@noct.88" rel="noopener">Shorts on TikTok &rarr;</a>
+  </div>
+<!--noct:latest-shorts-->
+<div class="grid shorts"><a class="card" href="https://www.youtube.com/shorts/jeGb8Pnnwjs" rel="noopener"><div class="thumb"><img src="https://i.ytimg.com/vi/jeGb8Pnnwjs/maxresdefault.jpg" alt="The Zeigarnik Effect: What Most People Get Wrong" loading="lazy"><span class="tag short">Short</span><span class="dur">0:58</span></div><div class="card-body"><div class="date">24 Sep 2026</div><h3>The Zeigarnik Effect: What Most People Get Wrong</h3></div></a><a class="card" href="https://www.youtube.com/shorts/P2ELXdUkuec" rel="noopener"><div class="thumb"><img src="https://i.ytimg.com/vi/P2ELXdUkuec/maxresdefault.jpg" alt="The Waiter&#x27;s Secret: How the Zeigarnik Effect Was Discovered" loading="lazy"><span class="tag short">Short</span><span class="dur">0:50</span></div><div class="card-body"><div class="date">23 Sep 2026</div><h3>The Waiter&#x27;s Secret: How the Zeigarnik Effect Was Discovered</h3></div></a><a class="card" href="https://www.youtube.com/shorts/0b5TKpYBOpo" rel="noopener"><div class="thumb"><img src="https://i.ytimg.com/vi/0b5TKpYBOpo/maxresdefault.jpg" alt="Why Unfinished Tasks Haunt Your Mind: The Zeigarnik Effect" loading="lazy"><span class="tag short">Short</span><span class="dur">0:53</span></div><div class="card-body"><div class="date">21 Sep 2026</div><h3>Why Unfinished Tasks Haunt Your Mind: The Zeigarnik Effect</h3></div></a></div>
+<!--/noct:latest-shorts-->
+</div></section>
 
-  <h2>Who can use it</h2>
-  <p>Nobody but us. It is not a product, there is no sign-up, and it never publishes on behalf of any account other than the NOCT accounts we own.</p>
+<section class="section"><div class="wrap">
+  <div class="cols">
+    <div class="feat"><h3>One question per episode</h3><p>Why unfinished tasks stick in your head. Why nobody slept through the night before 1800. Each episode takes one question and answers it properly in about nine minutes.</p></div>
+    <div class="feat"><h3>Checked against the research</h3><p>Every claim is traced to its source: the original study, the replications, and the papers that disagree. When a famous effect fails to replicate, that becomes the story.</p></div>
+    <div class="feat"><h3>Drawn, not stock</h3><p>No stock footage and no borrowed clips. Every beat of the script gets its own drawing in one consistent stick-figure style, so an idea is something you can see.</p></div>
+  </div>
+</div></section>
 
-  <h2>What it never does</h2>
-  <ul>
-    <li>It does not read, collect, or store anyone else's content or personal data.</li>
-    <li>It does not post third-party or re-uploaded content — every frame and the voice are ours.</li>
-    <li>It does not buy, sell, or share any data with anyone.</li>
-  </ul>
+<section class="section"><div class="wrap">
+  <div class="sec-head">
+    <div><span class="eyebrow">Release schedule</span><h2>Something new every evening</h2></div>
+    <p class="muted small" style="margin:0">All releases go live around 8:00 PM IST (14:30 UTC).</p>
+  </div>
+  <div class="sched">
+    <div class="day"><b>Mon</b><span>Short</span></div>
+    <div class="day long"><b>Tue</b><span>Full episode</span></div>
+    <div class="day"><b>Wed</b><span>Short</span></div>
+    <div class="day"><b>Thu</b><span>Short</span></div>
+    <div class="day long"><b>Fri</b><span>Full episode</span></div>
+    <div class="day"><b>Sat</b><span>Short</span></div>
+    <div class="day"><b>Sun</b><span>Short</span></div>
+  </div>
+</div></section>
 
-  <h2>Watch NOCT</h2>
-  <p>YouTube: <a href="https://www.youtube.com/@noct.88">@noct.88</a></p>
-
-  <hr>
-  <footer>
-    NOCT and NOCT Publisher are operated by Daily Dash Shop (Bhalawani, Pandharpur, Solapur, Maharashtra 413310, India).<br>
-    Contact: <a href="mailto:hellodailydashshop@gmail.com">hellodailydashshop@gmail.com</a> ·
-    <a href="/noct/privacy.html">Privacy Policy</a> ·
-    <a href="/noct/terms.html">Terms of Service</a>
-  </footer>
-</div>
-</body></html>
+<section class="section"><div class="wrap">
+  <div class="cta">
+    <div><h2>Follow NOCT</h2><p>Full episodes on YouTube, short cuts on YouTube Shorts and TikTok. Same handle everywhere: @noct.88.</p></div>
+    <div class="btns" style="margin:0">
+      <a class="btn dark" href="https://www.youtube.com/@noct.88" rel="noopener">YouTube @noct.88</a>
+      <a class="btn" href="https://www.tiktok.com/@noct.88" rel="noopener">TikTok @noct.88</a>
+    </div>
+  </div>
+</div></section>
+</main>
+<!--noct:foot-->
+<footer class="site-foot"><div class="wrap">
+<div><a class="brand" href="/noct/"><img src="/noct/apple-touch-icon.png" alt="NOCT icon" width="40" height="40">NOCT</a>
+<p>Hand-drawn stick-figure explainers on psychology, named effects and what ancient humans actually did. New episodes every Tuesday and Friday.</p></div>
+<div><h4>Site</h4><ul>
+<li><a href="/noct/">Home</a></li><li><a href="/noct/episodes.html">Episodes</a></li>
+<li><a href="/noct/about.html">About</a></li><li><a href="/noct/publisher.html">NOCT Publisher</a></li>
+<li><a href="/noct/contact.html">Contact</a></li></ul></div>
+<div><h4>Follow &amp; legal</h4><ul>
+<li><a href="https://www.youtube.com/@noct.88" rel="noopener">YouTube @noct.88</a></li><li><a href="https://www.tiktok.com/@noct.88" rel="noopener">TikTok @noct.88</a></li>
+<li><a href="/noct/privacy.html">Privacy Policy</a></li><li><a href="/noct/terms.html">Terms of Service</a></li>
+<li><a href="mailto:noctofficial08@gmail.com">noctofficial08@gmail.com</a></li></ul></div>
+<div class="legal">&copy; 2026 NOCT. Operated by Daily Dash Shop, Bhalawani, Pandharpur, Solapur, Maharashtra 413310, India.</div>
+</div></footer>
+<!--/noct:foot-->
+</body>
+</html>

@@ -2,48 +2,102 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Publisher — NOCT</title>
-<meta name="robots" content="noindex">
+<title>NOCT Publisher — posting NOCT's own videos to TikTok</title>
+<meta name="description" content="NOCT Publisher posts NOCT's own videos to NOCT's own TikTok account through TikTok's Content Posting API. Scopes: user.info.basic, video.upload, video.publish. No third-party user data.">
+<link rel="canonical" href="https://dailydashshop.com/noct/publisher.html">
+<meta property="og:title" content="NOCT Publisher">
+<meta property="og:url" content="https://dailydashshop.com/noct/publisher.html">
+<meta property="og:type" content="website">
+<!--noct:head-->
+<link rel="icon" href="/noct/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/noct/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/noct/icon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/noct/apple-touch-icon.png">
+<link rel="manifest" href="/noct/site.webmanifest">
+<meta property="og:site_name" content="NOCT">
+<meta property="og:image" content="https://dailydashshop.com/noct/icon-512.png">
 <meta name="theme-color" content="#121212">
+<!--/noct:head-->
+<link rel="stylesheet" href="/noct/noct.css">
 <style>
-:root{--cream:#f3ede1;--ink:#121212;--muted:#5a5449;--line:rgba(18,18,18,.15)}
-*{box-sizing:border-box}
-body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.6 Inter,-apple-system,Segoe UI,Arial,sans-serif}
-.wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
-.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-h1{font-size:30px;margin:4px 0 6px;letter-spacing:-.02em}
-h2{font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
-.card{border:1px solid var(--line);border-radius:12px;padding:20px;margin:22px 0;background:rgba(255,255,255,.35)}
-button{font:600 15px Inter,Arial,sans-serif;background:var(--ink);color:var(--cream);border:0;border-radius:8px;padding:11px 18px;cursor:pointer}
-button[disabled]{opacity:.4;cursor:default}
-button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-input,select{font:15px Inter,Arial,sans-serif;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);width:100%}
-input[type=radio]{width:auto;padding:0;margin:3px 0 0;flex:none}
-label{display:block;font-size:13px;color:var(--muted);margin:14px 0 6px}
-ul{list-style:none;margin:0;padding:0}
-li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
-li:last-child{border-bottom:0}
-.mb{color:var(--muted);white-space:nowrap}
-.who{display:flex;align-items:center;gap:12px}
-.who img{width:44px;height:44px;border-radius:50%;object-fit:cover}
-.muted{color:var(--muted);font-size:14px}
-.err{color:#8a2020;font-size:14px}
-.row{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.pub h2.step{font:600 14px/1.2 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.pcard{border:1px solid var(--line);border-radius:14px;padding:22px;margin:0 0 20px;background:var(--paper)}
+.pub button{font:600 15px var(--sans);background:var(--ink);color:var(--cream);border:0;border-radius:8px;padding:11px 18px;cursor:pointer}
+.pub button[disabled]{opacity:.4;cursor:default}
+.pub button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.pub input,.pub select{font:15px var(--sans);padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);width:100%}
+.pub input[type=radio]{width:auto;padding:0;margin:3px 0 0;flex:none}
+.pub label{display:block;font-size:13px;color:var(--muted);margin:14px 0 6px}
+.pub ul{list-style:none;margin:0;padding:0}
+.pub li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.pub li:last-child{border-bottom:0}
+.pub .mb{color:var(--muted);white-space:nowrap}
+.pub .who{display:flex;align-items:center;gap:12px}
+.pub .who img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.pub .muted{color:var(--muted);font-size:14px}
+.pub .err{color:#8a2020;font-size:14px}
+.pub .row{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+.scopes td,.scopes th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+.scopes{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.scopes th{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:900px){.split{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <span class="eyebrow">NOCT</span>
-  <h1>Publisher</h1>
-  <p class="muted">Posts NOCT's own rendered videos to NOCT's own TikTok account.</p>
+<!--noct:nav-->
+<header class="site-head"><div class="wrap"><a class="brand" href="/noct/"><img src="/noct/apple-touch-icon.png" alt="NOCT icon" width="40" height="40">NOCT</a><nav class="nav" aria-label="Main"><a href="/noct/">Home</a><a href="/noct/episodes.html">Episodes</a><a href="/noct/about.html">About</a><a href="/noct/publisher.html" aria-current="page">Publisher</a><a href="/noct/contact.html">Contact</a></nav></div></header>
+<!--/noct:nav-->
+<main>
+<section class="page-head"><div class="wrap">
+  <span class="eyebrow">NOCT Publisher &middot; TikTok integration</span>
+  <h1>NOCT Publisher</h1>
+  <p class="lede">NOCT Publisher is the tool we use to post NOCT's own videos to NOCT's own TikTok account, <a href="https://www.tiktok.com/@noct.88" rel="noopener">@noct.88</a>, through TikTok's official Content Posting API.</p>
+</div></section>
 
-  <div class="card">
-    <h2>1 · Account</h2>
+<section class="section" style="padding-top:12px"><div class="wrap">
+  <div class="cols">
+    <div class="feat"><h3>What it does</h3><p>Our render pipeline produces each NOCT short as a finished video file. The Publisher lists those files, and we pick one, set its title and who can see it, and post it to our TikTok account or save it to our TikTok drafts.</p></div>
+    <div class="feat"><h3>Who uses it</h3><p>Only the NOCT team, on the NOCT TikTok account. There is no sign-up and no public access. It never connects to, reads from, or posts for any other TikTok user.</p></div>
+    <div class="feat"><h3>What it never does</h3><p>It does not read followers, comments, messages or analytics, does not collect any third-party user's data, and does not post anything we did not make ourselves.</p></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap split">
+  <div>
+    <span class="eyebrow">Permissions</span>
+    <h2>TikTok scopes requested</h2>
+    <table class="scopes">
+      <tr><th>Scope</th><th>Why we need it</th></tr>
+      <tr><td><code>user.info.basic</code></td><td>Shows the connected account's display name and avatar, so we can confirm it is @noct.88 before posting.</td></tr>
+      <tr><td><code>video.upload</code></td><td>Sends one of our own videos to the account's TikTok drafts to finish in the TikTok app.</td></tr>
+      <tr><td><code>video.publish</code></td><td>Posts one of our own videos directly to the account with the chosen title and privacy level.</td></tr>
+    </table>
+    <p class="muted small" style="margin-top:14px">Tokens are stored server-side only and deleted on disconnection or on request. Details in the <a href="/noct/privacy.html">Privacy Policy</a>.</p>
+  </div>
+  <div>
+    <span class="eyebrow">Flow</span>
+    <h2>How a post is made</h2>
+    <ol class="steps">
+      <li><h3>Connect</h3><p>We sign in to the NOCT TikTok account with TikTok Login Kit and approve the three scopes.</p></li>
+      <li><h3>Choose</h3><p>We pick a rendered NOCT video, write the caption and choose a privacy level from the options TikTok allows for the account.</p></li>
+      <li><h3>Post</h3><p>The video is sent through the Content Posting API, and the Publisher shows TikTok's processing status until the post is live.</p></li>
+    </ol>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap narrow pub">
+  <span class="eyebrow">The tool</span>
+  <h2>Publisher console</h2>
+  <p class="muted" style="font-size:16px">The console talks to the Publisher service running on NOCT's own machine, so it only works there; anywhere else it will show that the service is not running. <a href="/noct/tiktok_demo.mp4">Watch a recording of it in use</a>.</p>
+
+  <div class="pcard">
+    <h2 class="step">1 · Account</h2>
     <div id="acct"><p class="muted">Checking…</p></div>
   </div>
 
-  <div class="card">
-    <h2>2 · Video</h2>
+  <div class="pcard">
+    <h2 class="step">2 · Video</h2>
     <ul id="vids"><li class="muted">Loading videos…</li></ul>
     <label for="title">Title</label>
     <input id="title" maxlength="150" placeholder="Why unfinished tasks haunt your mind">
@@ -55,7 +109,23 @@ li:last-child{border-bottom:0}
     </div>
     <p id="msg" class="muted"></p>
   </div>
-</div>
+</div></section>
+</main>
+<!--noct:foot-->
+<footer class="site-foot"><div class="wrap">
+<div><a class="brand" href="/noct/"><img src="/noct/apple-touch-icon.png" alt="NOCT icon" width="40" height="40">NOCT</a>
+<p>Hand-drawn stick-figure explainers on psychology, named effects and what ancient humans actually did. New episodes every Tuesday and Friday.</p></div>
+<div><h4>Site</h4><ul>
+<li><a href="/noct/">Home</a></li><li><a href="/noct/episodes.html">Episodes</a></li>
+<li><a href="/noct/about.html">About</a></li><li><a href="/noct/publisher.html">NOCT Publisher</a></li>
+<li><a href="/noct/contact.html">Contact</a></li></ul></div>
+<div><h4>Follow &amp; legal</h4><ul>
+<li><a href="https://www.youtube.com/@noct.88" rel="noopener">YouTube @noct.88</a></li><li><a href="https://www.tiktok.com/@noct.88" rel="noopener">TikTok @noct.88</a></li>
+<li><a href="/noct/privacy.html">Privacy Policy</a></li><li><a href="/noct/terms.html">Terms of Service</a></li>
+<li><a href="mailto:noctofficial08@gmail.com">noctofficial08@gmail.com</a></li></ul></div>
+<div class="legal">&copy; 2026 NOCT. Operated by Daily Dash Shop, Bhalawani, Pandharpur, Solapur, Maharashtra 413310, India.</div>
+</div></footer>
+<!--/noct:foot-->
 <script>
 const API = "http://127.0.0.1:8787/api";
 const $ = id => document.getElementById(id);

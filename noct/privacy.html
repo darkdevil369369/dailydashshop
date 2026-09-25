@@ -2,65 +2,96 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy Policy — NOCT Publisher</title>
-<meta name="description" content="Privacy policy for NOCT Publisher, the internal tool that publishes NOCT's own videos to NOCT's own social accounts.">
+<title>Privacy Policy — NOCT</title>
+<meta name="description" content="Privacy policy for the NOCT website and the NOCT Publisher app, including exactly what TikTok data is accessed, how it is stored, and how to have it deleted.">
 <link rel="canonical" href="https://dailydashshop.com/noct/privacy.html">
+<meta property="og:title" content="Privacy Policy — NOCT">
+<meta property="og:url" content="https://dailydashshop.com/noct/privacy.html">
+<meta property="og:type" content="website">
+<!--noct:head-->
+<link rel="icon" href="/noct/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/noct/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/noct/icon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/noct/apple-touch-icon.png">
+<link rel="manifest" href="/noct/site.webmanifest">
+<meta property="og:site_name" content="NOCT">
+<meta property="og:image" content="https://dailydashshop.com/noct/icon-512.png">
 <meta name="theme-color" content="#121212">
-<style>
-:root{--cream:#f3ede1;--ink:#121212;--muted:#5a5449}
-*{box-sizing:border-box}
-body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.65 Inter,-apple-system,Segoe UI,Arial,sans-serif}
-.wrap{max-width:720px;margin:0 auto;padding:56px 24px}
-h1{font-size:32px;line-height:1.2;margin:0 0 6px;letter-spacing:-.02em}
-h2{font-size:19px;margin:32px 0 8px;letter-spacing:-.01em}
-.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.date{color:var(--muted);font-size:14px;margin:0 0 8px}
-p{margin:0 0 14px}
-ul{margin:0 0 14px;padding-left:20px}
-a{color:var(--ink)}
-hr{border:0;border-top:1px solid rgba(18,18,18,.15);margin:40px 0}
-footer{font-size:13px;color:var(--muted)}
-</style>
+<!--/noct:head-->
+<link rel="stylesheet" href="/noct/noct.css">
 </head>
 <body>
-<div class="wrap">
-  <span class="eyebrow">NOCT Publisher</span>
+<!--noct:nav-->
+<header class="site-head"><div class="wrap"><a class="brand" href="/noct/"><img src="/noct/apple-touch-icon.png" alt="NOCT icon" width="40" height="40">NOCT</a><nav class="nav" aria-label="Main"><a href="/noct/">Home</a><a href="/noct/episodes.html">Episodes</a><a href="/noct/about.html">About</a><a href="/noct/publisher.html">Publisher</a><a href="/noct/contact.html">Contact</a></nav></div></header>
+<!--/noct:nav-->
+<main>
+<section class="page-head"><div class="wrap narrow">
+  <span class="eyebrow">Legal</span>
   <h1>Privacy Policy</h1>
-  <p class="date">Last updated: 21 September 2026</p>
+  <p class="muted">Last updated: 25 September 2026</p>
+</div></section>
 
-  <p>NOCT Publisher ("the app") is an internal publishing tool operated by Daily Dash Shop ("we", "us"). It uploads videos we produced ourselves to social accounts we own. It is not offered to the public and has no user sign-up.</p>
+<section class="section" style="padding-top:0"><div class="wrap narrow prose">
+  <p>This policy covers the NOCT website at dailydashshop.com/noct and NOCT Publisher ("the app"), the tool we use to post NOCT's own videos to NOCT's own TikTok account. Both are operated by Daily Dash Shop ("we", "us"), Bhalawani, Pandharpur, Solapur, Maharashtra 413310, India.</p>
 
-  <h2>Information we collect</h2>
-  <p>The app collects no personal information from anyone other than the account owner who authorises it — that is us. When we connect a social account, the platform gives the app:</p>
+  <h2>1. The website</h2>
+  <p>The website has no accounts, no sign-up, no comments and no forms. It sets no cookies and runs no analytics, advertising or tracking scripts. Episode thumbnails are loaded from YouTube's image servers (i.ytimg.com), and links to YouTube and TikTok take you to those services, whose own privacy policies apply once you are there. Our hosting provider (GitHub Pages) may keep standard server logs, such as IP addresses, for security and operation.</p>
+
+  <h2>2. Who the app is for</h2>
+  <p>NOCT Publisher is used only by us, to publish videos we made ourselves to the TikTok account we own (@noct.88). It is not offered to the public, has no sign-up, and never connects to or acts on behalf of any other TikTok user. It does not access any third party's TikTok data.</p>
+
+  <h2>3. TikTok data the app accesses</h2>
+  <p>When we connect our own TikTok account through TikTok's official Login Kit, we grant the app these scopes, and use them only as described:</p>
   <ul>
-    <li>An access token and refresh token for that account.</li>
-    <li>Basic profile information for that account (display name, avatar, open ID), used only to confirm the app is connected to the correct account.</li>
+    <li><strong>user.info.basic</strong>: the connected account's open ID, display name and avatar. Used only to show which account is connected, so we can confirm it is the NOCT account before posting.</li>
+    <li><strong>video.upload</strong>: to send one of our own video files to the account's TikTok drafts.</li>
+    <li><strong>video.publish</strong>: to publish one of our own videos directly to the account, with the title and privacy level we choose.</li>
   </ul>
-  <p>We do not collect data about viewers, followers, commenters, or any other person. We do not use cookies, analytics, or trackers on this site.</p>
+  <p>The app also reads the creator posting options TikTok returns (for example, the allowed privacy levels) and the processing status of each post it makes. It does not read followers, viewers, comments, messages, likes, analytics, or any other user's profile or content.</p>
 
-  <h2>How we use it</h2>
-  <p>Tokens are used for exactly one purpose: to upload our own videos to our own accounts at the scheduled time. Nothing else is done with them.</p>
+  <h2>4. How TikTok data is stored</h2>
+  <p>The access token and refresh token TikTok issues are stored server-side, in a private file on our own server that only the service account running the app can read. Tokens are never sent to the browser, never embedded in this website, never written to any public location, and never committed to a code repository. The one-time authorisation code TikTok returns after login is exchanged for tokens on the server and is not kept.</p>
 
-  <h2>How we store it</h2>
-  <p>Tokens are stored in a private file on our own server, readable only by the account that runs the app. They are never written to a public location and never appear in the app's public repository.</p>
+  <h2>5. How TikTok data is used</h2>
+  <p>Solely to post NOCT's own videos to NOCT's own TikTok account and to confirm those posts completed. We do not use TikTok data for advertising, profiling, analytics, or training any model, and we do not combine it with other data.</p>
 
-  <h2>Sharing</h2>
-  <p>We do not sell, rent, trade, or share this data with anyone. It is not sent to any third party, advertiser, or data broker. The only network calls the app makes are to the official APIs of the platforms we publish to.</p>
+  <h2>6. Sharing</h2>
+  <p>We do not sell, rent, trade or share TikTok data or any other personal data with anyone. The only network calls the app makes with it are to TikTok's own official API.</p>
 
-  <h2>Retention and deletion</h2>
-  <p>Tokens are kept only while the integration is in use. We can revoke access at any time from the platform's own app-permissions settings, and doing so immediately ends the app's access. On revocation or on request, the stored tokens are deleted from our server.</p>
+  <h2>7. Retention</h2>
+  <p>Tokens and the cached profile (open ID, display name, avatar URL) are kept only while the app is connected to the NOCT account. Access tokens expire after 24 hours and are refreshed only while the integration is in use. When the app is disconnected, or on request, the stored tokens and cached profile are deleted from our server. The app keeps no copy of TikTok data beyond that one private token file; the IDs and status of our own posts are held only for the few minutes it takes to confirm each post completed.</p>
 
-  <h2>Children</h2>
-  <p>The app is not directed at children and collects no data from them.</p>
+  <h2>8. Deletion and revocation</h2>
+  <p>Access can be revoked at any time from TikTok's app settings (Settings and privacy, Security, Apps and services permissions), which immediately ends the app's access. You can also email <a href="mailto:noctofficial08@gmail.com">noctofficial08@gmail.com</a> to ask us to delete any data we hold; we delete it from our server within 30 days of the request, and normally much sooner, and confirm by email.</p>
 
-  <h2>Changes</h2>
-  <p>If this policy changes, the updated version will be posted on this page with a new "last updated" date.</p>
+  <h2>9. Security</h2>
+  <p>All calls to TikTok use HTTPS. The app's local control service listens only on the server itself and is not reachable from the internet. The app's client secret is kept server-side alongside the tokens.</p>
 
-  <h2>Contact</h2>
-  <p>Questions about this policy: <a href="mailto:hellodailydashshop@gmail.com">hellodailydashshop@gmail.com</a><br>
+  <h2>10. Children</h2>
+  <p>Neither the website nor the app is directed at children under 13, and neither collects data from them.</p>
+
+  <h2>11. Changes</h2>
+  <p>If this policy changes, the new version is posted on this page with a new "last updated" date.</p>
+
+  <h2>12. Contact</h2>
+  <p>Privacy questions and data requests: <a href="mailto:noctofficial08@gmail.com">noctofficial08@gmail.com</a><br>
   Daily Dash Shop, Bhalawani, Pandharpur, Solapur, Maharashtra 413310, India.</p>
-
-  <hr>
-  <footer><a href="/noct/">NOCT Publisher</a> · <a href="/noct/terms.html">Terms of Service</a></footer>
-</div>
-</body></html>
+</div></section>
+</main>
+<!--noct:foot-->
+<footer class="site-foot"><div class="wrap">
+<div><a class="brand" href="/noct/"><img src="/noct/apple-touch-icon.png" alt="NOCT icon" width="40" height="40">NOCT</a>
+<p>Hand-drawn stick-figure explainers on psychology, named effects and what ancient humans actually did. New episodes every Tuesday and Friday.</p></div>
+<div><h4>Site</h4><ul>
+<li><a href="/noct/">Home</a></li><li><a href="/noct/episodes.html">Episodes</a></li>
+<li><a href="/noct/about.html">About</a></li><li><a href="/noct/publisher.html">NOCT Publisher</a></li>
+<li><a href="/noct/contact.html">Contact</a></li></ul></div>
+<div><h4>Follow &amp; legal</h4><ul>
+<li><a href="https://www.youtube.com/@noct.88" rel="noopener">YouTube @noct.88</a></li><li><a href="https://www.tiktok.com/@noct.88" rel="noopener">TikTok @noct.88</a></li>
+<li><a href="/noct/privacy.html">Privacy Policy</a></li><li><a href="/noct/terms.html">Terms of Service</a></li>
+<li><a href="mailto:noctofficial08@gmail.com">noctofficial08@gmail.com</a></li></ul></div>
+<div class="legal">&copy; 2026 NOCT. Operated by Daily Dash Shop, Bhalawani, Pandharpur, Solapur, Maharashtra 413310, India.</div>
+</div></footer>
+<!--/noct:foot-->
+</body>
+</html>
