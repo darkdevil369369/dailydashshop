@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NOCT Publisher — posting NOCT's own videos to TikTok</title>
-<meta name="description" content="NOCT Publisher posts NOCT's own videos to NOCT's own TikTok account through TikTok's Content Posting API. Scopes: user.info.basic, video.upload, video.publish. No third-party user data.">
+<title>NOCT Publisher — posting DECODED AI's own videos to TikTok</title>
+<meta name="description" content="NOCT Publisher posts DECODED AI's own videos to DECODED AI's own TikTok account through TikTok's Content Posting API. Scopes: user.info.basic, video.upload, video.publish. No third-party user data.">
 <link rel="canonical" href="https://dailydashshop.com/noct/publisher.html">
 <meta property="og:title" content="NOCT Publisher">
 <meta property="og:url" content="https://dailydashshop.com/noct/publisher.html">
@@ -14,7 +14,7 @@
 <link rel="icon" type="image/png" sizes="512x512" href="/noct/icon-512.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/noct/apple-touch-icon.png">
 <link rel="manifest" href="/noct/site.webmanifest">
-<meta property="og:site_name" content="NOCT">
+<meta property="og:site_name" content="DECODED AI">
 <meta property="og:image" content="https://dailydashshop.com/noct/icon-512.png">
 <meta name="theme-color" content="#121212">
 <!--/noct:head-->
@@ -42,23 +42,36 @@
 .scopes{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .scopes th{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 @media (max-width:900px){.split{grid-template-columns:1fr}}
+.pub .check{display:flex;gap:8px;align-items:center;margin:8px 18px 0 0;font-size:15px;color:var(--ink)}
+.pub .check input{width:auto;margin:0}
+.pub .check.off{opacity:.45}
+.pub .checks{display:flex;flex-wrap:wrap}
+.pub .sub{margin:4px 0 0 26px}
+.pub .hint{font-size:13px;color:var(--muted);margin:4px 0 0}
+.pub .toggle{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;font-size:15px}
+.pub .toggle input{width:auto}
+.pub video{width:100%;max-width:280px;aspect-ratio:9/16;background:#121212;border-radius:12px;display:block}
+.pub .prev{display:grid;grid-template-columns:280px 1fr;gap:22px;align-items:start}
+.pub .consent{font-size:13px;color:var(--muted);margin:18px 0 0}
+.pub .blocked{background:#f6e3e3;border:1px solid #e2b9b9;color:#8a2020;border-radius:10px;padding:12px 14px;font-size:14px;margin-top:14px}
+@media (max-width:700px){.pub .prev{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <!--noct:nav-->
-<header class="site-head"><div class="wrap"><a class="brand" href="/noct/"><img src="/noct/apple-touch-icon.png" alt="NOCT icon" width="40" height="40">NOCT</a><nav class="nav" aria-label="Main"><a href="/noct/">Home</a><a href="/noct/episodes.html">Episodes</a><a href="/noct/about.html">About</a><a href="/noct/publisher.html" aria-current="page">Publisher</a><a href="/noct/contact.html">Contact</a></nav></div></header>
+<header class="site-head"><div class="wrap"><a class="brand" href="/noct/"><img src="/noct/apple-touch-icon.png" alt="NOCT Publisher icon" width="40" height="40">DECODED AI</a><nav class="nav" aria-label="Main"><a href="/noct/">Home</a><a href="/noct/episodes.html">Shorts</a><a href="/noct/about.html">About</a><a href="/noct/publisher.html" aria-current="page">Publisher</a><a href="/noct/contact.html">Contact</a></nav></div></header>
 <!--/noct:nav-->
 <main>
 <section class="page-head"><div class="wrap">
   <span class="eyebrow">NOCT Publisher &middot; TikTok integration</span>
   <h1>NOCT Publisher</h1>
-  <p class="lede">NOCT Publisher is the tool we use to post NOCT's own videos to NOCT's own TikTok account, <a href="https://www.tiktok.com/@noct.88" rel="noopener">@noct.88</a>, through TikTok's official Content Posting API.</p>
+  <p class="lede">NOCT Publisher is the tool we use to post DECODED AI's own videos to DECODED AI's own TikTok account, <a href="https://www.tiktok.com/@decoded_ai" rel="noopener">@decoded_ai</a>, through TikTok's official Content Posting API.</p>
 </div></section>
 
 <section class="section" style="padding-top:12px"><div class="wrap">
   <div class="cols">
-    <div class="feat"><h3>What it does</h3><p>Our render pipeline produces each NOCT short as a finished video file. The Publisher lists those files, and we pick one, set its title and who can see it, and post it to our TikTok account or save it to our TikTok drafts.</p></div>
-    <div class="feat"><h3>Who uses it</h3><p>Only the NOCT team, on the NOCT TikTok account. There is no sign-up and no public access. It never connects to, reads from, or posts for any other TikTok user.</p></div>
+    <div class="feat"><h3>What it does</h3><p>Our render pipeline produces each DECODED AI Short as a finished video file. The Publisher lists those files, and we pick one, set its title and who can see it, and post it to our TikTok account or save it to our TikTok drafts.</p></div>
+    <div class="feat"><h3>Who uses it</h3><p>Only the DECODED AI team, on the DECODED AI TikTok account. There is no sign-up and no public access. It never connects to, reads from, or posts for any other TikTok user.</p></div>
     <div class="feat"><h3>What it never does</h3><p>It does not read followers, comments, messages or analytics, does not collect any third-party user's data, and does not post anything we did not make ourselves.</p></div>
   </div>
 </div></section>
@@ -69,7 +82,7 @@
     <h2>TikTok scopes requested</h2>
     <table class="scopes">
       <tr><th>Scope</th><th>Why we need it</th></tr>
-      <tr><td><code>user.info.basic</code></td><td>Shows the connected account's display name and avatar, so we can confirm it is @noct.88 before posting.</td></tr>
+      <tr><td><code>user.info.basic</code></td><td>Shows the connected account's display name and avatar, so we can confirm it is @decoded_ai before posting.</td></tr>
       <tr><td><code>video.upload</code></td><td>Sends one of our own videos to the account's TikTok drafts to finish in the TikTok app.</td></tr>
       <tr><td><code>video.publish</code></td><td>Posts one of our own videos directly to the account with the chosen title and privacy level.</td></tr>
     </table>
@@ -79,9 +92,9 @@
     <span class="eyebrow">Flow</span>
     <h2>How a post is made</h2>
     <ol class="steps">
-      <li><h3>Connect</h3><p>We sign in to the NOCT TikTok account with TikTok Login Kit and approve the three scopes.</p></li>
-      <li><h3>Choose</h3><p>We pick a rendered NOCT video, write the caption and choose a privacy level from the options TikTok allows for the account.</p></li>
-      <li><h3>Post</h3><p>The video is sent through the Content Posting API, and the Publisher shows TikTok's processing status until the post is live.</p></li>
+      <li><h3>Connect</h3><p>We sign in to the DECODED AI TikTok account with TikTok Login Kit and approve the three scopes.</p></li>
+      <li><h3>Choose</h3><p>We pick a rendered DECODED AI video and preview it. The form loads the account's current TikTok settings every time: we edit the caption, pick who can view it (no default), choose whether to allow comments, duets and stitches, and disclose any commercial content.</p></li>
+      <li><h3>Post</h3><p>Nothing is sent until we press Post and accept TikTok's Music Usage Confirmation. The video then goes through the Content Posting API, and the Publisher shows TikTok's processing status until the post is live.</p></li>
     </ol>
   </div>
 </div></section>
@@ -89,22 +102,51 @@
 <section class="section"><div class="wrap narrow pub">
   <span class="eyebrow">The tool</span>
   <h2>Publisher console</h2>
-  <p class="muted" style="font-size:16px">The console talks to the Publisher service running on NOCT's own machine, so it only works there; anywhere else it will show that the service is not running. <a href="/noct/tiktok_demo.mp4">Watch a recording of it in use</a>.</p>
+  <p class="muted" style="font-size:16px">The console talks to the Publisher service running on our own machine, so it only works there; anywhere else it will show that the service is not running. Nothing is sent to TikTok until you press Post.</p>
 
   <div class="pcard">
-    <h2 class="step">1 · Account</h2>
-    <div id="acct"><p class="muted">Checking…</p></div>
+    <h2 class="step">1 &middot; Account</h2>
+    <div id="acct"><p class="muted">Checking&hellip;</p></div>
   </div>
 
   <div class="pcard">
-    <h2 class="step">2 · Video</h2>
-    <ul id="vids"><li class="muted">Loading videos…</li></ul>
-    <label for="title">Title</label>
-    <input id="title" maxlength="150" placeholder="Why unfinished tasks haunt your mind">
-    <label for="privacy">Who can see this post</label>
-    <select id="privacy"><option value="SELF_ONLY">Only me</option></select>
+    <h2 class="step">2 &middot; Video</h2>
+    <ul id="vids"><li class="muted">Loading videos&hellip;</li></ul>
+  </div>
+
+  <div class="pcard" id="form" hidden>
+    <h2 class="step">3 &middot; Post to <span id="nick">TikTok</span></h2>
+    <div class="prev">
+      <video id="preview" controls playsinline preload="metadata"></video>
+      <div>
+        <label for="title">Caption</label>
+        <textarea id="title" maxlength="2200" rows="4" style="width:100%;font:15px var(--sans);padding:10px 12px;border:1px solid var(--line);border-radius:8px"></textarea>
+        <label for="privacy">Who can view this video</label>
+        <select id="privacy"></select>
+        <label>Allow users to</label>
+        <div class="checks">
+          <label class="check" id="c-comment"><input type="checkbox" id="allow_comment"> Comment</label>
+          <label class="check" id="c-duet"><input type="checkbox" id="allow_duet"> Duet</label>
+          <label class="check" id="c-stitch"><input type="checkbox" id="allow_stitch"> Stitch</label>
+        </div>
+        <label class="check" style="margin-top:14px"><input type="checkbox" id="aigc" checked> AI-generated content label</label>
+      </div>
+    </div>
+
+    <div class="toggle"><span><b>Disclose video content</b><br><span class="hint">Turn on to disclose that this video promotes goods or services in exchange for something of value.</span></span>
+      <input type="checkbox" id="commercial" role="switch" aria-label="Disclose video content"></div>
+    <div id="brand" hidden>
+      <label class="check"><input type="checkbox" id="brand_organic"> Your brand</label>
+      <p class="hint sub">You are promoting yourself or your own business. This video will be classified as Brand Organic.</p>
+      <label class="check"><input type="checkbox" id="branded"> Branded content</label>
+      <p class="hint sub">You are promoting another brand or a third party. This video will be classified as Branded Content.</p>
+      <p class="hint" id="bc-label"></p>
+    </div>
+
+    <p class="consent" id="consent"></p>
+    <div id="blocked"></div>
     <div class="row">
-      <button id="post" disabled>Post to TikTok</button>
+      <button id="post" disabled>Post</button>
       <button id="draft" class="ghost" disabled>Save as draft</button>
     </div>
     <p id="msg" class="muted"></p>
@@ -113,118 +155,165 @@
 </main>
 <!--noct:foot-->
 <footer class="site-foot"><div class="wrap">
-<div><a class="brand" href="/noct/"><img src="/noct/apple-touch-icon.png" alt="NOCT icon" width="40" height="40">NOCT</a>
-<p>Hand-drawn stick-figure explainers on psychology, named effects and what ancient humans actually did. New episodes every Tuesday and Friday.</p></div>
+<div><a class="brand" href="/noct/"><img src="/noct/apple-touch-icon.png" alt="NOCT Publisher icon" width="40" height="40">DECODED AI</a>
+<p>Five AI characters, one question, five very different answers. Original scripted Shorts, on YouTube first and then TikTok.</p></div>
 <div><h4>Site</h4><ul>
-<li><a href="/noct/">Home</a></li><li><a href="/noct/episodes.html">Episodes</a></li>
+<li><a href="/noct/">Home</a></li><li><a href="/noct/episodes.html">Shorts</a></li>
 <li><a href="/noct/about.html">About</a></li><li><a href="/noct/publisher.html">NOCT Publisher</a></li>
 <li><a href="/noct/contact.html">Contact</a></li></ul></div>
 <div><h4>Follow &amp; legal</h4><ul>
-<li><a href="https://www.youtube.com/@noct.88" rel="noopener">YouTube @noct.88</a></li><li><a href="https://www.tiktok.com/@noct.88" rel="noopener">TikTok @noct.88</a></li>
+<li><a href="https://www.youtube.com/@decodedaihq" rel="noopener">YouTube @decodedaihq</a></li><li><a href="https://www.tiktok.com/@decoded_ai" rel="noopener">TikTok @decoded_ai</a></li>
 <li><a href="/noct/privacy.html">Privacy Policy</a></li><li><a href="/noct/terms.html">Terms of Service</a></li>
 <li><a href="mailto:noctofficial08@gmail.com">noctofficial08@gmail.com</a></li></ul></div>
-<div class="legal">&copy; 2026 NOCT. Operated by Daily Dash Shop, Bhalawani, Pandharpur, Solapur, Maharashtra 413310, India.</div>
+<div class="legal">&copy; 2026 DECODED AI. Operated by Daily Dash Shop, Bhalawani, Pandharpur, Solapur, Maharashtra 413310, India.</div>
 </div></footer>
 <!--/noct:foot-->
 <script>
 const API = "http://127.0.0.1:8787/api";
 const $ = id => document.getElementById(id);
-let chosen = null, connected = false;
+const MUSIC = 'https://www.tiktok.com/legal/page/global/music-usage-confirmation/en';
+const BC = 'https://www.tiktok.com/legal/page/global/bc-policy/en';
+const LABEL = {PUBLIC_TO_EVERYONE: "Everyone", MUTUAL_FOLLOW_FRIENDS: "Friends",
+               FOLLOWER_OF_CREATOR: "Followers", SELF_ONLY: "Only me"};
+let connected = false, creator = null, chosen = null, busy = false;
 
 const get = p => fetch(API + p).then(r => r.json());
 const send = (p, body) => fetch(API + p, {
   method: "POST", headers: {"Content-Type": "application/json"},
   body: JSON.stringify(body)
 }).then(r => r.json());
-
-// Render filenames are "<date>-<episode-slug>-<nn>-<short-slug>.mp4"; the
-// episode slug repeats on every cut, so only the short's own slug is shown.
-function pretty(name) {
-  const s = name.replace(/\.mp4$/, "").replace(/^\d{4}-\d{2}-\d{2}-/, "");
-  const cut = s.match(/-(\d\d)-(.+)$/);
-  const text = (cut ? cut[2] : s).replace(/-/g, " ").trim();
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
-function ready() {
-  const on = connected && chosen;
-  $("post").disabled = $("draft").disabled = !on;
-}
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
 
 async function loadAccount() {
   try {
     const s = await get("/status");
     if (s.connected && s.user) {
       connected = true;
-      $("acct").innerHTML = '<div class="who"><img src="' + (s.user.avatar_url || "") + '" alt="">' +
-        '<div><strong>' + (s.user.display_name || "NOCT") + '</strong>' +
+      $("acct").innerHTML = '<div class="who"><img src="' + esc(s.user.avatar_url || "") + '" alt="">' +
+        '<div><strong>' + esc(s.user.display_name || "DECODED AI") + '</strong>' +
         '<div class="muted">Connected to TikTok</div></div></div>';
-      loadPrivacy();
     } else {
       $("acct").innerHTML = '<p class="muted">No TikTok account connected yet.</p>' +
         '<div class="row"><button id="connect">Connect TikTok</button></div>' +
-        (s.error ? '<p class="err">' + s.error + '</p>' : '');
+        (s.error ? '<p class="err">' + esc(s.error) + '</p>' : '');
       $("connect").onclick = async () => {
         const a = await get("/auth-url");
-        if (a.ok) location.href = a.url; else $("acct").innerHTML += '<p class="err">' + a.error + '</p>';
+        if (a.ok) location.href = a.url; else $("acct").innerHTML += '<p class="err">' + esc(a.error) + '</p>';
       };
     }
   } catch (e) {
     $("acct").innerHTML = '<p class="err">Publisher service is not running on this machine.</p>';
   }
-  ready();
-}
-
-async function loadPrivacy() {
-  const c = await get("/creator");
-  if (!c.ok) return;
-  const opts = (c.creator.privacy_level_options || ["SELF_ONLY"]);
-  const label = {PUBLIC_TO_EVERYONE: "Everyone", MUTUAL_FOLLOW_FRIENDS: "Friends",
-                 FOLLOWER_OF_CREATOR: "Followers", SELF_ONLY: "Only me"};
-  $("privacy").innerHTML = opts.map(o => '<option value="' + o + '">' + (label[o] || o) + '</option>').join("");
 }
 
 async function loadVideos() {
   try {
     const v = await get("/videos");
     if (!v.videos.length) { $("vids").innerHTML = '<li class="muted">No rendered videos found.</li>'; return; }
+    window.VIDS = Object.fromEntries(v.videos.map(f => [f.name, f]));
     $("vids").innerHTML = v.videos.map((f, i) =>
-      '<li><input type="radio" name="v" id="v' + i + '" value="' + f.name + '">' +
+      '<li><input type="radio" name="v" id="v' + i + '" value="' + esc(f.name) + '">' +
       '<label for="v' + i + '" style="margin:0;color:inherit;flex:1;word-break:break-word">' +
-      pretty(f.name) + '</label>' +
-      '<span class="mb">' + f.mb + ' MB</span></li>').join("");
-    $("vids").onchange = e => {
-      chosen = e.target.value;
-      if (!$("title").value) $("title").value = pretty(chosen);
-      ready();
-    };
+      esc(f.title || f.name) + '</label>' +
+      '<span class="mb">' + Math.round(f.secs) + 's &middot; ' + f.mb + ' MB</span></li>').join("");
+    $("vids").onchange = e => { if (connected) openForm(e.target.value); };
   } catch (e) {
     $("vids").innerHTML = '<li class="err">Publisher service is not running.</li>';
   }
 }
 
-async function publish(draft) {
-  $("post").disabled = $("draft").disabled = true;
-  $("msg").className = "muted";
-  $("msg").textContent = draft ? "Uploading to drafts…" : "Uploading to TikTok…";
-  const r = await send("/post", {name: chosen, title: $("title").value,
-                                 privacy: $("privacy").value, draft: draft});
-  if (!r.ok) { $("msg").className = "err"; $("msg").textContent = r.error; ready(); return; }
-  $("msg").textContent = "Uploaded. Waiting for TikTok to process…";
-  for (let i = 0; i < 20; i++) {
-    await new Promise(t => setTimeout(t, 3000));
-    const s = await get("/post-status?id=" + encodeURIComponent(r.publish_id));
-    const st = s.ok ? (s.status.status || "") : "";
-    if (st === "PUBLISH_COMPLETE") { $("msg").textContent = "Posted to TikTok."; break; }
-    if (st === "FAILED") { $("msg").className = "err"; $("msg").textContent = "TikTok rejected it: " + (s.status.fail_reason || ""); break; }
-    $("msg").textContent = "TikTok is processing the video… (" + (st || "pending") + ")";
+// Fresh creator_info on every render of the post form, as TikTok requires.
+async function openForm(name) {
+  chosen = name;
+  const f = VIDS[name];
+  $("form").hidden = false;
+  $("msg").textContent = ""; $("msg").className = "muted";
+  $("preview").src = API + "/video/" + encodeURIComponent(name);
+  $("title").value = f.title || "";
+  $("privacy").innerHTML = '<option value="" disabled selected>Loading&hellip;</option>';
+  $("blocked").innerHTML = "";
+  creator = null;
+  const c = await get("/creator");
+  if (!c.ok) {
+    $("blocked").innerHTML = '<div class="blocked">This account cannot post right now. ' + esc(c.error) +
+      ' Please try again later.</div>';
+    $("privacy").innerHTML = "";
+    return ready();
   }
+  creator = c.creator;
+  $("nick").textContent = creator.creator_nickname || creator.creator_username || "TikTok";
+  // No default: the user must pick a visibility.
+  $("privacy").innerHTML = '<option value="" disabled selected>Choose who can view</option>' +
+    (creator.privacy_level_options || []).map(o =>
+      '<option value="' + o + '">' + (LABEL[o] || o) + '</option>').join("");
+  for (const [k, flag] of [["comment", "comment_disabled"], ["duet", "duet_disabled"], ["stitch", "stitch_disabled"]]) {
+    const off = !!creator[flag];
+    $("allow_" + k).checked = false;
+    $("allow_" + k).disabled = off;
+    $("c-" + k).classList.toggle("off", off);
+    $("c-" + k).title = off ? "Turned off in this account's TikTok settings." : "";
+  }
+  const max = creator.max_video_post_duration_sec || 0;
+  if (max && f.secs > max) {
+    $("blocked").innerHTML = '<div class="blocked">This video is ' + Math.round(f.secs) +
+      's long. This account can post videos up to ' + max + 's.</div>';
+  }
+  $("commercial").checked = $("brand_organic").checked = $("branded").checked = false;
   ready();
 }
 
+function ready() {
+  const com = $("commercial").checked, own = $("brand_organic").checked, bc = $("branded").checked;
+  $("brand").hidden = !com;
+  // Branded content cannot be private.
+  const only = [...$("privacy").options].find(o => o.value === "SELF_ONLY");
+  if (only) {
+    only.disabled = com && bc;
+    only.title = only.disabled ? "Branded content visibility cannot be set to private." : "";
+    if (only.disabled && $("privacy").value === "SELF_ONLY") $("privacy").value = "";
+  }
+  $("bc-label").textContent = !com ? "" : bc ? 'Your video will be labeled as "Paid partnership".'
+    : own ? 'Your video will be labeled as "Promotional content".' : "";
+  $("consent").innerHTML = com && bc
+    ? 'By posting, you agree to TikTok\'s <a href="' + BC + '" target="_blank" rel="noopener">Branded Content Policy</a> and <a href="' + MUSIC + '" target="_blank" rel="noopener">Music Usage Confirmation</a>.'
+    : 'By posting, you agree to TikTok\'s <a href="' + MUSIC + '" target="_blank" rel="noopener">Music Usage Confirmation</a>.';
+  const tooLong = creator && creator.max_video_post_duration_sec && chosen &&
+    VIDS[chosen].secs > creator.max_video_post_duration_sec;
+  const needBrand = com && !own && !bc;
+  const can = connected && chosen && creator && !tooLong && !busy;
+  $("post").disabled = !(can && $("privacy").value && !needBrand);
+  $("post").title = needBrand ? "You need to indicate if your content promotes yourself, a third party, or both." : "";
+  $("draft").disabled = !can;
+}
+
+async function publish(draft) {
+  busy = true; ready();
+  $("msg").className = "muted";
+  $("msg").textContent = draft ? "Uploading to drafts…" : "Uploading to TikTok…";
+  const r = await send("/post", {
+    name: chosen, title: $("title").value, privacy: $("privacy").value, draft: draft,
+    allow_comment: $("allow_comment").checked, allow_duet: $("allow_duet").checked,
+    allow_stitch: $("allow_stitch").checked, aigc: $("aigc").checked,
+    commercial: $("commercial").checked, brand_organic: $("brand_organic").checked,
+    branded: $("branded").checked});
+  if (!r.ok) { $("msg").className = "err"; $("msg").textContent = r.error; busy = false; return ready(); }
+  $("msg").textContent = "Uploaded. TikTok is processing your video; this can take a few minutes to appear on your profile.";
+  const done = draft ? ["SEND_TO_USER_INBOX", "FAILED"] : ["PUBLISH_COMPLETE", "FAILED"];
+  for (let i = 0; i < 120; i++) {
+    await new Promise(t => setTimeout(t, 5000));
+    const s = await get("/post-status?id=" + encodeURIComponent(r.publish_id));
+    const st = s.ok ? (s.status.status || "") : "";
+    if (st === "PUBLISH_COMPLETE") { $("msg").textContent = "Posted. It can take a few minutes to show on the profile."; break; }
+    if (st === "SEND_TO_USER_INBOX" && draft) { $("msg").textContent = "Sent to your TikTok inbox. Open TikTok to finish the post."; break; }
+    if (st === "FAILED") { $("msg").className = "err"; $("msg").textContent = "TikTok could not post it: " + (s.status.fail_reason || "unknown reason"); break; }
+    $("msg").textContent = "TikTok is processing your video (" + (st || "PROCESSING") + "). This can take a few minutes.";
+  }
+  busy = false; ready();
+}
+
+["privacy", "commercial", "brand_organic", "branded"].forEach(id => $(id).addEventListener("change", ready));
 $("post").onclick = () => publish(false);
 $("draft").onclick = () => publish(true);
-loadAccount();
-loadVideos();
+loadAccount().then(loadVideos);
 </script>
 </body></html>
