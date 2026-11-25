@@ -2004,8 +2004,8 @@ DDS.storeLinks = {          // set real links when Etsy/Gumroad live; falls back
 // Per-product buy links → Gumroad checkout (?wanted=true opens the buy form directly).
 // Gumroad = merchant of record: handles global tax + delivery. Money accrues in the Gumroad
 // wallet, paid out to bank once the $100 threshold is reached. Empty → falls back to signup.
-// Own Razorpay checkout — /checkout?pid=<catalog id> creates a fresh payment link
-// (repeat-sale safe) then 302s to Razorpay's hosted page. Paid -> webhook -> auto-deliver.
+// Own checkout — /checkout?pid=<catalog id> opens a fresh Dodo Payments session (primary;
+// &gw=paypal for PayPal). Paid -> webhook / PayPal capture -> auto-deliver.
 DDS.buyBase = "https://dds.tryrealo.com/checkout?pid=";
 DDS.buyLinks = {
   "everything-bundle":          DDS.buyBase + "everything-bundle",

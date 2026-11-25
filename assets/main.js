@@ -230,7 +230,7 @@
       window.addEventListener("mousemove",move); baEl.addEventListener("touchmove",move,{passive:false});
       window.addEventListener("mouseup",end); baEl.addEventListener("touchend",end);
     }
-    // Buy: offer both card (Razorpay) and crypto (NOWPayments) via the chooser.
+    // Buy: offer card (Dodo), PayPal and crypto (NOWPayments) via the chooser.
     host.querySelectorAll(".js-buy").forEach(a=>a.addEventListener("click",e=>{
       e.preventDefault();
       let pid="";
@@ -462,6 +462,7 @@
 .pay-msg{min-height:18px;font-size:.85rem;margin-bottom:8px}
 .pay-btn{width:100%;padding:13px;border-radius:11px;border:0;font-family:Sora,sans-serif;font-weight:700;font-size:1rem;cursor:pointer;margin-top:8px}
 .pay-card{background:var(--brand,#7c5cff);color:#fff}
+.pay-paypal{background:#ffc439;color:#111}
 .pay-crypto{background:transparent;color:inherit;border:1.5px solid var(--brand,#7c5cff)}
 .pay-fine{color:var(--ink-2,#a9a6c4);font-size:.72rem;margin:14px 0 0}
 .pay-x{position:absolute;top:10px;right:14px;background:0;border:0;color:inherit;font-size:1.6rem;line-height:1;cursor:pointer;opacity:.6}`;
@@ -475,9 +476,10 @@
       <input class="pay-email" type="email" inputmode="email" placeholder="you@email.com" autocomplete="email">
       <label class="pay-optin"><input type="checkbox" class="pay-decoded" checked style="flex:none;width:17px;height:17px;accent-color:var(--brand,#7c5cff);cursor:pointer;margin-top:1px"><span><b>Included:</b> <b>The Decoded</b> — a free daily AI &amp; tech briefing from our sister publication. Untick if you'd rather not.</span></label>
       <div class="pay-msg" aria-live="polite"></div>
-      <button class="pay-btn pay-card">💳 Pay with card / UPI</button>
+      <button class="pay-btn pay-card">💳 Pay with card</button>
+      <button class="pay-btn pay-paypal">Pay with PayPal</button>
       ${cryptoOk?'<button class="pay-btn pay-crypto">🪙 Pay with crypto (USDC / USDT)</button>':'<p class="pay-fine" style="margin:10px 0 0">Crypto is available on orders over $'+CRYPTO_MIN+'.</p>'}
-      <p class="pay-fine">Secure checkout · card via Razorpay${cryptoOk?' · crypto via NOWPayments':''}</p>
+      <p class="pay-fine">Secure checkout · card via Dodo Payments · PayPal${cryptoOk?' · crypto via NOWPayments':''}</p>
     </div>`;
     document.body.appendChild(ov);
     const em=ov.querySelector(".pay-email"), msg=ov.querySelector(".pay-msg");
@@ -506,6 +508,10 @@
     ov.querySelector(".pay-card").addEventListener("click",()=>{
       if(!isProduct) go(`${base}/checkout?item=${encodeURIComponent(ref)}&email={email}&fmt=json`,true);
       else go(cardEndpoint+"&fmt=json",false);
+    });
+    ov.querySelector(".pay-paypal").addEventListener("click",()=>{
+      if(!isProduct) go(`${base}/checkout?item=${encodeURIComponent(ref)}&email={email}&gw=paypal&fmt=json`,true);
+      else go(cardEndpoint+"&gw=paypal&fmt=json",false);
     });
     const cryptoBtn=ov.querySelector(".pay-crypto");
     if(cryptoBtn) cryptoBtn.addEventListener("click",()=>{
