@@ -156,7 +156,7 @@
     const host=$("#productView"); if(!host) return;
     const q=new URLSearchParams(location.search); const key=q.get("id")||q.get("slug")||document.body.getAttribute("data-pid");
     const p=DDS.products.find(x=>x.id===key||x.slug===key)||DDS.products[0];
-    document.title=`${p.name} — Daily Dash Shop`;
+    document.title=(p.name+" | Instant Digital Download").length<=66?`${p.name} | Instant Digital Download`:`${p.name} | Instant Download`;
     (function(){var c=document.querySelector('link[rel="canonical"]');if(c)c.href=`https://dailydashshop.com/products/${p.slug}.html`;})();
     const cmp=p.compareAt?`<s>${money(p.compareAt)}</s> `:"";
     const off=p.compareAt?Math.round((1-p.price/p.compareAt)*100):0;
