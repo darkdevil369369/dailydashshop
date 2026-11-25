@@ -1,0 +1,17 @@
+# DailyDash Shop
+
+> Online shop for printable planners, resume and business templates, and social media kits. Every product is an instant digital download (no physical shipping) in editable formats such as Word, Google Docs, PowerPoint, Canva and print-ready PDF.
+
+## Key pages
+- [Shop all templates](https://dailydashshop.com/shop.html): full catalog by category (bundles, resumes, planners, business kits, education, social media)
+- [The Everything Bundle](https://dailydashshop.com/products/everything-bundle.html): all core packs in one download
+- [Executive Resume & CV Pack](https://dailydashshop.com/products/executive-resume-cv-pack.html)
+- [Ultimate Life Planner](https://dailydashshop.com/products/ultimate-life-planner.html)
+- [Free tools](https://dailydashshop.com/tools.html): AI resume checker and invoice generator
+- [Credits wallet](https://dailydashshop.com/credits.html)
+- [About](https://dailydashshop.com/about.html) | [Contact](https://dailydashshop.com/contact.html)
+- [Refund policy](https://dailydashshop.com/refund.html) | [License](https://dailydashshop.com/license.html) | [Terms](https://dailydashshop.com/terms.html) | [Privacy](https://dailydashshop.com/privacy.html)
+
+## Machine-readable
+- [Sitemap](https://dailydashshop.com/sitemap.xml)
+- [Product feed (Google Merchant format)](https://dailydashshop.com/merchant-feed.xml)

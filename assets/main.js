@@ -109,7 +109,7 @@
     <article class="p-card reveal" data-cat="${p.category}">
       <a class="p-thumb" href="/products/${p.slug}.html">
         ${tag}
-        <img loading="lazy" src="${A(p.image)}" alt="${p.name}">
+        <img loading="lazy" width="800" height="1000" src="${A(p.image.replace(/\.jpg$/,'-md.jpg'))}" onerror="this.onerror=null;this.src='${A(p.image)}'" alt="${p.name}">
       </a>
       <div class="p-body">
         <span class="p-cat">${(DDS.categories.find(c=>c.id===p.category)||{}).label||''}</span>

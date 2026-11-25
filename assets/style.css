@@ -122,7 +122,7 @@ h1,h2,h3,h4,.display{font-family:"Fraunces","Sora",Georgia,serif;font-weight:600
 .section.tint{background:var(--paper)}
 .section.dark{background:var(--ink);color:#eceaf5}
 .sec-head{max-width:56ch}
-.sec-head h2{font-size:clamp(1.9rem,4vw,3rem);margin:12px 0 14px}
+.sec-head :is(h1,h2){font-size:clamp(1.9rem,4vw,3rem);margin:12px 0 14px}
 .sec-head p{color:var(--ink-2);font-size:1.08rem}
 .section.dark .sec-head p{color:#b9b6cf}
 .center{text-align:center;margin-inline:auto}
@@ -381,10 +381,10 @@ h1,h2,h3,h4,.display{font-family:"Fraunces","Sora",Georgia,serif;font-weight:600
 }
 
 /* signature gold rule under every section heading (echoes the pins) */
-.sec-head h2{position:relative;padding-bottom:20px}
-.sec-head h2::after{content:"";position:absolute;left:0;bottom:0;width:74px;height:3px;border-radius:3px;background:var(--grad-gold)}
+.sec-head :is(h1,h2){position:relative;padding-bottom:20px}
+.sec-head :is(h1,h2)::after{content:"";position:absolute;left:0;bottom:0;width:74px;height:3px;border-radius:3px;background:var(--grad-gold)}
 .sec-head.center h2::after{left:50%;transform:translateX(-50%)}
-.section.dark .sec-head h2::after{background:var(--grad-gold);opacity:.95}
+.section.dark .sec-head :is(h1,h2)::after{background:var(--grad-gold);opacity:.95}
 
 /* eyebrow — refined gold lead mark */
 .eyebrow{display:inline-flex;align-items:center;gap:9px}
@@ -475,7 +475,7 @@ body{line-height:1.66;letter-spacing:-.005em;font-feature-settings:"cv11","ss01"
 h1,h2,h3,h4,.display{font-optical-sizing:auto;font-variation-settings:"opsz" 96;letter-spacing:-.022em}
 .hero h1{font-size:clamp(2.7rem,6.6vw,5rem);line-height:1.02;font-weight:600;font-variation-settings:"opsz" 144}
 .hero .lead{font-size:clamp(1.12rem,2.1vw,1.36rem);line-height:1.55;color:var(--ink-2);max-width:36ch;font-weight:400}
-.sec-head h2{font-size:clamp(2rem,4.2vw,3.15rem);line-height:1.06;font-variation-settings:"opsz" 120}
+.sec-head :is(h1,h2){font-size:clamp(2rem,4.2vw,3.15rem);line-height:1.06;font-variation-settings:"opsz" 120}
 .sec-head p{font-size:clamp(1.04rem,1.6vw,1.14rem);color:var(--muted);line-height:1.6}
 .eyebrow{letter-spacing:.2em;font-size:.7rem}
 
@@ -571,3 +571,9 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opa
   .section{padding:clamp(48px,12vw,64px) 0}
   .hero h1{font-size:clamp(2.3rem,10vw,3rem)}
 }
+
+/* CLS: reserve space for JS-injected chrome/sections */
+#site-header{min-height:75px}
+#homeStats{min-height:22px}
+#featured{min-height:573px}
+@media(max-width:640px){#homeStats{min-height:77px}#featured{min-height:2719px}}
